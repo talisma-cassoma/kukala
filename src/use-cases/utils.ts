@@ -1,7 +1,12 @@
+//import { imageMap } from "@/mock/image-map";
+
 import type {
     ProductPriceVariant,
     ProductVariant,
 } from "@crystallize/js-api-client";
+
+import fs from 'fs/promises';
+
 
 export function isEqual(a: any, b: any): boolean {
     // Handle primitive types and references to the same object
@@ -71,3 +76,58 @@ export const variantToCartItem = (variant: ProductVariant) => {
         attributes: variant.attributes,
     };
 };
+
+// export function resolveImage(cell: any) {
+//   const key = cell?.item?.path?.split("/").pop();
+
+//   const mapped = imageMap[key];
+
+//   if (!mapped) return cell;
+
+//   return {
+//     ...cell,
+//     item: {
+//       ...cell.item,
+//       variants: [
+//         {
+//           ...cell.item.variants[0],
+//           images: [
+//             {
+//               ...cell.item.variants[0].images[0],
+//               url: mapped.src,
+//             },
+//           ],
+//         },
+//       ],
+//     },
+//   };
+// }
+
+
+
+//importar dados do JSON
+async function importJSON() {
+  try {
+    const data = await fs.readFile("./src/mock/response.json", "utf-8");
+    return JSON.parse(data);
+  } catch (err) {
+    console.error("Erro ao importar JSON:", err);
+    return null;
+  }
+}
+//salvar JSON
+// async function saveJSON(data: any) {
+//   try {
+//     await fs.writeFile(
+//       "./response.json",
+//       JSON.stringify(data, null, 2),
+//       "utf-8"
+//     );
+
+//     console.log("JSON salvo com sucesso!");
+//   } catch (err) {
+//     console.error("Erro ao salvar JSON:", err);
+//   }
+// }
+
+// await saveJSON(data);

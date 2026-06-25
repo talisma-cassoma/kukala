@@ -25,7 +25,7 @@ const { pathname } = Astro.url;
     <ViewTransitions />
   </head>
   <body class="relative text-text bg-primary">
-    <Header client:only />
+    <Header client:load />
     <slot />
     {
       pathname === "/cart" ||

@@ -1,20 +1,20 @@
-import { apiClient } from "../shared";
+export async function fetchAllProducts(origin: string) {
+ console.log("getStaticPaths: ", origin);
 
-export async function fetchAllProducts() {
-    try {
-        return await apiClient.catalogueApi(
-            `
-        #graphql
-        {
-          catalogue(path:"/shop"){
-            children {
-              path
-            }
-          }
-        }
-      `
-        );
-    } catch (error) {
-        throw error;
+  try {
+    const response = await fetch(`${origin}/api/products`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch products from API');
     }
+
+    const products = await response.json();
+
+    return {
+      catalogue: {
+        children: products.map((product: { path: string }) => ({ path: product.path })),
+      },
+    };
+  } catch (error) {
+    throw error;
+  }
 }
