@@ -1,5 +1,5 @@
 ---
-import { Grid } from "../components/grid";
+import { Kits } from "../components/Kits/index.tsx";
 import { Products } from "../components/products";
 import Layout from "../layouts/Layout.astro";
 import { fetchFrontPage } from "../use-cases/queries/frontpage.ts";
@@ -11,13 +11,14 @@ const data = await fetchFrontPage(Astro.url.origin);
 
 const { page, catalog, products } = data;
 const { grid } = catalog;
+//const { products = [] } = grid.content;
 ---
 
 <Layout
-  title={page?.title ?? "Kulala"}
-  description={page?.description ?? "One stop shop for buying cosmetic & personal care online."}>
+  title="Kulala shop"
+  description="One stop shop for buying cosmetic & personal care online."}>
   <div class="py-10 lg:container mx-auto w-full md:px-0 px-3">
-    <Grid grid={grid} />
+    <Kits grid={grid} />
     <Products donuts={{ children: products }} />
   </div>
 </Layout>

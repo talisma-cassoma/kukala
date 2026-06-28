@@ -10,10 +10,74 @@ import {
 } from "../use-cases/utils";
 import type { Product as ProductType } from "../use-cases/contracts/Product";
 
+export const relatedProducts = {
+    "content": {
+        "items": [
+            {
+                "id": "crystallize-spec-ref-61f004b959b0e119fc8c27d6",
+                "__typename": "Product",
+                "name": "Strawberry blast",
+                "path": "/shop/strawberry-blast",
+                "topics": [
+                    {
+                        "name": "limited-edition"
+                    },
+                    {
+                        "name": "glazed"
+                    }
+                ],
+                "bundle": {
+                    "content": null
+                },
+                "defaultVariant": {
+                    "firstImage": {
+                        "url": "https://media.crystallize.com/dounot/23/10/1/2/strawberry_blast.png",
+                        "altText": "Strawberry flavoured donut",
+                        "variants": []
+                    },
+                    "priceVariant": {
+                        "price": 6,
+                        "currency": "USD"
+                    }
+                }
+            },
+            {
+                "id": "crystallize-spec-ref-61f00d4059b0e119fc8c28aa",
+                "__typename": "Product",
+                "name": "Creamy Nonsense",
+                "path": "/shop/creamy-nonsense",
+                "topics": [
+                    {
+                        "name": "new"
+                    },
+                    {
+                        "name": "glazed"
+                    }
+                ],
+                "bundle": {
+                    "content": null
+                },
+                "defaultVariant": {
+                    "firstImage": {
+                        "url": "https://media.crystallize.com/dounot/23/10/1/4/creamy_nonsense.png",
+                        "altText": "Donut with vanilla frosting and chocolate drizzle.",
+                        "variants": []
+                    },
+                    "priceVariant": {
+                        "price": 8,
+                        "currency": "USD"
+                    }
+                }
+            }
+        ]
+    }
+}
+
 export const Product = ({ product }: { product: ProductType }) => {
     const [selectedVariant, setSelectedVariant] = useState(
         product?.variants?.[0]
     );
+    
     const onVariantChange = (variant: any) => setSelectedVariant(variant);
     const defaultPrice = getDefaultPriceVariant(selectedVariant?.priceVariants);
     const [cart, setCart] = useState<any>([]);
@@ -81,7 +145,7 @@ export const Product = ({ product }: { product: ProductType }) => {
             </div>
             <ProductBody body={product.body} table={product.table} />
             <p className="text-text mb-4 font-semibold">Related do(u)nuts</p>
-            <RelatedProducts related={product.related} />
+            <RelatedProducts related={relatedProducts as any} />
         </>
     );
 };

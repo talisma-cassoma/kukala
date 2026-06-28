@@ -1,0 +1,886 @@
+[{ "pageTitle": "Chocolate Dream",
+"pageDescription": "Product",
+"productData": {
+        "product": {
+            "id": "crystallize-spec-ref-61f000499cd27e2c7d1caac8",
+            "__typename": "Product",
+            "name": "Chocolate Dream",
+            "path": "/shop/chocolate-dream",
+            "topics": [
+                {
+                    "name": "new"
+                }
+            ],
+            "bundle": {
+                "content": null
+            },
+            "defaultVariant": {
+                "firstImage": {
+                    "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                    "altText": "Chocolate flavoured donut",
+                    "variants": []
+                }
+            },
+            "summary": {
+                "content": {
+                    "json": [
+                        {
+                            "kind": "block",
+                            "type": "paragraph",
+                            "metadata": {},
+                            "children": [
+                                {
+                                    "kind": "inline",
+                                    "metadata": {},
+                                    "textContent": "What could be better than chocolate? This donut is a chocolate lover's dream!"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "body": {
+                "content": {
+                    "paragraphs": [
+                        {
+                            "title": "Our Best-Selling Donut",
+                            "body": {
+                                "json": [
+                                    {
+                                        "kind": "block",
+                                        "type": "paragraph",
+                                        "metadata": {},
+                                        "children": [
+                                            {
+                                                "kind": "inline",
+                                                "metadata": {},
+                                                "textContent": "What could be better than chocolate? This donut is a chocolate lover's dream! Enjoy fresh or keep some perfectly frozen donuts on hand to satisfy your sweet tooth whenever you want."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "images": []
+                        },
+                        {
+                            "title": "Frozen Donuts - For Best Results",
+                            "body": {
+                                "json": [
+                                    {
+                                        "kind": "block",
+                                        "type": "paragraph",
+                                        "metadata": {},
+                                        "children": [
+                                            {
+                                                "kind": "inline",
+                                                "metadata": {},
+                                                "textContent": "Store your frozen donuts in their packaging at 0° F / -17° C. Stored properly, they should keep for 2-3 months. To defrost, remove from packaging and transfer to a plate. Let thaw at room temperature for about an hour."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "images": [
+                                {
+                                    "url": "https://media.crystallize.com/dounot/22/12/2/5/two-chooclate-donuts.jpg",
+                                    "altText": "chocolate donuts",
+                                    "variants": []
+                                }
+                            ]
+                        },
+                        {
+                            "title": null,
+                            "body": {
+                                "json": [
+                                    {
+                                        "kind": "block",
+                                        "type": "paragraph",
+                                        "metadata": {},
+                                        "children": [
+                                            {
+                                                "kind": "inline",
+                                                "metadata": {},
+                                                "textContent": "To reheat the donuts, you can use a microwave (15-20 second bursts) or oven (350° F / 177° C for 5 minutes or until desired temperature is reached)."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "images": []
+                        }
+                    ]
+                }
+            },
+            "table": {
+                "content": {
+                    "sections": [
+                        {
+                            "title": "Nutrition",
+                            "properties": [
+                                {
+                                    "key": "Calories",
+                                    "value": "143 kj"
+                                },
+                                {
+                                    "key": "Total fat",
+                                    "value": "5.4 g"
+                                },
+                                {
+                                    "key": "Cholesterol",
+                                    "value": "0 mg"
+                                },
+                                {
+                                    "key": "Sodium",
+                                    "value": "86 mg"
+                                },
+                                {
+                                    "key": "Potassium",
+                                    "value": "109 mg"
+                                },
+                                {
+                                    "key": "Total carbohydrates",
+                                    "value": "22.8 mg"
+                                },
+                                {
+                                    "key": "Protein",
+                                    "value": "2.4 g"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "related": {
+                "content": {
+                    "items": [
+                        {
+                            "id": "crystallize-spec-ref-61f004b959b0e119fc8c27d6",
+                            "__typename": "Product",
+                            "name": "Strawberry blast",
+                            "path": "/shop/strawberry-blast",
+                            "topics": [
+                                {
+                                    "name": "limited-edition"
+                                },
+                                {
+                                    "name": "glazed"
+                                }
+                            ],
+                            "bundle": {
+                                "content": null
+                            },
+                            "defaultVariant": {
+                                "firstImage": {
+                                    "url": "https://media.crystallize.com/dounot/23/10/1/2/strawberry_blast.png",
+                                    "altText": "Strawberry flavoured donut",
+                                    "variants": []
+                                },
+                                "priceVariant": {
+                                    "price": 6,
+                                    "currency": "USD"
+                                }
+                            }
+                        },
+                        {
+                            "id": "crystallize-spec-ref-61f00d4059b0e119fc8c28aa",
+                            "__typename": "Product",
+                            "name": "Creamy Nonsense",
+                            "path": "/shop/creamy-nonsense",
+                            "topics": [
+                                {
+                                    "name": "new"
+                                },
+                                {
+                                    "name": "glazed"
+                                }
+                            ],
+                            "bundle": {
+                                "content": null
+                            },
+                            "defaultVariant": {
+                                "firstImage": {
+                                    "url": "https://media.crystallize.com/dounot/23/10/1/4/creamy_nonsense.png",
+                                    "altText": "Donut with vanilla frosting and chocolate drizzle.",
+                                    "variants": []
+                                },
+                                "priceVariant": {
+                                    "price": 8,
+                                    "currency": "USD"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "variants": [
+                {
+                    "id": "chocolate-dream-1643118665128",
+                    "name": "Chocolate dream",
+                    "sku": "chocolate-dream-1643118665128",
+                    "price": 8,
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "name": "Default",
+                            "price": 8,
+                            "currency": "USD"
+                        }
+                    ],
+                    "stock": 37,
+                    "isDefault": true,
+                    "attributes": [
+                        {
+                            "attribute": "Donut size",
+                            "value": "M"
+                        },
+                        {
+                            "attribute": "Delivery",
+                            "value": "Baked"
+                        },
+                        {
+                            "attribute": "Box size",
+                            "value": "1"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                            "altText": "Chocolate flavoured donut",
+                            "variants": []
+                        }
+                    ]
+                },
+                {
+                    "id": "chocolate-dream-1643118986542",
+                    "name": "Chocolate dream",
+                    "sku": "chocolate-dream-1643118986542",
+                    "price": 8,
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "name": "Default",
+                            "price": 8,
+                            "currency": "USD"
+                        }
+                    ],
+                    "stock": 34,
+                    "isDefault": false,
+                    "attributes": [
+                        {
+                            "attribute": "Donut size",
+                            "value": "M"
+                        },
+                        {
+                            "attribute": "Delivery",
+                            "value": "Frozen"
+                        },
+                        {
+                            "attribute": "Box size",
+                            "value": "1"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                            "altText": "Chocolate flavoured donut",
+                            "variants": []
+                        }
+                    ]
+                },
+                {
+                    "id": "chocolate-dream-1643119304815",
+                    "name": "Chocolate dream",
+                    "sku": "chocolate-dream-1643119304815",
+                    "price": 8,
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "name": "Default",
+                            "price": 8,
+                            "currency": "USD"
+                        }
+                    ],
+                    "stock": 36,
+                    "isDefault": false,
+                    "attributes": [
+                        {
+                            "attribute": "Donut size",
+                            "value": "L"
+                        },
+                        {
+                            "attribute": "Delivery",
+                            "value": "Baked"
+                        },
+                        {
+                            "attribute": "Box size",
+                            "value": "1"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                            "altText": "Chocolate flavoured donut",
+                            "variants": []
+                        }
+                    ]
+                },
+                {
+                    "id": "chocolate-dream-1643119372012",
+                    "name": "Chocolate dream",
+                    "sku": "chocolate-dream-1643119372012",
+                    "price": 8,
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "name": "Default",
+                            "price": 8,
+                            "currency": "USD"
+                        }
+                    ],
+                    "stock": 34,
+                    "isDefault": false,
+                    "attributes": [
+                        {
+                            "attribute": "Donut size",
+                            "value": "L"
+                        },
+                        {
+                            "attribute": "Delivery",
+                            "value": "Frozen"
+                        },
+                        {
+                            "attribute": "Box size",
+                            "value": "1"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                            "altText": "Chocolate flavoured donut",
+                            "variants": []
+                        }
+                    ]
+                },
+                {
+                    "id": "chocolate-dream-1643119504733",
+                    "name": "Chocolate dream",
+                    "sku": "chocolate-dream-1643119504733",
+                    "price": 8,
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "name": "Default",
+                            "price": 8,
+                            "currency": "USD"
+                        }
+                    ],
+                    "stock": 42,
+                    "isDefault": false,
+                    "attributes": [
+                        {
+                            "attribute": "Donut size",
+                            "value": "XL"
+                        },
+                        {
+                            "attribute": "Delivery",
+                            "value": "Baked"
+                        },
+                        {
+                            "attribute": "Box size",
+                            "value": "1"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                            "altText": "Chocolate flavoured donut",
+                            "variants": []
+                        }
+                    ]
+                },
+                {
+                    "id": "chocolate-dream-1643119709464",
+                    "name": "Chocolate dream",
+                    "sku": "chocolate-dream-1643119709464",
+                    "price": 8,
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "name": "Default",
+                            "price": 8,
+                            "currency": "USD"
+                        }
+                    ],
+                    "stock": 41,
+                    "isDefault": false,
+                    "attributes": [
+                        {
+                            "attribute": "Donut size",
+                            "value": "XL"
+                        },
+                        {
+                            "attribute": "Delivery",
+                            "value": "Frozen"
+                        },
+                        {
+                            "attribute": "Box size",
+                            "value": "1"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                            "altText": "Chocolate flavoured donut",
+                            "variants": []
+                        }
+                    ]
+                },
+                {
+                    "id": "chocolate-dream-1644678087733",
+                    "name": "Chocolate dream",
+                    "sku": "chocolate-dream-1644678087733",
+                    "price": 16,
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "name": "Default",
+                            "price": 16,
+                            "currency": "USD"
+                        }
+                    ],
+                    "stock": 33,
+                    "isDefault": false,
+                    "attributes": [
+                        {
+                            "attribute": "Donut size",
+                            "value": "M"
+                        },
+                        {
+                            "attribute": "Delivery",
+                            "value": "Baked"
+                        },
+                        {
+                            "attribute": "Box size",
+                            "value": "6"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                            "altText": "Chocolate flavoured donut",
+                            "variants": []
+                        }
+                    ]
+                },
+                {
+                    "id": "chocolate-dream-1644678880378",
+                    "name": "Chocolate dream",
+                    "sku": "chocolate-dream-1644678880378",
+                    "price": 16,
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "name": "Default",
+                            "price": 16,
+                            "currency": "USD"
+                        }
+                    ],
+                    "stock": 34,
+                    "isDefault": false,
+                    "attributes": [
+                        {
+                            "attribute": "Donut size",
+                            "value": "M"
+                        },
+                        {
+                            "attribute": "Delivery",
+                            "value": "Frozen"
+                        },
+                        {
+                            "attribute": "Box size",
+                            "value": "6"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                            "altText": "Chocolate flavoured donut",
+                            "variants": []
+                        }
+                    ]
+                },
+                {
+                    "id": "chocolate-dream-1644681499754",
+                    "name": "Chocolate dream",
+                    "sku": "chocolate-dream-1644681499754",
+                    "price": 16,
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "name": "Default",
+                            "price": 16,
+                            "currency": "USD"
+                        }
+                    ],
+                    "stock": 23,
+                    "isDefault": false,
+                    "attributes": [
+                        {
+                            "attribute": "Donut size",
+                            "value": "L"
+                        },
+                        {
+                            "attribute": "Delivery",
+                            "value": "Baked"
+                        },
+                        {
+                            "attribute": "Box size",
+                            "value": "6"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                            "altText": "Chocolate flavoured donut",
+                            "variants": []
+                        }
+                    ]
+                },
+                {
+                    "id": "chocolate-dream-1644694478712",
+                    "name": "Chocolate dream",
+                    "sku": "chocolate-dream-1644694478712",
+                    "price": 20,
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "name": "Default",
+                            "price": 20,
+                            "currency": "USD"
+                        }
+                    ],
+                    "stock": 32,
+                    "isDefault": false,
+                    "attributes": [
+                        {
+                            "attribute": "Donut size",
+                            "value": "L"
+                        },
+                        {
+                            "attribute": "Delivery",
+                            "value": "Frozen"
+                        },
+                        {
+                            "attribute": "Box size",
+                            "value": "6"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                            "altText": "Chocolate flavoured donut",
+                            "variants": []
+                        }
+                    ]
+                },
+                {
+                    "id": "chocolate-dream-1644694531834",
+                    "name": "Chocolate dream",
+                    "sku": "chocolate-dream-1644694531834",
+                    "price": 22,
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "name": "Default",
+                            "price": 22,
+                            "currency": "USD"
+                        }
+                    ],
+                    "stock": 43,
+                    "isDefault": false,
+                    "attributes": [
+                        {
+                            "attribute": "Donut size",
+                            "value": "XL"
+                        },
+                        {
+                            "attribute": "Delivery",
+                            "value": "Baked"
+                        },
+                        {
+                            "attribute": "Box size",
+                            "value": "6"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                            "altText": "Chocolate flavoured donut",
+                            "variants": []
+                        }
+                    ]
+                },
+                {
+                    "id": "chocolate-dream-1644694603302",
+                    "name": "Chocolate dream",
+                    "sku": "chocolate-dream-1644694603302",
+                    "price": 24,
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "name": "Default",
+                            "price": 24,
+                            "currency": "USD"
+                        }
+                    ],
+                    "stock": 31,
+                    "isDefault": false,
+                    "attributes": [
+                        {
+                            "attribute": "Donut size",
+                            "value": "XL"
+                        },
+                        {
+                            "attribute": "Delivery",
+                            "value": "Frozen"
+                        },
+                        {
+                            "attribute": "Box size",
+                            "value": "6"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                            "altText": "Chocolate flavoured donut",
+                            "variants": []
+                        }
+                    ]
+                },
+                {
+                    "id": "chocolate-dream-1644694667625",
+                    "name": "Chocolate dream",
+                    "sku": "chocolate-dream-1644694667625",
+                    "price": 24,
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "name": "Default",
+                            "price": 24,
+                            "currency": "USD"
+                        }
+                    ],
+                    "stock": 30,
+                    "isDefault": false,
+                    "attributes": [
+                        {
+                            "attribute": "Donut size",
+                            "value": "M"
+                        },
+                        {
+                            "attribute": "Delivery",
+                            "value": "Baked"
+                        },
+                        {
+                            "attribute": "Box size",
+                            "value": "12"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                            "altText": "Chocolate flavoured donut",
+                            "variants": []
+                        }
+                    ]
+                },
+                {
+                    "id": "chocolate-dream-1644694843349",
+                    "name": "Chocolate dream",
+                    "sku": "chocolate-dream-1644694843349",
+                    "price": 26,
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "name": "Default",
+                            "price": 26,
+                            "currency": "USD"
+                        }
+                    ],
+                    "stock": 28,
+                    "isDefault": false,
+                    "attributes": [
+                        {
+                            "attribute": "Donut size",
+                            "value": "M"
+                        },
+                        {
+                            "attribute": "Delivery",
+                            "value": "Frozen"
+                        },
+                        {
+                            "attribute": "Box size",
+                            "value": "12"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                            "altText": "Chocolate flavoured donut",
+                            "variants": []
+                        }
+                    ]
+                },
+                {
+                    "id": "chocolate-dream-1644695788012",
+                    "name": "Chocolate dream",
+                    "sku": "chocolate-dream-1644695788012",
+                    "price": 24,
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "name": "Default",
+                            "price": 24,
+                            "currency": "USD"
+                        }
+                    ],
+                    "stock": 24,
+                    "isDefault": false,
+                    "attributes": [
+                        {
+                            "attribute": "Donut size",
+                            "value": "L"
+                        },
+                        {
+                            "attribute": "Delivery",
+                            "value": "Baked"
+                        },
+                        {
+                            "attribute": "Box size",
+                            "value": "12"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                            "altText": "Chocolate flavoured donut",
+                            "variants": []
+                        }
+                    ]
+                },
+                {
+                    "id": "chocolate-dream-1644695862469",
+                    "name": "Chocolate dream",
+                    "sku": "chocolate-dream-1644695862469",
+                    "price": 28,
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "name": "Default",
+                            "price": 28,
+                            "currency": "USD"
+                        }
+                    ],
+                    "stock": 26,
+                    "isDefault": false,
+                    "attributes": [
+                        {
+                            "attribute": "Donut size",
+                            "value": "L"
+                        },
+                        {
+                            "attribute": "Delivery",
+                            "value": "Frozen"
+                        },
+                        {
+                            "attribute": "Box size",
+                            "value": "12"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                            "altText": "Chocolate flavoured donut",
+                            "variants": []
+                        }
+                    ]
+                },
+                {
+                    "id": "chocolate-dream-1644695922609",
+                    "name": "Chocolate dream",
+                    "sku": "chocolate-dream-1644695922609",
+                    "price": 24,
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "name": "Default",
+                            "price": 24,
+                            "currency": "USD"
+                        }
+                    ],
+                    "stock": 22,
+                    "isDefault": false,
+                    "attributes": [
+                        {
+                            "attribute": "Donut size",
+                            "value": "XL"
+                        },
+                        {
+                            "attribute": "Delivery",
+                            "value": "Baked"
+                        },
+                        {
+                            "attribute": "Box size",
+                            "value": "12"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                            "altText": "Chocolate flavoured donut",
+                            "variants": []
+                        }
+                    ]
+                },
+                {
+                    "id": "chocolate-dream-1644695968450",
+                    "name": "Chocolate dream",
+                    "sku": "chocolate-dream-1644695968450",
+                    "price": 26,
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "name": "Default",
+                            "price": 26,
+                            "currency": "USD"
+                        }
+                    ],
+                    "stock": 25,
+                    "isDefault": false,
+                    "attributes": [
+                        {
+                            "attribute": "Donut size",
+                            "value": "XL"
+                        },
+                        {
+                            "attribute": "Delivery",
+                            "value": "Frozen"
+                        },
+                        {
+                            "attribute": "Box size",
+                            "value": "12"
+                        }
+                    ],
+                    "images": [
+                        {
+                            "url": "https://media.crystallize.com/dounot/23/10/1/3/chocolate_dream.png",
+                            "altText": "Chocolate flavoured donut",
+                            "variants": []
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+]

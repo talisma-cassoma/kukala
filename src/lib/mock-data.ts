@@ -122,24 +122,11 @@ function buildFrontPageData(spec: any) {
   };
 
   const grid = {
-    content: {
-      grids: [
-        {
-          rows: [
-            {
-              columns: featured.map((product: any, index: number) => ({
-                layout: {
-                  rowspan: 1,
-                  colspan: index === 0 ? 3 : 1,
-                },
-                item: mapProductToGridItem(product),
-              })),
-            },
-          ],
-        },
-      ],
-    },
-  };
+  content: {
+    // Lista linear e direta, sem rows ou columns
+    products: featured.map((product: any) => mapProductToGridItem(product)),
+  },
+};
 
   return {
     page: {

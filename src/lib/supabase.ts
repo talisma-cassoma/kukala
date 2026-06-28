@@ -1,23 +1,22 @@
-import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+import { createClient } from "@supabase/supabase-js";
 
-let client: SupabaseClient | null = null;
+let client: ReturnType<typeof createClient> | null = null;
 
 export function getSupabaseClient() {
-  if (client) {
-    return client;
-  }
+  if (client) return client;
 
   const url = import.meta.env.PUBLIC_SUPABASE_URL;
   const anonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
   if (!url || !anonKey) {
-    return null;
+    throw new Error("Supabase environment variables are missing.");
   }
 
   client = createClient(url, anonKey, {
     auth: {
       persistSession: true,
       autoRefreshToken: true,
+      detectSessionInUrl: true,
     },
   });
 

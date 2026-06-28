@@ -37,7 +37,7 @@ const { pathname } = Astro.url;
       )
     }
     <footer class="container mt-40 mx-auto pb-10">
-      <div class="flex mt-10  w-full text-center justify-end">
+      <div class="flex mt-10 w-full text-center justify-end">
         <div class="flex items-center gap-1 mt-10">
           <img src={CrystallizeLogo} alt="Crystallize" class="w-5" />
           Powered by <a href="https://crystallize.com" class="underline">
@@ -47,6 +47,14 @@ const { pathname } = Astro.url;
       </div>
     </footer>
     <style is:global>
+      @utility no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
       @media screen and (max-width: 768px) {
         .crystallize-grid {
           display: flex !important;
