@@ -1,86 +1,41 @@
-import { GridItem } from "@/components/Kits/grid-item";
+import { ComboBoxes } from "./comboBoxes";
+import { DiscountedBundles } from "./discountedBundles"
+import { relative } from "node:path";
+import type {ProductsType} from "@/use-cases/contracts/Cell"
 
-type Topic = {
-    name: string;
-};
 
-type Image = {
-    url: string;
-    altText: string;
-    variants: unknown[];
-};
 
-type Variant = {
-    images: Image[];
-    price: number;
-};
 
-type ProductItem = {
-    name: string;
-    path: string;
-    topics: Topic[];
-    variants: Variant[];
-};
-
-type GridColumn = {
-    layout: {
-        rowspan: number;
-        colspan: number;
-    };
-    item: ProductItem;
-};
-
-type GridRow = {
-    columns: GridColumn[];
-};
-
-type GridDefinition = {
-    rows: GridRow[];
-};
-
-export type GridData = {
-    content: {
-        grids: GridDefinition[];
-    };
-};
-
-export const Kits = ({ grid }: { grid: { content: { products: any[] } } }) => {
+export const Kits = ({ products }: { products: ProductsType }) => {
     // Desestruturação direta dos dados necessários vindos da API
-    const { products = [] } = grid.content;
+    const { comboboxes, discountedBundles } = products
+    //console.log("produtos: ", JSON.stringify(products))
 
     return (
         <div
             style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
+                gridTemplateColumns: "repeat(3,1, 1fr)",
                 gap: "1rem",
+                justifyContent: "center"
             }}
         >
-            {products.map((product, index) => {
-                // Decisão Exclusiva do Frontend: o primeiro elemento é o destaque
-                const isFeatured = index === 0;
+            <ComboBoxes cell={comboboxes[0]} />
+            <div className="flex gap-2 max-w-[54rem] justify-between">
+                {discountedBundles.map((discountedBundle, index) => {
 
-                // Criamos o objeto virtual apenas para manter o GridItem antigo funcionando por enquanto
-                const virtualCell = {
-                    item: product,
-                    layout: {
-                        colspan: isFeatured ? 3 : 1,
-                        rowspan: 1
-                    }
-                };
+                    return (
+                        <div
+                            className="flex gap-2 w-full"
+                            key={index}
+                        >
+                            <DiscountedBundles cell={discountedBundle} />
+                        </div>
+                    );
+                })}
+            </div>
 
-                return (
-                    <div
-                        key={index}
-                        style={{
-                            gridColumn: `span ${virtualCell.layout.colspan}`,
-                            gridRow: `span ${virtualCell.layout.rowspan}`,
-                        }}
-                    >
-                        <GridItem cell={virtualCell} />
-                    </div>
-                );
-            })}
+
         </div>
     );
 };

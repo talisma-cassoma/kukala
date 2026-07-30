@@ -1,30 +1,76 @@
 import type { APIRoute } from 'astro';
 import { PrismaClient } from '@prisma/client';
-import { loadMockProduct } from '../../../lib/mock-data';
+import type { Product as PrismaProduct, Topic, Image, Paragraph, TableSection, TableProperty, ProductOptionGroup, ProductOption, ProductRelationship } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-// Re-usable function to format product data into cards
-function mapProductToCard(product: any) {
-    const firstImage = product.defaultVariant?.images?.[0] ?? product.images?.[0] ?? null;
+// Define a more specific type for the product data we fetch from Prisma
+type FullProduct = PrismaProduct & {
+    mainImage: Image | null;
+    topics: Topic[];
+    bodyParagraphs: (Paragraph & { images: Image[] })[];
+    tableSections: (TableSection & { properties: TableProperty[] })[];
+    optionGroups: (ProductOptionGroup & { options: ProductOption[] })[];
+    relatedTo: (ProductRelationship & { to: PrismaProduct & { mainImage: Image | null, topics: Topic[] } })[];
+};
+
+// Maps the deeply nested Prisma product object to the flat structure the frontend expects
+function mapProductToContract(product: FullProduct) {
+    const price = product.optionGroups
+        .flatMap(g => g.options)
+        .reduce((min, p) => (p.price < min ? p.price : min), new Decimal(Infinity))
+        .toNumber();
+        
     return {
         id: product.id,
-        __typename: 'Product',
         name: product.name,
         path: product.path,
-        topics: product.topics ?? [],
-        bundle: {
-            content: product.isBundle ? { value: true } : null,
+        __typename: 'Product',
+        topics: product.topics.map(t => ({ name: t.name })),
+        image: product.mainImage ? { url: product.mainImage.url, altText: product.mainImage.altText ?? '' } : null,
+        price: isFinite(price) ? price : 0,
+        summary: product.summary ?? '',
+        
+        // Map structured content
+        body: {
+                paragraphs: product.bodyParagraphs.map(p => ({
+                    title: { text: p.title ?? '' },
+                    body: { json: p.body },
+                    images: p.images.map(img => ({ url: img.url, altText: img.altText ?? '' })),
+                })),
         },
-        defaultVariant: {
-            firstImage: firstImage ? {
-                url: firstImage.url,
-                altText: firstImage.altText,
-                variants: [],
-            } : null,
-            priceVariant: {
-                price: product.defaultVariant?.price ?? 0,
-                currency: product.defaultVariant?.currency ?? 'USD',
+        table: {
+                sections: product.tableSections.map(s => ({
+                    title: s.title,
+                    properties: s.properties.map(p => ({ key: p.key, value: p.value })),
+                })),
+        },
+        
+        // Map configurable options
+        productOptions: product.optionGroups.map(g => ({
+            id: g.id,
+            name: g.name,
+            required: g.required,
+            options: g.options.map(o => ({
+                id: o.id,
+                label: o.label,
+                price: o.price.toNumber(),
+                available: o.available,
+            })),
+        })),
+
+        // Map related products
+        related: {
+            content: {
+                items: product.relatedTo.map(r => ({
+                    id: r.to.id,
+                    name: r.to.name,
+                    path: r.to.path,
+                    __typename: 'Product',
+                    image: r.to.mainImage ? { url: r.to.mainImage.url, altText: r.to.mainImage.altText ?? '' } : null,
+                    topics: r.to.topics.map(t => ({ name: t.name })),
+                    price: 0, // Price for related items can be simplified or fetched if needed
+                })),
             },
         },
     };
@@ -32,29 +78,6 @@ function mapProductToCard(product: any) {
 
 
 export const GET: APIRoute = async ({ params }) => {
-
-  if (true) { //fecth no mock por agora
-        const slug = params.slug;
-        const pathName = slug ? `/shop/${slug}` : '';
-        const data = await loadMockProduct(pathName);
-
-        if (!data) {
-            return new Response(JSON.stringify({ error: 'Product not found' }), {
-                status: 404,
-                headers: { 'content-type': 'application/json' },
-            });
-        }
-
-        return new Response(JSON.stringify(data), {
-            status: 200,
-            headers: {
-                'content-type': 'application/json',
-            },
-        });
-    }
-
-
-
     const { slug } = params;
 
     if (!slug) {
@@ -65,114 +88,60 @@ export const GET: APIRoute = async ({ params }) => {
     }
 
     try {
-        const product = await prisma.product.findUnique({
-            where: { slug },
+        // Fetch the product and all its related content in a single, structured query
+        const productFromDb = await prisma.product.findUnique({
+            where: { slug, published: true },
             include: {
+                mainImage: true,
                 topics: true,
-                images: true, // All images for the product
-                variants: {
-                    include: {
-                        images: true, // All images for each variant
-                    },
+                bodyParagraphs: {
+                    orderBy: { order: 'asc' },
+                    include: { images: true },
                 },
+                tableSections: {
+                    orderBy: { order: 'asc' },
+                    include: { properties: { orderBy: { order: 'asc' } } },
+                },
+                optionGroups: {
+                    include: { options: true },
+                },
+                relatedTo: {
+                    include: {
+                        to: { // 'to' is the related product
+                            include: { mainImage: true, topics: true }
+                        }
+                    }
+                }
             },
         });
 
-        if (!product || product===null) {
+        if (!productFromDb) {
             return new Response(JSON.stringify({ message: 'Product not found' }), {
                 status: 404,
                 headers: { 'content-type': 'application/json' },
             });
         }
         
-        // Fetch related products if there are any IDs
-        let relatedItems: any[] = [];
-        if (product?.relatedProductIds && (product?.relatedProductIds?.length?? 0) > 0) {
-            const relatedProducts = await prisma.product.findMany({
-                where: {
-                    id: { in: product?.relatedProductIds },
-                    published: true,
-                },
-                include: {
-                    topics: true,
-                    images: { take: 1 },
-                    defaultVariant: {
-                        include: {
-                            images: { take: 1 },
-                        },
-                    },
-                },
-            });
-            relatedItems = relatedProducts.map(mapProductToCard);
-        }
+        // Map the database result to the frontend contract
+        const productForFrontend = mapProductToContract(productFromDb as FullProduct);
 
-        // The mock data has a complex shape. We replicate it here.
-        // The `body`, `summary`, and `nutritionJson` fields are assumed to contain
-        // JSON that matches the structure your frontend expects.
-        const response = {
-            product: {
-                ...mapProductToCard(product),
-                summary: {
-                    content: {
-                        json: product?.summary ? JSON.parse(product?.summary?? "" ) : [],
-                    },
-                },
-                body: {
-                    content: {
-                        paragraphs: product?.body ? JSON.parse(product?.body ?? "") : [],
-                    },
-                },
-                table: {
-                    content: {
-                        sections: product?.nutritionJson ?? [],
-                    },
-                },
-                related: {
-                    content: {
-                        items: relatedItems,
-                    },
-                },
-                variants: product?.variants.map(variant => ({
-                    id: variant.id,
-                    name: variant.name,
-                    sku: variant.sku,
-                    price: variant.price,
-                    priceVariants: [{ // This structure seems redundant but matches mock
-                        identifier: 'default',
-                        name: 'Default',
-                        price: variant.price,
-                        currency: variant.currency,
-                    }],
-                    stock: variant.stock,
-                    isDefault: variant.isDefault,
-                    attributes: variant.attributes,
-                    images: variant.images.map(image => ({
-                        url: image.url,
-                        altText: image.altText,
-                        key: image.key,
-                        width: image.width,
-                        height: image.height,
-                        variants: [], // Not nesting variants
-                    })),
-                })),
-                defaultVariant: { // Override the one from mapProductToCard
-                    firstImage: product?.images?.[0] ?? product?.variants?.[0]?.images?.[0] ?? null,
-                },
-            },
-        };
-
-        return new Response(JSON.stringify(response), {
+        return new Response(JSON.stringify({ product: productForFrontend }), {
             status: 200,
             headers: {
                 'content-type': 'application/json',
             },
         });
+
     } catch (error: any) {
         console.error(error);
-        const errorMessage = error instanceof SyntaxError ? "Error parsing content from database." : error.message;
+        const errorMessage = error.message;
         return new Response(JSON.stringify({ message: "An error occurred.", error: errorMessage }), {
             status: 500,
             headers: { 'content-type': 'application/json' },
         });
     }
 };
+
+// We need to import Decimal to handle the price mapping correctly.
+// Prisma uses a custom Decimal type for Decimal fields.
+import { Decimal } from '@prisma/client/runtime/library';

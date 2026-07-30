@@ -1,11 +1,11 @@
 import { ContentTransformer, Image } from "@crystallize/reactjs-components";
 import ReactPlayer from "react-player";
-import { type ProductBody as ProductBodyType } from "../use-cases/contracts/ProductContent";
+import { type ProductBodyType } from "../use-cases/contracts/ProductContent";
 
 export const ProductBody = ({ body, table }: ProductBodyType) => {
     return (
         <div className="flex flex-col gap-3 my-10 lg:w-9/12 w-full mx-auto z-10">
-            {body?.content?.paragraphs.map((paragraph, index) => (
+            {body?.paragraphs.map((paragraph, index) => (
                 <div key={index} className="flex flex-col justify-between">
                     <div className="my-3 text-text md:px-20">
                         {paragraph.title && (
@@ -13,23 +13,22 @@ export const ProductBody = ({ body, table }: ProductBodyType) => {
                                 {paragraph.title?.text}
                             </h2>
                         )}
-                        {paragraph.body && (
-                            <div>
-                                <ContentTransformer
-                                    json={paragraph.body?.json as [any]}
-                                />
-                            </div>
-                        )}
+                        <p>
+                            {paragraph.text}
+                        </p>
                     </div>
                     {paragraph.images && (
                         <div className="my-5 mx-auto">
                             {paragraph?.images?.map((image, index: number) => (
-                                <Image
-                                    {...image}
+                                <img
+                                    src={image.url}
+                                    alt={image.altText}
+                                    //srcSet={`${image.url}?w=200 200w, ${image.url}?w=300 300w`}
                                     sizes="200px"
-                                    className="rounded-xl overflow-hidden"
+                                    className="rounded-xl overflow-hidden aspect-[768/409]"
                                     loading="lazy"
-                                    key={index}
+                                    // width="500px"
+                                    // height="400px"
                                 />
                             ))}
                         </div>
@@ -55,7 +54,7 @@ export const ProductBody = ({ body, table }: ProductBodyType) => {
                     )}
                 </div>
             ))}
-            {table?.content?.sections.map((section, index) => (
+            {table?.sections.map((section, index) => (
                 <div
                     key={index}
                     className="flex lg:flex-row flex-col justify-between text-text my-20"

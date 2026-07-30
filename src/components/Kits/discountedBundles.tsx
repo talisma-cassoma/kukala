@@ -1,37 +1,36 @@
 
-export function DscountedBundles({ cell }: any) {
-  const product = cell.item;
+import { TopicsDisplayer } from "@/components/topics-displayer";
 
-  const image = product.variants?.[0]?.images?.[0];
-  const price = product.variants?.[0]?.price;
-     return (
-    <a href={product.path}>
-      <div className="flex flex-col rounded-xl p-5 bg-red-50 min-h-[400px]">
-        <div className="flex justify-between">
-          <div className="flex gap-1">
-            {product.topics?.map((topic: any) => (
-              <span
-                key={topic.name}
-                className="text-sm bg-grey px-3 py-1 rounded-xl"
-              >
-                {topic.name}
-              </span>
-            ))}
-          </div>
+export function DiscountedBundles({ cell }: any) {
+  const product = cell;
 
-          <p>${price}</p>
+  const image = product.image;
+  const price = product.price;
+  return (
+    <a href={product.path}
+      className="flex flex-col pb-[4rem] lg:bg-background3 rounded-xl lg:h-96 p-5 lg:w-[300px w-full box-border">
+      <div className="grid grid-rows-[auto_1fr_auto] h-full gap-4">
+      
+        <div className="flex justify-between items-start">
+          <TopicsDisplayer topics={product?.topics} />
+          <p className="font-bold">${price}</p>
         </div>
 
-        <img
-          src={image.url}
-          alt={image.altText}
-          className="mx-auto"
-        />
-
-        <h2 className="text-2xl font-bold text-center mt-auto">
-          {product.name}
+        <div className="flex items-center justify-center min-h-0 w-full">
+          <img
+            src={image.url}
+            alt={image.altText}
+            srcSet={`${image.url}?w=200 200w, ${image.url}?w=300 300w`}
+            sizes="(max-width: 700px) 200px, 300px"
+            loading="lazy"
+            className="w-full  aspect-[500/434] object-contain"
+          />
+        </div>
+        <h2 className="text-2xl font-bold text-center mx-auto w-40">
+          {product?.name}
         </h2>
       </div>
+
     </a>
   );
-  }
+}

@@ -3,7 +3,7 @@ import { fetchAllProducts } from "../../use-cases/queries/all-products";
 import { fetchProduct } from "../../use-cases/queries/product";
 
 import Layout from "../../layouts/Layout.astro";
-import { Product as CrystallizeProduct } from "../../components/product";
+import { ProductView } from "../../components/product";
 
 export const prerender = false;
 
@@ -38,14 +38,14 @@ const pageDescription = productData?.product?.description ?? 'Product';
 
 // console.log('dados do produto: { pageTitle', JSON.stringify(pageTitle));
 // console.log('pageDescription', JSON.stringify(pageDescription));
-// console.log('productData', JSON.stringify(productData), '}');
+ //console.log('productData', JSON.stringify(productData), '}');
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
-  <div class="lg:container mx-auto w-full lg:px-0 px-5">
+  <div class="lg:container mx-auto w-screenWidth lg:px-0 px-5">
     {
       productData ? (
-        <CrystallizeProduct product={productData.product} client:load/>
+        <ProductView product={productData.product} client:load/>
       ) : (
         <p>Product not found</p>
       )

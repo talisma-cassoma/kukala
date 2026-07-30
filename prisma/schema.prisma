@@ -1,156 +1,255 @@
-// Prisma schema for the storefront catalog and order data
-// This is designed to mirror the content shape exposed by the Crystallize-style queries.
+// This schema is designed based on the specific business domain of the application,
+// avoiding generic CMS or e-commerce patterns. It prioritizes explicit relationships
+// and structured data to efficiently support the frontend contracts and SSR API queries.
 
 generator client {
     provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+    provider  = "postgresql"
+    url       = env("DATABASE_URL")
     directUrl = env("DATABASE_DIRECT_URL")
 }
 
-model Page {
-    id          String   @id @default(cuid())
-    slug        String   @unique
-    title       String?
-    description String?
-    path        String   @unique
-    type        String   @default("page")
-    published   Boolean  @default(true)
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+// --- Enums ---
 
-    heroImage       String?
-    heroText        String?
-    metaTitle       String?
-    metaDescription String?
-
-    gridItems GridItem[]
-    products  Product[]
-    sections  Section[]
+enum ProductType {
+    COMBOBOX
+    RETAIL
+    DISCOUNTED
 }
 
-model Section {
-    id        String   @id @default(cuid())
-    pageId    String
-    page      Page     @relation(fields: [pageId], references: [id], onDelete: Cascade)
-    title     String?
-    kind      String   @default("content")
-    body      Json?
-    order     Int      @default(0)
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+enum OrderStatus {
+    PENDING
+    PAID
+    FULFILLED
+    CANCELLED
 }
 
-model GridItem {
-    id        String   @id @default(cuid())
-    pageId    String
-    page      Page     @relation(fields: [pageId], references: [id], onDelete: Cascade)
-    name      String
-    path      String
-    price     Decimal?
-    imageUrl  String?
-    imageAlt  String?
-    topics    Topic[]
-    order     Int      @default(0)
-    colspan   Int      @default(1)
-    rowspan   Int      @default(1)
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-}
+// --- Core Models ---
 
+// Represents a product in the catalog.
 model Product {
-    id                String   @id @default(cuid())
-    slug              String   @unique
-    name              String
-    path              String   @unique
-    type              String   @default("product")
-    published         Boolean  @default(true)
-    isBundle          Boolean  @default(false)
-    summary           String?
-    body              String?
-    nutritionJson     Json?
-    relatedProductIds String[]
-    createdAt         DateTime @default(now())
-    updatedAt         DateTime @updatedAt
+    id          String      @id @default(cuid())
+    name        String
+    slug        String      @unique
+    path        String      @unique
+    type        ProductType // Classification for homepage grouping
+    summary     String?
+    published   Boolean     @default(false)
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
+    mainImageId String?
+    
+    mainImage   Image?      @relation("MainProductImage", fields: [mainImageId], references: [id], onUpdate: NoAction, onDelete: NoAction)
+    images      Image[] // Additional images for the product
+    topics      Topic[]
+    
+    // Structured content for the product page
+    bodyParagraphs Paragraph[]
+    tableSections  TableSection[]
 
-    pageId String?
-    page   Page?   @relation(fields: [pageId], references: [id])
+    // Configurable purchase options
+    optionGroups ProductOptionGroup[]
 
-    defaultVariantId String?
-    defaultVariant   ProductVariant? @relation("DefaultVariant", fields: [defaultVariantId], references: [id])
+    // Self-relation for related products
+    relatedTo     ProductRelationship[] @relation("RelatedFrom")
+    relatedFrom   ProductRelationship[] @relation("RelatedTo")
 
-    variants ProductVariant[]
-    topics   Topic[]
-    images   ProductImage[]
-    orders   OrderItem[]
+    // Orders this product is part of
+    orderItems OrderItem[]
+
+    @@index([slug])
+    @@index([type])
 }
 
-model ProductVariant {
-    id         String   @id @default(cuid())
-    productId  String
-    product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-    sku        String   @unique
-    name       String
-    price      Decimal
-    currency   String   @default("USD")
-    stock      Int      @default(0)
-    isDefault  Boolean  @default(false)
-    attributes Json?
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
-
-    defaultForProduct Product[]      @relation("DefaultVariant")
-    images            ProductImage[]
-}
-
-model ProductImage {
-    id        String          @id @default(cuid())
-    productId String?
-    product   Product?        @relation(fields: [productId], references: [id], onDelete: Cascade)
-    variantId String?
-    variant   ProductVariant? @relation(fields: [variantId], references: [id], onDelete: Cascade)
-    url       String
-    altText   String?
-    width     Int?
-    height    Int?
-    key       String?
-    createdAt DateTime        @default(now())
-    updatedAt DateTime        @updatedAt
-}
-
+// Represents a topic/category for grouping products.
 model Topic {
-    id        String     @id @default(cuid())
-    name      String     @unique
-    slug      String     @unique
+    id        String    @id @default(cuid())
+    name      String    @unique
+    slug      String    @unique
     products  Product[]
-    gridItems GridItem[]
+
+    @@index([slug])
 }
 
+// --- Product Content Models ---
+
+// Represents a paragraph in the product's body content.
+model Paragraph {
+    id        String   @id @default(cuid())
+    title     String?
+    body      Json // For rich text content from a text editor
+    order     Int      @default(0)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    productId String
+    product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+    images Image[]
+
+    @@index([productId])
+}
+
+// Represents an image, which can be linked to a Product or a Paragraph.
+model Image {
+    id      String  @id @default(cuid())
+    url     String
+    altText String?
+    key     String? // For services like S3
+
+    // An image can belong to a product's main image...
+    productAsMainImage Product[] @relation("MainProductImage")
+
+    // ...or be one of many images for a product...
+    productId String?
+    product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+    
+    // ...or belong to a paragraph.
+    paragraphId String?
+    paragraph   Paragraph? @relation(fields: [paragraphId], references: [id], onDelete: Cascade)
+
+    @@index([productId])
+    @@index([paragraphId])
+}
+
+// Represents a section in the product's specification table (e.g., "Nutrition").
+model TableSection {
+    id        String   @id @default(cuid())
+    title     String
+    order     Int      @default(0)
+    
+    productId String
+    product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+    properties TableProperty[]
+
+    @@index([productId])
+}
+
+// Represents a key-value pair within a TableSection (e.g., "Calories: 100").
+model TableProperty {
+    id        String   @id @default(cuid())
+    key       String
+    value     String
+    order     Int      @default(0)
+
+    sectionId String
+    section   TableSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+
+    @@index([sectionId])
+}
+
+
+// --- Product Options Models ---
+
+// Represents a group of purchase options (e.g., "Delivery" or "Package Size").
+model ProductOptionGroup {
+    id        String   @id @default(cuid())
+    name      String // e.g., "Package Size"
+    required  Boolean  @default(false)
+
+    productId String
+    product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+    
+    options   ProductOption[]
+
+    @@index([productId])
+}
+
+// Represents a single choice within an option group (e.g., "250g" or "500g").
+model ProductOption {
+    id          String  @id @default(cuid())
+    label       String // e.g., "250g"
+    price       Decimal // Price for this specific option
+    available   Boolean @default(true)
+
+    groupId String
+    group   ProductOptionGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+    // Link to order items to record which options were selected
+    orderItems OrderItemOption[]
+
+    @@index([groupId])
+}
+
+
+// --- Order Models ---
+
+// Represents a customer's order. No user accounts are needed.
 model Order {
     id            String      @id @default(cuid())
-    status        String      @default("pending")
-    customerEmail String?
+    customerEmail String      // Only for contact, not for accounts
     totalNet      Decimal
     totalGross    Decimal
+    status        OrderStatus @default(PENDING)
     createdAt     DateTime    @default(now())
     updatedAt     DateTime    @updatedAt
+
     items         OrderItem[]
 }
 
+// Represents a line item in an order.
 model OrderItem {
     id         String   @id @default(cuid())
+    name       String   // Denormalized product name at time of purchase
+    quantity   Int
+    unitPrice  Decimal  // Price per unit at time of purchase
+    totalPrice Decimal  // Total for this line item
+
     orderId    String
     order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
-    productId  String?
-    product    Product? @relation(fields: [productId], references: [id])
-    variantId  String?
-    name       String
-    quantity   Int
-    unitPrice  Decimal
-    totalPrice Decimal
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
+
+    productId  String
+    product    Product  @relation(fields: [productId], references: [id], onDelete:Restrict)
+
+    // Records the specific options selected for this item
+    selectedOptions OrderItemOption[]
+
+    @@index([orderId])
+}
+
+// Join table to link an OrderItem to the selected ProductOptions.
+model OrderItemOption {
+    id String @id @default(cuid())
+    
+    orderItemId String
+    orderItem OrderItem @relation(fields: [orderItemId], references: [id], onDelete: Cascade)
+    
+    productOptionId String
+    productOption   ProductOption @relation(fields: [productOptionId], references: [id], onDelete: Restrict)
+
+    // Denormalized data for historical accuracy
+    groupName String // e.g., "Package Size"
+    optionLabel String // e.g., "250g"
+    priceAtPurchase Decimal
+
+    @@unique([orderItemId, productOptionId])
+    @@index([orderItemId])
+    @@index([productOptionId])
+}
+
+
+// --- Helper Models ---
+
+// Explicit many-to-many relationship for related products.
+model ProductRelationship {
+    fromId String
+    from   Product @relation("RelatedFrom", fields: [fromId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+    toId   String
+    to     Product @relation("RelatedTo", fields: [toId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+    @@id([fromId, toId])
+}
+
+// Admin user model. Customers do not have accounts.
+model Admin {
+    id           String   @id @default(cuid())
+    email        String   @unique
+    passwordHash String
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
 }

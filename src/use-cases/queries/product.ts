@@ -3,7 +3,8 @@ export async function fetchProduct(path: string, origin: string) {
     const slug = path.replace('/shop/', '');
     const response = await fetch(`${origin}/api/products/${slug}`);
     if (!response.ok) {
-      throw new Error('Failed to fetch product from API');
+      //throw new Error('Failed to fetch product from API');
+      return null;
     }
 
     return await response.json();

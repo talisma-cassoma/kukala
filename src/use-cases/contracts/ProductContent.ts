@@ -1,5 +1,19 @@
 import type { Paragraph } from "./Paragraph";
 
+export interface ProductOptionItem {
+    id: string;
+    label: string;
+    price: number;
+    available: boolean;
+}
+
+export interface ProductOptionGroup {
+    id: string;
+    name: string;
+    required?: boolean;
+    options: ProductOptionItem[];
+}
+
 export type ProductTable = {
     sections: {
         title: string;
@@ -10,13 +24,12 @@ export type ProductTable = {
     }[];
 };
 
-export type ProductBody = {
+export type ProductBodyType = {
     body: {
-        content: {
-            paragraphs: Paragraph[];
-        };
+        paragraphs: Paragraph[];
     };
-    table: {
-        content: ProductTable;
-    };
+    table: ProductTable;
+   
+    productOptions?: ProductOptionGroup[];
 };
+

@@ -1,0 +1,640 @@
+[
+    {      
+        "type": "RETAIL",
+        "name": "Écran solaire spf 50 kukala",
+        "path": "/shop/ecran_solaire_spf_50",
+        "topics": [
+            { "name": "new" },
+            { "name": "promo" }
+        ],
+        "bundle": {
+            "content": { "value": false}
+        },
+        "image": {
+            "dir_path": "/ecran_solaire_spf_50",
+            "url": "this sould come from supabase",
+            "altText": "Écran solaire spf 50 kukala image",
+            "variants": []
+        },
+        "price": 75,
+        "related": {
+            "items": [
+                {
+                    "name": "Related Mock Product 1",
+                    "path": "/shop/related-mock-product-1",
+                    "topics": [{ "name": "related-category-X" }],
+                    "defaultVariant": { "price": 10.0, "currency": "USD" }
+                },
+                {
+                    "name": "Related Mock Product 2",
+                    "path": "/shop/related-mock-product-2",
+                    "topics": [{ "name": "related-category-Y" }],
+                    "defaultVariant": { "price": 15.0, "currency": "EUR" }
+                }
+            ]
+        },
+        "summary": "O cuidado nutritivo aue transforma a sua dele. proporcionando um brilho dourado e saudave",
+        
+        "body": {
+            "paragraphs": [
+                {
+                    "title": { "text": "Introduction to the Mock Product" },
+                    "text": "Il existe des rituels qui traversent le temps. Au Maroc, l'huile n'est pas un produit — c'est un geste. Transmis, raffiné, quotidien. Kukala est née à Marrakech, au cœur d'une ville où le soin de la peau est une culture millénaire. Une ville où les souks respirent l'argan, le savon beldi et les épices — où prendre soin de soi n'a jamais été un luxe, mais une évidence. De cette terre, nous avons gardé l'essentiel : des huiles naturelles rigoureusement sélectionnées, formulées au sein d'un laboratoire national marocain. Chaque produit est pensé pour s'intégrer dans votre quotidien — homme ou femme — sans e ort, sans superflu. Une hydratation profonde. Des ingrédients qui ont fait leurs preuves. Une approche épurée du soin, portée par l'héritage d'une ville d'exception. Kukala. L'essentiel, à l'état pur.",
+                    "images": [
+                        { "url": "this sould come from supabase", "altText": "imagem do produto" },
+                        { "url": "this sould come from supabase", "altText": "imagem do produto" }
+                    ],
+                    "videos": [
+                        { "playlist": "mock-video-playlist-1", "autoplay": false }
+                    ]
+                }
+            ]
+        },
+        "table": {
+            "sections": [
+                {
+                    "title": "General Specifications",
+                    "properties": [
+                        { "key": "Weight", "value": "500g" },
+                        { "key": "Dimensions", "value": "10x10x5 cm" },
+                        { "key": "Material", "value": "High-quality plastic" }
+                    ]
+                },
+                {
+                    "title": "Technical Details",
+                    "properties": [
+                        { "key": "Power Source", "value": "USB-C" },
+                        { "key": "Battery Life", "value": "Up to 8 hours" }
+                    ]
+                }
+            ]
+        },
+        "productOptions": [
+            {
+                "id": "color",
+                "name": "Color",
+                "required": false,
+                "options": [
+                    { "id": "red", "label": "Red", "price": 0, "available": true },
+                    { "id": "blue", "label": "Blue", "price": 0, "available": true },
+                    { "id": "green", "label": "Green", "price": 5, "available": false }
+                ] 
+            },
+            {
+                "id": "storage",
+                "name": "Storage",
+                "options": [
+                    { "id": "32gb", "label": "32 GB", "price": 0, "available": true },
+                    { "id": "64gb", "label": "64 GB", "price": 10, "available": true }
+                ]
+            }
+        ]
+    },
+    {      
+        "type": "RETAIL",
+        "name": "Hydratation profonde",
+        "path": "/shop/hydratation_profonde",
+         "topics": [
+            { "name": "new" },
+            { "name": "promo" }
+        ],
+        "bundle": {
+            "content": { "value": false}
+        },
+        "image": {
+            "dir_path": "/hydratation_profonde",
+            "url": "this sould come from supabase",
+            "altText": "Hydratation profonde image",
+            "variants": []
+        },
+        "price": 65,
+        "related": {
+            "items": [
+                {
+                    "name": "Related Mock Product 1",
+                    "path": "/shop/related-mock-product-1",
+                    "topics": [{ "name": "related-category-X" }],
+                    "defaultVariant": { "price": 10.0, "currency": "USD" }
+                },
+                {
+                    "name": "Related Mock Product 2",
+                    "path": "/shop/related-mock-product-2",
+                    "topics": [{ "name": "related-category-Y" }],
+                    "defaultVariant": { "price": 15.0, "currency": "EUR" }
+                }
+            ]
+        },
+        "summary": "O cuidado nutritivo aue transforma a sua dele. proporcionando um brilho dourado e saudave",
+        
+        "body": {
+            "paragraphs": [
+                {
+                    "title": { "text": "Introduction to the Mock Product" },
+                    "text": "Il existe des rituels qui traversent le temps. Au Maroc, l'huile n'est pas un produit — c'est un geste. Transmis, raffiné, quotidien. Kukala est née à Marrakech, au cœur d'une ville où le soin de la peau est une culture millénaire. Une ville où les souks respirent l'argan, le savon beldi et les épices — où prendre soin de soi n'a jamais été un luxe, mais une évidence. De cette terre, nous avons gardé l'essentiel : des huiles naturelles rigoureusement sélectionnées, formulées au sein d'un laboratoire national marocain. Chaque produit est pensé pour s'intégrer dans votre quotidien — homme ou femme — sans e ort, sans superflu. Une hydratation profonde. Des ingrédients qui ont fait leurs preuves. Une approche épurée du soin, portée par l'héritage d'une ville d'exception. Kukala. L'essentiel, à l'état pur.",
+                    "images": [
+                        { "url": "this sould come from supabase", "altText": "imagem do produto" },
+                        { "url": "this sould come from supabase", "altText": "imagem do produto" }
+                    ],
+                    "videos": [
+                        { "playlist": "mock-video-playlist-1", "autoplay": false }
+                    ]
+                }
+            ]
+        },
+        "table": {
+            "sections": [
+                {
+                    "title": "General Specifications",
+                    "properties": [
+                        { "key": "Weight", "value": "500g" },
+                        { "key": "Dimensions", "value": "10x10x5 cm" },
+                        { "key": "Material", "value": "High-quality plastic" }
+                    ]
+                },
+                {
+                    "title": "Technical Details",
+                    "properties": [
+                        { "key": "Power Source", "value": "USB-C" },
+                        { "key": "Battery Life", "value": "Up to 8 hours" }
+                    ]
+                }
+            ]
+        },
+        "productOptions": [
+            {
+                "id": "color",
+                "name": "Color",
+                "required": false,
+                "options": [
+                    { "id": "red", "label": "Red", "price": 0, "available": true },
+                    { "id": "blue", "label": "Blue", "price": 0, "available": true },
+                    { "id": "green", "label": "Green", "price": 5, "available": false }
+                ] 
+            },
+            {
+                "id": "storage",
+                "name": "Storage",
+                "options": [
+                    { "id": "32gb", "label": "32 GB", "price": 0, "available": true },
+                    { "id": "64gb", "label": "64 GB", "price": 10, "available": true }
+                ]
+            }
+        ]
+    },
+    {      
+        "type": "RETAIL",
+        "name": "huile hydratante Glamour Doré",
+        "path": "/shop/huile_hydratante_glamour_dore",
+         "topics": [
+            { "name": "new" },
+            { "name": "promo" }
+        ],
+        "bundle": {
+            "content": { "value": false}
+        },
+        "image": {
+            "dir_path": "/huile_hydratante_glamour_dore",
+            "url": "this sould come from supabase",
+            "altText": "huile hydratante glamour dore image",
+            "variants": []
+        },
+        "price": 65,
+        "related": {
+            "items": [
+                {
+                    "name": "Related Mock Product 1",
+                    "path": "/shop/related-mock-product-1",
+                    "topics": [{ "name": "related-category-X" }],
+                    "defaultVariant": { "price": 10.0, "currency": "USD" }
+                },
+                {
+                    "name": "Related Mock Product 2",
+                    "path": "/shop/related-mock-product-2",
+                    "topics": [{ "name": "related-category-Y" }],
+                    "defaultVariant": { "price": 15.0, "currency": "EUR" }
+                }
+            ]
+        },
+        "summary": "O cuidado nutritivo aue transforma a sua dele. proporcionando um brilho dourado e saudave",
+        
+        "body": {
+            "paragraphs": [
+                {
+                    "title": { "text": "Introduction to the Mock Product" },
+                    "text": "Il existe des rituels qui traversent le temps. Au Maroc, l'huile n'est pas un produit — c'est un geste. Transmis, raffiné, quotidien. Kukala est née à Marrakech, au cœur d'une ville où le soin de la peau est une culture millénaire. Une ville où les souks respirent l'argan, le savon beldi et les épices — où prendre soin de soi n'a jamais été un luxe, mais une évidence. De cette terre, nous avons gardé l'essentiel : des huiles naturelles rigoureusement sélectionnées, formulées au sein d'un laboratoire national marocain. Chaque produit est pensé pour s'intégrer dans votre quotidien — homme ou femme — sans e ort, sans superflu. Une hydratation profonde. Des ingrédients qui ont fait leurs preuves. Une approche épurée du soin, portée par l'héritage d'une ville d'exception. Kukala. L'essentiel, à l'état pur.",
+                    "images": [
+                        { "url": "this sould come from supabase", "altText": "imagem do produto" },
+                        { "url": "this sould come from supabase", "altText": "imagem do produto" }
+                    ],
+                    "videos": [
+                        { "playlist": "mock-video-playlist-1", "autoplay": false }
+                    ]
+                }
+            ]
+        },
+        "table": {
+            "sections": [
+                {
+                    "title": "General Specifications",
+                    "properties": [
+                        { "key": "Weight", "value": "500g" },
+                        { "key": "Dimensions", "value": "10x10x5 cm" },
+                        { "key": "Material", "value": "High-quality plastic" }
+                    ]
+                },
+                {
+                    "title": "Technical Details",
+                    "properties": [
+                        { "key": "Power Source", "value": "USB-C" },
+                        { "key": "Battery Life", "value": "Up to 8 hours" }
+                    ]
+                }
+            ]
+        },
+        "productOptions": [
+            {
+                "id": "color",
+                "name": "Color",
+                "required": false,
+                "options": [
+                    { "id": "red", "label": "Red", "price": 0, "available": true },
+                    { "id": "blue", "label": "Blue", "price": 0, "available": true },
+                    { "id": "green", "label": "Green", "price": 5, "available": false }
+                ] 
+            },
+            {
+                "id": "storage",
+                "name": "Storage",
+                "options": [
+                    { "id": "32gb", "label": "32 GB", "price": 0, "available": true },
+                    { "id": "64gb", "label": "64 GB", "price": 10, "available": true }
+                ]
+            }
+        ]
+    },
+    {      
+        "type": "COMBOBOX",
+        "name": "combo kukla",
+        "path": "/shop/combo_3xkukla",
+         "topics": [
+            { "name": "new" },
+            { "name": "promo" }
+        ],
+        "bundle": {
+            "content": { "value": false}
+        },
+        "image": {
+            "dir_path": "/combo_3xkukla",
+            "url": "this sould come from supabase",
+            "altText": "combo des 3 produits kukla image",
+            "variants": []
+        },
+        "price": 150,
+        "related": {
+            "items": [
+                {
+                    "name": "Related Mock Product 1",
+                    "path": "/shop/related-mock-product-1",
+                    "topics": [{ "name": "related-category-X" }],
+                    "defaultVariant": { "price": 10.0, "currency": "USD" }
+                },
+                {
+                    "name": "Related Mock Product 2",
+                    "path": "/shop/related-mock-product-2",
+                    "topics": [{ "name": "related-category-Y" }],
+                    "defaultVariant": { "price": 15.0, "currency": "EUR" }
+                }
+            ]
+        },
+        "summary": "O cuidado nutritivo aue transforma a sua dele. proporcionando um brilho dourado e saudave",
+        
+        "body": {
+            "paragraphs": [
+                {
+                    "title": { "text": "Introduction to the Mock Product" },
+                    "text": "Il existe des rituels qui traversent le temps. Au Maroc, l'huile n'est pas un produit — c'est un geste. Transmis, raffiné, quotidien. Kukala est née à Marrakech, au cœur d'une ville où le soin de la peau est une culture millénaire. Une ville où les souks respirent l'argan, le savon beldi et les épices — où prendre soin de soi n'a jamais été un luxe, mais une évidence. De cette terre, nous avons gardé l'essentiel : des huiles naturelles rigoureusement sélectionnées, formulées au sein d'un laboratoire national marocain. Chaque produit est pensé pour s'intégrer dans votre quotidien — homme ou femme — sans e ort, sans superflu. Une hydratation profonde. Des ingrédients qui ont fait leurs preuves. Une approche épurée du soin, portée par l'héritage d'une ville d'exception. Kukala. L'essentiel, à l'état pur.",
+                    "images": [
+                        { "url": "this sould come from supabase", "altText": "imagem do produto" },
+                        { "url": "this sould come from supabase", "altText": "imagem do produto" }
+                    ],
+                    "videos": [
+                        { "playlist": "mock-video-playlist-1", "autoplay": false }
+                    ]
+                }
+            ]
+        },
+        "table": {
+            "sections": [
+                {
+                    "title": "General Specifications",
+                    "properties": [
+                        { "key": "Weight", "value": "500g" },
+                        { "key": "Dimensions", "value": "10x10x5 cm" },
+                        { "key": "Material", "value": "High-quality plastic" }
+                    ]
+                },
+                {
+                    "title": "Technical Details",
+                    "properties": [
+                        { "key": "Power Source", "value": "USB-C" },
+                        { "key": "Battery Life", "value": "Up to 8 hours" }
+                    ]
+                }
+            ]
+        },
+        "productOptions": [
+            {
+                "id": "color",
+                "name": "Color",
+                "required": false,
+                "options": [
+                    { "id": "red", "label": "Red", "price": 10, "available": true },
+                    { "id": "blue", "label": "Blue", "price": 10, "available": true },
+                    { "id": "green", "label": "Green", "price": 5, "available": false }
+                ] 
+            },
+            {
+                "id": "storage",
+                "name": "Storage",
+                "options": [
+                    { "id": "32gb", "label": "32 GB", "price": 0, "available": true },
+                    { "id": "64gb", "label": "64 GB", "price": 10, "available": true }
+                ]
+            }
+        ]
+    },
+    {      
+        "type": "DISCOUNTED",
+        "name": "combo 3 Écran solaire spf 50 kukala",
+        "path": "/shop/combo_3xecran_solaire_spf_50",
+         "topics": [
+            { "name": "new" },
+            { "name": "promo" }
+        ],
+        "bundle": {
+            "content": { "value": false}
+        },
+        "image": {
+            "dir_path": "/combo_3xecran_solaire_spf_50",
+            "url": "this sould come from supabase",
+            "altText": "combo des 3 Écran solaire spf 50 image",
+            "variants": []
+        },
+        "price": 65,
+        "related": {
+            "items": [
+                {
+                    "name": "Related Mock Product 1",
+                    "path": "/shop/related-mock-product-1",
+                    "topics": [{ "name": "related-category-X" }],
+                    "defaultVariant": { "price": 10.0, "currency": "USD" }
+                },
+                {
+                    "name": "Related Mock Product 2",
+                    "path": "/shop/related-mock-product-2",
+                    "topics": [{ "name": "related-category-Y" }],
+                    "defaultVariant": { "price": 15.0, "currency": "EUR" }
+                }
+            ]
+        },
+        "summary": "O cuidado nutritivo aue transforma a sua dele. proporcionando um brilho dourado e saudave",
+        
+        "body": {
+            "paragraphs": [
+                {
+                    "title": { "text": "Introduction to the Mock Product" },
+                    "text": "Il existe des rituels qui traversent le temps. Au Maroc, l'huile n'est pas un produit — c'est un geste. Transmis, raffiné, quotidien. Kukala est née à Marrakech, au cœur d'une ville où le soin de la peau est une culture millénaire. Une ville où les souks respirent l'argan, le savon beldi et les épices — où prendre soin de soi n'a jamais été un luxe, mais une évidence. De cette terre, nous avons gardé l'essentiel : des huiles naturelles rigoureusement sélectionnées, formulées au sein d'un laboratoire national marocain. Chaque produit est pensé pour s'intégrer dans votre quotidien — homme ou femme — sans e ort, sans superflu. Une hydratation profonde. Des ingrédients qui ont fait leurs preuves. Une approche épurée du soin, portée par l'héritage d'une ville d'exception. Kukala. L'essentiel, à l'état pur.",
+                    "images": [
+                        { "url": "this sould come from supabase", "altText": "imagem do produto" },
+                        { "url": "this sould come from supabase", "altText": "imagem do produto" }
+                    ],
+                    "videos": [
+                        { "playlist": "mock-video-playlist-1", "autoplay": false }
+                    ]
+                }
+            ]
+        },
+        "table": {
+            "sections": [
+                {
+                    "title": "General Specifications",
+                    "properties": [
+                        { "key": "Weight", "value": "500g" },
+                        { "key": "Dimensions", "value": "10x10x5 cm" },
+                        { "key": "Material", "value": "High-quality plastic" }
+                    ]
+                },
+                {
+                    "title": "Technical Details",
+                    "properties": [
+                        { "key": "Power Source", "value": "USB-C" },
+                        { "key": "Battery Life", "value": "Up to 8 hours" }
+                    ]
+                }
+            ]
+        },
+        "productOptions": [
+            {
+                "id": "color",
+                "name": "Color",
+                "required": false,
+                "options": [
+                    { "id": "red", "label": "Red", "price": 10, "available": true },
+                    { "id": "blue", "label": "Blue", "price": 10, "available": true },
+                    { "id": "green", "label": "Green", "price": 5, "available": false }
+                ] 
+            },
+            {
+                "id": "storage",
+                "name": "Storage",
+                "options": [
+                    { "id": "32gb", "label": "32 GB", "price": 0, "available": true },
+                    { "id": "64gb", "label": "64 GB", "price": 10, "available": true }
+                ]
+            }
+        ]
+    },
+     {      
+        "type": "DISCOUNTED",
+        "name": "combo 3 Hydratation profonde",
+        "path": "/shop/combo_3xhydratation_profonde",
+         "topics": [
+            { "name": "new" },
+            { "name": "promo" }
+        ],
+        "bundle": {
+            "content": { "value": false}
+        },
+        "image": {
+            "dir_path": "/combo_3xhydratation_profonde",
+            "url": "this sould come from supabase",
+            "altText": "combo des 3 Hydratation profonde image",
+            "variants": []
+        },
+        "price": 150,
+        "related": {
+            "items": [
+                {
+                    "name": "Related Mock Product 1",
+                    "path": "/shop/related-mock-product-1",
+                    "topics": [{ "name": "related-category-X" }],
+                    "defaultVariant": { "price": 10.0, "currency": "USD" }
+                },
+                {
+                    "name": "Related Mock Product 2",
+                    "path": "/shop/related-mock-product-2",
+                    "topics": [{ "name": "related-category-Y" }],
+                    "defaultVariant": { "price": 15.0, "currency": "EUR" }
+                }
+            ]
+        },
+        "summary": "O cuidado nutritivo aue transforma a sua dele. proporcionando um brilho dourado e saudave",
+        
+        "body": {
+            "paragraphs": [
+                {
+                    "title": { "text": "Introduction to the Mock Product" },
+                    "text": "Il existe des rituels qui traversent le temps. Au Maroc, l'huile n'est pas un produit — c'est un geste. Transmis, raffiné, quotidien. Kukala est née à Marrakech, au cœur d'une ville où le soin de la peau est une culture millénaire. Une ville où les souks respirent l'argan, le savon beldi et les épices — où prendre soin de soi n'a jamais été un luxe, mais une évidence. De cette terre, nous avons gardé l'essentiel : des huiles naturelles rigoureusement sélectionnées, formulées au sein d'un laboratoire national marocain. Chaque produit est pensé pour s'intégrer dans votre quotidien — homme ou femme — sans e ort, sans superflu. Une hydratation profonde. Des ingrédients qui ont fait leurs preuves. Une approche épurée du soin, portée par l'héritage d'une ville d'exception. Kukala. L'essentiel, à l'état pur.",
+                    "images": [
+                        { "url": "this sould come from supabase", "altText": "imagem do produto" },
+                        { "url": "this sould come from supabase", "altText": "imagem do produto" }
+                    ],
+                    "videos": [
+                        { "playlist": "mock-video-playlist-1", "autoplay": false }
+                    ]
+                }
+            ]
+        },
+        "table": {
+            "sections": [
+                {
+                    "title": "General Specifications",
+                    "properties": [
+                        { "key": "Weight", "value": "500g" },
+                        { "key": "Dimensions", "value": "10x10x5 cm" },
+                        { "key": "Material", "value": "High-quality plastic" }
+                    ]
+                },
+                {
+                    "title": "Technical Details",
+                    "properties": [
+                        { "key": "Power Source", "value": "USB-C" },
+                        { "key": "Battery Life", "value": "Up to 8 hours" }
+                    ]
+                }
+            ]
+        },
+        "productOptions": [
+            {
+                "id": "color",
+                "name": "Color",
+                "required": false,
+                "options": [
+                    { "id": "red", "label": "Red", "price": 0, "available": true },
+                    { "id": "blue", "label": "Blue", "price": 0, "available": true },
+                    { "id": "green", "label": "Green", "price": 5, "available": false }
+                ] 
+            },
+            {
+                "id": "storage",
+                "name": "Storage",
+                "options": [
+                    { "id": "32gb", "label": "32 GB", "price": 0, "available": true },
+                    { "id": "64gb", "label": "64 GB", "price": 10, "available": true }
+                ]
+            }
+        ]
+    },
+    {      
+        "type": "DISCOUNTED",
+        "name": "combo 3 huile hydratante Glamour Doré",
+        "path": "/shop/combo_3xhuile_hydratante_glamour_dore",
+         "topics": [
+            { "name": "new" },
+            { "name": "promo" }
+        ],
+        "bundle": {
+            "content": { "value": false}
+        },
+        "image": {
+            "dir_path": "/combo_3xhuile_hydratante_glamour_dore",
+            "url": "this sould come from supabase",
+            "altText": "combo 3 huile hydratante glamour dore image",
+            "variants": []
+        },
+        "price": 150,
+        "related": {
+            "items": [
+                {
+                    "name": "Related Mock Product 1",
+                    "path": "/shop/related-mock-product-1",
+                    "topics": [{ "name": "related-category-X" }],
+                    "defaultVariant": { "price": 10.0, "currency": "USD" }
+                },
+                {
+                    "name": "Related Mock Product 2",
+                    "path": "/shop/related-mock-product-2",
+                    "topics": [{ "name": "related-category-Y" }],
+                    "defaultVariant": { "price": 15.0, "currency": "EUR" }
+                }
+            ]
+        },
+        "summary": "O cuidado nutritivo aue transforma a sua dele. proporcionando um brilho dourado e saudave",
+        
+        "body": {
+            "paragraphs": [
+                {
+                    "title": { "text": "Introduction to the Mock Product" },
+                    "text": "Il existe des rituels qui traversent le temps. Au Maroc, l'huile n'est pas un produit — c'est un geste. Transmis, raffiné, quotidien. Kukala est née à Marrakech, au cœur d'une ville où le soin de la peau est une culture millénaire. Une ville où les souks respirent l'argan, le savon beldi et les épices — où prendre soin de soi n'a jamais été un luxe, mais une évidence. De cette terre, nous avons gardé l'essentiel : des huiles naturelles rigoureusement sélectionnées, formulées au sein d'un laboratoire national marocain. Chaque produit est pensé pour s'intégrer dans votre quotidien — homme ou femme — sans e ort, sans superflu. Une hydratation profonde. Des ingrédients qui ont fait leurs preuves. Une approche épurée du soin, portée par l'héritage d'une ville d'exception. Kukala. L'essentiel, à l'état pur.",
+                    "images": [
+                        { "url": "this sould come from supabase", "altText": "imagem do produto" },
+                        { "url": "this sould come from supabase", "altText": "imagem do produto" }
+                    ],
+                    "videos": [
+                        { "playlist": "mock-video-playlist-1", "autoplay": false }
+                    ]
+                }
+            ]
+        },
+        "table": {
+            "sections": [
+                {
+                    "title": "General Specifications",
+                    "properties": [
+                        { "key": "Weight", "value": "500g" },
+                        { "key": "Dimensions", "value": "10x10x5 cm" },
+                        { "key": "Material", "value": "High-quality plastic" }
+                    ]
+                },
+                {
+                    "title": "Technical Details",
+                    "properties": [
+                        { "key": "Power Source", "value": "USB-C" },
+                        { "key": "Battery Life", "value": "Up to 8 hours" }
+                    ]
+                }
+            ]
+        },
+        "productOptions": [
+            {
+                "id": "color",
+                "name": "Color",
+                "required": false,
+                "options": [
+                    { "id": "red", "label": "Red", "price": 0, "available": true },
+                    { "id": "blue", "label": "Blue", "price": 0, "available": true },
+                    { "id": "green", "label": "Green", "price": 5, "available": false }
+                ] 
+            },
+            {
+                "id": "storage",
+                "name": "Storage",
+                "options": [
+                    { "id": "32gb", "label": "32 GB", "price": 0, "available": true },
+                    { "id": "64gb", "label": "64 GB", "price": 10, "available": true }
+                ]
+            }
+        ]
+    }
+
+]

@@ -50,6 +50,7 @@ export const POST: APIRoute = async ({ request }) => {
             slug: productPayload.slug,
             path: productPayload.path || `/shop/${productPayload.slug}`,
             published: productPayload.published ?? true,
+            type: productPayload.type || 'product',
             summary: productPayload.summary ? JSON.stringify(productPayload.summary) : undefined,
             body: productPayload.body ? JSON.stringify(productPayload.body) : undefined,
             // ... add other product fields here

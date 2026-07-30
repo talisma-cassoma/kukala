@@ -1,10 +1,10 @@
-import type { ProductCard as ProductCardType } from "../use-cases/contracts/ProductCard";
+import type { ProductType } from "../use-cases/contracts/ProductCard";
 import { ProductCard } from "./product-card";
 
 export const Products = ({
     donuts,
 }: {
-    donuts: { children: ProductCardType[] };
+    donuts: { children: ProductType[] };
 }) => {
     return (
         <div className="mt-20">

@@ -1,121 +1,182 @@
-import type { ProductVariant } from "@crystallize/js-api-client";
-import { isEqual } from "../use-cases/utils";
 
-function reduceAttributes(variants: any[]) {
-    return variants.reduce((acc, variant) => {
-        const attrs = acc;
-        variant.attributes.forEach(
-            ({ attribute, value }: { attribute: any; value: any }) => {
-                const currentAttribute = attrs[attribute];
-                if (!currentAttribute) {
-                    attrs[attribute] = [value];
-                    return;
-                }
 
-                const valueExists = currentAttribute.find(
-                    (str: string) => str === value
-                );
-                if (!valueExists) {
-                    attrs[attribute].push(value);
-                }
-            }
-        );
+import type { ProductOptionGroup, ProductOptionItem } from "@/use-cases/contracts/ProductContent";
+import clsx from "clsx";
 
-        return attrs;
-    }, {});
+export interface SelectedOptions {
+  [groupId: string]: string;
 }
 
-function attributesToObject({ attributes }: any) {
-    return Object.assign(
-        {},
-        ...attributes.map(
-            ({ attribute, value }: { attribute: any; value: any }) => ({
-                [attribute]: value,
-            })
-        )
-    );
+export interface ProductOptionsProps {
+  groups: ProductOptionGroup[];
+  selected: SelectedOptions;
+  onChange: (
+    groupId: string,
+    option: ProductOptionItem
+  ) => void;
 }
+export const productOptions: ProductOptionGroup[] = [
+  {
+    id: "fragrance",
+    name: "Fragrance",
+    required: true,
+    options: [
+      {
+        id: "lavender",
+        label: "Lavender",
+        price: 0,
+        available: true,
+      },
+      {
+        id: "vanilla",
+        label: "Vanilla",
+        price: 2,
+        available: true,
+      },
+      {
+        id: "rose",
+        label: "Rose",
+        price: 4,
+        available: false,
+      },
+    ],
+  },
 
-export const VariantSelector = ({
-    variants,
-    selectedVariant,
-    onVariantChange,
-}: {
-    variants: ProductVariant[];
-    selectedVariant: ProductVariant;
-    onVariantChange: (variant: any) => void;
-}) => {
-    const attributes = reduceAttributes(variants);
+  {
+    id: "bag-size",
+    name: "Package Size",
+    required: true,
+    options: [
+      {
+        id: "small",
+        label: "Small",
+        price: 0,
+        available: true,
+      },
+      {
+        id: "medium",
+        label: "Medium",
+        price: 5,
+        available: true,
+      },
+      {
+        id: "large",
+        label: "Large",
+        price: 10,
+        available: false,
+      },
+    ],
+  },
 
-    function onAttributeSelect({
-        attribute,
-        value,
-        e,
-    }: {
-        attribute: any;
-        value: any;
-        e: any;
-    }) {
-        const selectedAttributes = attributesToObject(selectedVariant);
+  {
+    id: "delivery",
+    name: "Delivery",
+    required: true,
+    options: [
+      {
+        id: "normal",
+        label: "2-3 days",
+        price: 0,
+        available: true,
+      },
+      {
+        id: "express",
+        label: "Same day",
+        price: 15,
+        available: true,
+      },
+    ],
+  },
 
-        selectedAttributes[attribute] = value;
-        // Get the most suitable variant
-        let variant = variants.find((variant) => {
-            if (isEqual(selectedAttributes, attributesToObject(variant))) {
-                return true;
-            }
-            return false;
-        });
+  {
+    id: "gift",
+    name: "Gift Wrap",
+    options: [
+      {
+        id: "none",
+        label: "No",
+        price: 0,
+        available: true,
+      },
+      {
+        id: "premium",
+        label: "Premium",
+        price: 8,
+        available: true,
+      },
+    ],
+  },
 
-        if (variant) {
-            onVariantChange(variant);
-        }
-    }
+  {
+    id: "eco",
+    name: "Eco Package",
+    options: [
+      {
+        id: "no",
+        label: "Standard",
+        price: 0,
+        available: true,
+      },
+      {
+        id: "yes",
+        label: "Eco",
+        price: 3,
+        available: true,
+    },
+],
+},
+];
 
-    return (
-        <div>
-            {Object.keys(attributes).map((attribute) => {
-                const attr = attributes[attribute];
-                const selectedAttr = selectedVariant.attributes?.find(
-                    (a: any) => a.attribute === attribute
-                );
+export function VariantSelector({
+  groups,
+  selected,
+  onChange,
+}: ProductOptionsProps) {
+  return (
+    <div className="space-y-6">
+      {groups.map((group) => (
+        <div key={group.id}>
+          <p className="mb-3 font-semibold text-text">
+            {group.name}
+          </p>
 
-                if (!selectedAttr) {
-                    return null;
-                }
+          <div className="flex flex-wrap gap-3">
+            {group.options.map((option) => {
+              const active =
+                selected[group.id] === option.id;
 
-                return (
-                    <div key={attribute} className="w-40">
-                        <p className="my-3 text-text font-semibold">
-                            {attribute}
-                        </p>
-                        <div className="flex justify-between mb-5">
-                            {attr.map((value: string) => (
-                                <button
-                                    key={value}
-                                    onClick={(e) =>
-                                        onAttributeSelect({
-                                            attribute,
-                                            value,
-                                            e,
-                                        })
-                                    }
-                                    type="button"
-                                    className="bg-white drop-shadow-sm w-30 px-3 py-2 rounded-sm text-text font-semibold"
-                                    style={{
-                                        border:
-                                            value === selectedAttr.value
-                                                ? "3px solid #373567"
-                                                : "3px solid transparent",
-                                    }}
-                                >
-                                    {value}
-                                </button>
-                            ))}
-                        </div>
+              return (
+                <button
+                  key={option.id}
+                  type="button"
+                  disabled={!option.available}
+                  onClick={() =>
+                    onChange(group.id, option)
+                  }
+                  className={clsx(
+                    "rounded-md border px-4 py-2 transition",
+                    active
+                      ? "border-[#373567] bg-white"
+                      : "border-transparent bg-white",
+                    !option.available &&
+                      "cursor-not-allowed opacity-40"
+                  )}
+                >
+                  <div className="font-medium">
+                    {option.label}
+                  </div>
+
+                  {option.price > 0 && (
+                    <div className="text-xs text-gray-500">
+                      +${option.price}
                     </div>
-                );
+                  )}
+                </button>
+              );
             })}
+          </div>
         </div>
-    );
-};
+      ))}
+    </div>
+  );
+}

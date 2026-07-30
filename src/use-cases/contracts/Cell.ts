@@ -1,16 +1,8 @@
-import type { ProductVariant } from "@crystallize/js-api-client";
+import type { ProductType } from "@/use-cases/contracts/ProductCard"
 
-export type CellProps = {
-    cell: {
-        item: {
-            name: string;
-            path: string;
-            topics: { name: string }[];
-            variants: ProductVariant[];
-        };
-        layout: {
-            colspan: number;
-            rowspan: number;
-        };
-    };
-};
+export type ProductsType = {
+    comboboxes: ProductType[],
+    discountedBundles: ProductType[]
+    retailProducts: ProductType[]
+}
+

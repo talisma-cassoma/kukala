@@ -5,8 +5,14 @@ let client: ReturnType<typeof createClient> | null = null;
 export function getSupabaseClient() {
   if (client) return client;
 
-  const url = import.meta.env.PUBLIC_SUPABASE_URL;
-  const anonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+ const url =
+    import.meta?.env?.PUBLIC_SUPABASE_URL ??
+    process.env.PUBLIC_SUPABASE_URL;
+
+
+const anonKey =
+    import.meta?.env?.PUBLIC_SUPABASE_ANON_KEY ??
+    process.env.PUBLIC_SUPABASE_ANON_KEY;
 
   if (!url || !anonKey) {
     throw new Error("Supabase environment variables are missing.");
@@ -22,3 +28,8 @@ export function getSupabaseClient() {
 
   return client;
 }
+
+export const supabaseAdmin = createClient(
+  process.env.PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);

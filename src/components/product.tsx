@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { ContentTransformer, Image } from "@crystallize/reactjs-components";
 import { ProductBody } from "./product-body";
-import { VariantSelector } from "./variant-selector";
+import { productOptions, VariantSelector, type SelectedOptions } from "./variant-selector";
 import { RelatedProducts } from "./related-products";
+import type { ProductBodyType  } from "../use-cases/contracts/ProductContent";
 import {
     getCurrencySymbol,
     getDefaultPriceVariant,
@@ -73,13 +74,20 @@ export const relatedProducts = {
     }
 }
 
-export const Product = ({ product }: { product: ProductType }) => {
-    const [selectedVariant, setSelectedVariant] = useState(
-        product?.variants?.[0]
-    );
-    
+export const ProductView = ({ product }: { product: ProductBodyType & ProductType}) => {
+    const [selectedVariant, setSelectedVariant] = useState(product);
+    //this part should be part of { product }: { product: ProductType }
+    const [selectedOptions, setSelectedOptions] =
+        useState<SelectedOptions>({
+            fragrance: "lavender",
+            "bag-size": "small",
+            delivery: "normal",
+            gift: "none",
+            eco: "no",
+        });
+
     const onVariantChange = (variant: any) => setSelectedVariant(variant);
-    const defaultPrice = getDefaultPriceVariant(selectedVariant?.priceVariants);
+    const defaultPrice = selectedVariant?.price;
     const [cart, setCart] = useState<any>([]);
     const [buttonText, setButtonText] = useState("Add to Cart");
 
@@ -109,31 +117,44 @@ export const Product = ({ product }: { product: ProductType }) => {
                     <h1 className="font-extrabold text-5xl mb-3">
                         {product.name}
                     </h1>
-                    <ContentTransformer
-                        json={product?.summary?.content?.json as [any]}
-                    />
+                    <p>
+                        {product?.summary}
+                    </p>
+
                 </div>
-                <Image
+                {/* <Image
                     {...product.defaultVariant?.firstImage}
                     sizes="500px"
                     className="rounded-sm mx-auto"
-                />
+                /> */}
+                <figure className="rounded-sm mx-auto overflow-hidden">
+                    <img
+                        src={product.image?.url}
+                        alt={product.image?.altText}
+                        srcSet={`${product.image?.url}?w=200 200w, ${product.image?.url}?w=300 300w`}
+                        sizes="(max-width: 700px) 200px, 300px"
+                        loading="lazy"
+                        className="max-h-full max-w-full aspect-[500/434] object-contain"
+                    />
+                </figure>
                 <div className="lg:mb-0 mb-5">
                     <VariantSelector
-                        variants={product.variants!}
-                        selectedVariant={selectedVariant!}
-                        onVariantChange={onVariantChange}
-                    />
+                        groups={productOptions}
+                        selected={selectedOptions}
+                        onChange={(groupId, option) => {
+                            setSelectedOptions((prev) => ({
+                                ...prev,
+                                [groupId]: option.id,
+                            }));
+                        }}
+                    />;
                 </div>
             </div>
             <div className="flex z-10 justify-between lg:w-5/12 w-8/12 mx-auto bg-white p-5 text-text rounded-xl">
                 <div>
                     <p className="font-semibold text-sm">Total price</p>
                     <p className="font-bold text-lg">
-                        {getCurrencySymbol(
-                            defaultPrice?.currency ?? "EUR",
-                            defaultPrice?.price ?? 0.0
-                        )}
+                        {defaultPrice?? 0.0}
                     </p>
                 </div>
                 <button

@@ -1,168 +1,82 @@
 import type { APIRoute } from 'astro';
-import { PrismaClient } from '@prisma/client';
-import { loadMockFrontPage } from '../../lib/mock-data';
+import { PrismaClient, ProductType } from '@prisma/client';
+import type { Product, ProductOptionGroup } from '@prisma/client';
+import { Decimal } from '@prisma/client/runtime/library';
 
-// It's a good practice to instantiate PrismaClient once and reuse it across your app.
-// Consider creating a file like `src/lib/prisma.ts` to export a single instance.
 const prisma = new PrismaClient();
 
-function mapProductToCard(product: any) {
-    const firstImage = product.defaultVariant?.images?.[0] ?? product.images?.[0] ?? null;
+// A type guard to check if a product has a main image
+type ProductWithImage = Product & { 
+    mainImage: { url: string; altText: string | null } | null; 
+    topics: { name: string }[];
+    optionGroups: (ProductOptionGroup & { options: { price: Decimal }[] })[];
+};
+function hasImage(product: any): product is ProductWithImage {
+    return product.mainImage !== null;
+}
+
+// Maps a Prisma Product to the shape expected by the frontend's ProductCard contract
+function mapProductToCard(product: ProductWithImage) {
+    const price = product.optionGroups
+        .flatMap(g => g.options)
+        .reduce((min, p) => (p.price.lt(min) ? p.price : min), new Decimal(Infinity))
+        .toNumber();
+
     return {
         id: product.id,
         __typename: 'Product',
         name: product.name,
         path: product.path,
-        topics: product.topics ?? [],
-        bundle: {
-            content: product.isBundle ? { value: true } : null,
+        topics: product.topics.map(t => ({ name: t.name })),
+        bundle: null,
+        image: {
+            url: product.mainImage!.url,
+            altText: product.mainImage!.altText ?? '',
         },
-        defaultVariant: {
-            firstImage: firstImage ? {
-                url: firstImage.url,
-                altText: firstImage.altText,
-                variants: [], // variants are not loaded for cards
-            } : null,
-            priceVariant: {
-                price: product.defaultVariant?.price ?? 0,
-                currency: product.defaultVariant?.currency ?? 'USD',
-            },
-        },
+        price: isFinite(price) ? price : 0,
     };
 }
 
+
 export const GET: APIRoute = async () => {
-
-     if (true) { //fecth no mock por agora
-        const data = await loadMockFrontPage();
-
-        return new Response(JSON.stringify(data), {
-            status: 200,
-            headers: {
-                'content-type': 'application/json',
-            },
-        });
-    }
-
     try {
-        const pageData = await prisma.page.findUnique({
+        const productsFromDb = await prisma.product.findMany({
             where: {
-                slug: 'frontpage', // Assuming your frontpage has this slug
+                published: true,
             },
             include: {
-                gridItems: {
-                    orderBy: {
-                        order: 'asc',
-                    },
+                mainImage: true,
+                topics: true,
+                optionGroups: {
                     include: {
-                        topics: true,
+                        options: true,
                     },
                 },
-                products: {
-                    take: 6, // Limit to 6 products for the frontpage display
-                    include: {
-                        topics: true,
-                        images: {
-                            take: 1,
-                        },
-                        defaultVariant: {
-                            include: {
-                                images: {
-                                    take: 1,
-                                }
-                            }
-                        }
-                    },
-                },
-                sections: {
-                    orderBy: {
-                        order: 'asc'
-                    }
-                }
             },
         });
 
-        if (!pageData) {
-            return new Response(JSON.stringify({ message: "Frontpage not found" }), {
-                status: 404,
-                headers: { 'content-type': 'application/json' },
-            });
-        }
+        // Filter out products that don't have a main image, as they can't be displayed properly
+        const validProducts = productsFromDb.filter(hasImage);
 
-        const productCards = pageData?.products.map(mapProductToCard);
+        // Group products by their type
+        const comboboxes = validProducts
+            .filter((p) => p.type === ProductType.COMBOBOX)
+            .map(mapProductToCard);
 
-        // This shapes the data to look like the original mock data structure.
-        // You might want to simplify this structure in the future.
+        const discountedBundles = validProducts
+            .filter((p) => p.type === ProductType.DISCOUNTED)
+            .map(mapProductToCard);
+        
+        const retailProducts = validProducts
+            .filter((p) => p.type === ProductType.RETAIL)
+            .map(mapProductToCard);
+
+
+        // Construct the response in the shape the frontend `Kits` component expects
         const response = {
-            page: {
-                title: pageData?.title,
-                description: pageData?.description,
-                meta: {
-                    content: {
-                        chunks: [
-                            [
-                                { content: { text: pageData?.heroText ?? pageData?.title } },
-                                { content: { plainText: [pageData?.description] } },
-                            ],
-                        ],
-                    }
-                }
-            },
-            catalog: {
-                grid: {
-                    content: {
-                        grids: [{
-                            rows: [{
-                                columns: (pageData?.gridItems ?? []).map(item => ({
-                                    layout: { rowspan: item.rowspan, colspan: item.colspan },
-                                    item: {
-                                        name: item.name,
-                                        path: item.path,
-                                        topics: item.topics ?? [],
-                                        variants: [{
-                                            images: item.imageUrl ? [{ url: item.imageUrl, altText: item.imageAlt, variants: [] }] : [],
-                                            price: item.price ?? 0,
-                                        }],
-                                    }
-                                })),
-                            }],
-                        }],
-                    },
-                },
-            },
-            products: productCards,
-            catalogue: {
-                meta: {
-                    content: {
-                        chunks: [
-                            [{ content: { text: pageData?.title } }],
-                        ],
-                    },
-                },
-                grid: {
-                    content: {
-                        grids: [{
-                            rows: [{
-                                columns: (pageData?.gridItems ?? []).map(item => ({
-                                    layout: { rowspan: item.rowspan, colspan: item.colspan },
-                                    item: {
-                                        name: item.name,
-                                        path: item.path,
-                                        topics: item.topics ?? [],
-                                        variants: [{
-                                            images: item.imageUrl ? [{ url: item.imageUrl, altText: item.imageAlt, variants: [] }] : [],
-                                            price: item.price ?? 0,
-                                        }],
-                                    }
-                                })),
-                            }],
-                        }],
-                    },
-                },
-            },
-            donuts: {
-                children: productCards
-            }
+            comboboxes,
+            discountedBundles,
+            retailProducts
         };
 
         return new Response(JSON.stringify(response), {
@@ -171,6 +85,7 @@ export const GET: APIRoute = async () => {
                 'content-type': 'application/json',
             },
         });
+
     } catch (error: any) {
         console.error(error);
         return new Response(JSON.stringify({ message: "An error occurred.", error: error.message }), {
