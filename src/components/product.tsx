@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
+import { useStore } from '@nanostores/react';
 import { ContentTransformer, Image } from "@crystallize/reactjs-components";
 import { ProductBody } from "./product-body";
 import { productOptions, VariantSelector, type SelectedOptions } from "./variant-selector";
 import { RelatedProducts } from "./related-products";
 import type { ProductBodyType  } from "../use-cases/contracts/ProductContent";
 import {
-    getCurrencySymbol,
-    getDefaultPriceVariant,
     variantToCartItem,
 } from "../use-cases/utils";
 import type { Product as ProductType } from "../use-cases/contracts/Product";
+import { addItemToCart, cart } from '@/pages/shop/cartStore';
 
 export const relatedProducts = {
     "content": {
@@ -88,27 +88,16 @@ export const ProductView = ({ product }: { product: ProductBodyType & ProductTyp
 
     const onVariantChange = (variant: any) => setSelectedVariant(variant);
     const defaultPrice = selectedVariant?.price;
-    const [cart, setCart] = useState<any>([]);
+    const $cart = useStore(cart); // Subscribe to cart store changes
     const [buttonText, setButtonText] = useState("Add to Cart");
 
     const addToCart = (product: any) => {
         setButtonText("Adding...");
-        const newCart = [...cart, variantToCartItem(product)];
-        setCart(newCart);
+        const cartItem = variantToCartItem(product);
+        addItemToCart(cartItem);
         setButtonText("Added 🎉");
         setTimeout(() => setButtonText("Add to Cart"), 1000);
     };
-
-    useEffect(() => {
-        const cart = localStorage.getItem("cart");
-        if (cart) {
-            setCart(JSON.parse(cart));
-        }
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem("cart", JSON.stringify(cart));
-    }, [cart]);
 
     return (
         <>

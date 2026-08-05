@@ -1,5 +1,6 @@
 import { useState } from "react";
-import type { LocalCartItem } from "../use-cases/contracts/LocalCartItem";
+import { useStore } from '@nanostores/react';
+import { cart as cartStore, clearCart } from '../pages/shop/cartStore';
 
 export const CheckoutForm = () => {
     const [state, setState] = useState({
@@ -11,20 +12,11 @@ export const CheckoutForm = () => {
         postalCode: "",
     });
 
+    const { items: cartItems, total } = useStore(cartStore);
     const { firstName, lastName, email, street, city, postalCode } = state;
 
-    const cart =
-        typeof window !== "undefined" && localStorage.getItem("cart")
-            ? JSON.parse(localStorage.getItem("cart") || "{}")
-            : [];
-
-    const total = cart?.reduce(
-        (amount: number, item: LocalCartItem) => item.price + amount,
-        0
-    );
-
     const checkoutModel: any = {
-        basketModel: cart,
+        basketModel: { items: cartItems },
         customer: {
             firstName,
             lastName,
@@ -69,7 +61,7 @@ export const CheckoutForm = () => {
         }).then((res) => res.json());
 
         if (response?.orders?.create?.id) {
-            localStorage.removeItem("cart");
+            clearCart();
             window.location.href = `/order/${response.orders.create.id}`;
         }
     };

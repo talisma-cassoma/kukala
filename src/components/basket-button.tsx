@@ -1,8 +1,8 @@
+import { useStore } from '@nanostores/react';
+import { cart } from '../pages/shop/cartStore';
+
 export const BasketButton = () => {
-    const basket =
-        typeof window !== "undefined" && localStorage.getItem("cart")
-            ? JSON.parse(localStorage.getItem("cart") || "{}")
-            : [];
+    const { itemCount } = useStore(cart);
 
     return (
         <div className="relative">
@@ -31,8 +31,8 @@ export const BasketButton = () => {
                 />
             </svg>
 
-            <div className="w-5 h-5 absolute bg-text rounded-full text-primary text-center -right-2 -top-2 text-sm">
-                {basket.length}
+            <div className="w-5 h-5 absolute bg-text rounded-full text-[#333] text-center -right-2 -top-2 text-sm">
+                {itemCount}
             </div>
         </div>
     );

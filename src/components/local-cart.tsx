@@ -1,22 +1,16 @@
-import type { LocalCartItem } from "../use-cases/contracts/LocalCartItem";
+import { useStore } from '@nanostores/react';
+import { cart } from '../pages/shop/cartStore';
 
 export const LocalCart = () => {
-    const cart =
-        typeof window !== "undefined" && localStorage.getItem("cart")
-            ? JSON.parse(localStorage.getItem("cart") || "{}")
-            : [];
-    const total = cart?.reduce(
-        (amount: number, item: LocalCartItem) => item.price + amount,
-        0
-    );
+    const { items, total, itemCount } = useStore(cart);
 
     return (
         <div className="py-20 text-text lg:w-auth mx-auto w-full">
             <h1 className="text-4xl font-bold  mb-10">
-                Your shopping cart ({cart.length})
+                Your shopping cart ({itemCount})
             </h1>
             <div className="flex flex-col gap-5 bg-background1 p-20">
-                {cart.map((item: any, index: number) => (
+                {items.map((item, index: number) => (
                     <div
                         key={index}
                         className="flex justify-between items-center"
@@ -32,7 +26,7 @@ export const LocalCart = () => {
                                         index: number
                                     ) => (
                                         <div
-                                            className="even:after:content-['\00a0-'] even:before:content-['-\00a0']"
+                                           className="even:after:content-['\\00a0-'] even:before:content-['-\\00a0']"
                                             key={index}
                                         >
                                             {attr.value}

@@ -1,8 +1,10 @@
 ---
-import { ViewTransitions } from "astro:transitions";
+//import { ViewTransitions } from "astro:transitions";
 import { Header } from "../components/header";
 import { Background } from "../components/background";
 import CrystallizeLogo from "../assets/crystallize-logo.svg?url";
+import '../styles/global.css';
+import { initializeCart } from '../pages/shop/cartStore';
 
 interface Props {
   title: string;
@@ -22,7 +24,13 @@ const { pathname } = Astro.url;
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <ViewTransitions />
+    {/* <ViewTransitions /> */}
+     <script type="module">
+        // This script runs on the client after the page is loaded.
+        // It's important to call initializeCart() only once.
+        import { initializeCart } from '/src/pages/shop/cartStore.ts';
+        initializeCart();
+    </script>
   </head>
   <body class="relative text-text bg-primary">
     <Header client:load />

@@ -75,17 +75,17 @@
                 "name": "Color",
                 "required": false,
                 "options": [
-                    { "id": "red", "label": "Red", "price": 0, "available": true },
-                    { "id": "blue", "label": "Blue", "price": 0, "available": true },
-                    { "id": "green", "label": "Green", "price": 5, "available": false }
+                    { "id": "red", "label": "Red", "price": 75, "available": true },
+                    { "id": "blue", "label": "Blue", "price": 75, "available": true },
+                    { "id": "green", "label": "Green", "price": 75, "available": false }
                 ] 
             },
             {
                 "id": "storage",
                 "name": "Storage",
                 "options": [
-                    { "id": "32gb", "label": "32 GB", "price": 0, "available": true },
-                    { "id": "64gb", "label": "64 GB", "price": 10, "available": true }
+                    { "id": "32gb", "label": "32 GB", "price": 75, "available": true },
+                    { "id": "64gb", "label": "64 GB", "price": 75, "available": true }
                 ]
             }
         ]
@@ -166,9 +166,9 @@
                 "name": "Color",
                 "required": false,
                 "options": [
-                    { "id": "red", "label": "Red", "price": 0, "available": true },
-                    { "id": "blue", "label": "Blue", "price": 0, "available": true },
-                    { "id": "green", "label": "Green", "price": 5, "available": false }
+                    { "id": "red", "label": "Red", "price": 65, "available": true },
+                    { "id": "blue", "label": "Blue", "price": 65, "available": true },
+                    { "id": "green", "label": "Green", "price": 65, "available": false }
                 ] 
             },
             {
@@ -257,17 +257,17 @@
                 "name": "Color",
                 "required": false,
                 "options": [
-                    { "id": "red", "label": "Red", "price": 0, "available": true },
-                    { "id": "blue", "label": "Blue", "price": 0, "available": true },
-                    { "id": "green", "label": "Green", "price": 5, "available": false }
+                    { "id": "red", "label": "Red", "price": 65, "available": true },
+                    { "id": "blue", "label": "Blue", "price": 65, "available": true },
+                    { "id": "green", "label": "Green", "price": 65, "available": false }
                 ] 
             },
             {
                 "id": "storage",
                 "name": "Storage",
                 "options": [
-                    { "id": "32gb", "label": "32 GB", "price": 0, "available": true },
-                    { "id": "64gb", "label": "64 GB", "price": 10, "available": true }
+                    { "id": "32gb", "label": "32 GB", "price": 65, "available": true },
+                    { "id": "64gb", "label": "64 GB", "price": 65, "available": true }
                 ]
             }
         ]
@@ -348,17 +348,17 @@
                 "name": "Color",
                 "required": false,
                 "options": [
-                    { "id": "red", "label": "Red", "price": 10, "available": true },
-                    { "id": "blue", "label": "Blue", "price": 10, "available": true },
-                    { "id": "green", "label": "Green", "price": 5, "available": false }
+                    { "id": "red", "label": "Red", "price": 150, "available": true },
+                    { "id": "blue", "label": "Blue", "price": 150, "available": true },
+                    { "id": "green", "label": "Green", "price": 150, "available": false }
                 ] 
             },
             {
                 "id": "storage",
                 "name": "Storage",
                 "options": [
-                    { "id": "32gb", "label": "32 GB", "price": 0, "available": true },
-                    { "id": "64gb", "label": "64 GB", "price": 10, "available": true }
+                    { "id": "32gb", "label": "32 GB", "price": 150, "available": true },
+                    { "id": "64gb", "label": "64 GB", "price": 150, "available": true }
                 ]
             }
         ]
@@ -439,17 +439,17 @@
                 "name": "Color",
                 "required": false,
                 "options": [
-                    { "id": "red", "label": "Red", "price": 10, "available": true },
-                    { "id": "blue", "label": "Blue", "price": 10, "available": true },
-                    { "id": "green", "label": "Green", "price": 5, "available": false }
+                    { "id": "red", "label": "Red", "price": 65, "available": true },
+                    { "id": "blue", "label": "Blue", "price": 65, "available": true },
+                    { "id": "green", "label": "Green", "price": 65, "available": false }
                 ] 
             },
             {
                 "id": "storage",
                 "name": "Storage",
                 "options": [
-                    { "id": "32gb", "label": "32 GB", "price": 0, "available": true },
-                    { "id": "64gb", "label": "64 GB", "price": 10, "available": true }
+                    { "id": "32gb", "label": "32 GB", "price": 65, "available": true },
+                    { "id": "64gb", "label": "64 GB", "price": 65, "available": true }
                 ]
             }
         ]
@@ -530,17 +530,17 @@
                 "name": "Color",
                 "required": false,
                 "options": [
-                    { "id": "red", "label": "Red", "price": 0, "available": true },
-                    { "id": "blue", "label": "Blue", "price": 0, "available": true },
-                    { "id": "green", "label": "Green", "price": 5, "available": false }
+                    { "id": "red", "label": "Red", "price": 150, "available": true },
+                    { "id": "blue", "label": "Blue", "price": 150, "available": true },
+                    { "id": "green", "label": "Green", "price": 150, "available": false }
                 ] 
             },
             {
                 "id": "storage",
                 "name": "Storage",
                 "options": [
-                    { "id": "32gb", "label": "32 GB", "price": 0, "available": true },
-                    { "id": "64gb", "label": "64 GB", "price": 10, "available": true }
+                    { "id": "32gb", "label": "32 GB", "price": 150, "available": true },
+                    { "id": "64gb", "label": "64 GB", "price": 150, "available": true }
                 ]
             }
         ]
@@ -621,17 +621,17 @@
                 "name": "Color",
                 "required": false,
                 "options": [
-                    { "id": "red", "label": "Red", "price": 0, "available": true },
-                    { "id": "blue", "label": "Blue", "price": 0, "available": true },
-                    { "id": "green", "label": "Green", "price": 5, "available": false }
+                    { "id": "red", "label": "Red", "price": 150, "available": true },
+                    { "id": "blue", "label": "Blue", "price": 150, "available": true },
+                    { "id": "green", "label": "Green", "price": 150, "available": false }
                 ] 
             },
             {
                 "id": "storage",
                 "name": "Storage",
                 "options": [
-                    { "id": "32gb", "label": "32 GB", "price": 0, "available": true },
-                    { "id": "64gb", "label": "64 GB", "price": 10, "available": true }
+                    { "id": "32gb", "label": "32 GB", "price": 150, "available": true },
+                    { "id": "64gb", "label": "64 GB", "price": 150, "available": true }
                 ]
             }
         ]

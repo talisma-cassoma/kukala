@@ -1,12 +1,13 @@
 import { defineConfig } from 'astro/config';
-import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
-import vercel from '@astrojs/vercel/serverless';
+import vercel from "@astrojs/vercel";
+import tailwindcss from "@tailwindcss/vite";
 
-// https://astro.build/config
 export default defineConfig({
-  site: "https://dounut-astro.vercel.app",
-  integrations: [tailwind(), react()],
-  output: 'server',
+  output: "server",
   adapter: vercel(),
+  integrations: [react()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

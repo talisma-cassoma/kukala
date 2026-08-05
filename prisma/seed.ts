@@ -1,4 +1,5 @@
-import { PrismaClient, ProductType } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
+import type { ProductType } from '@prisma/client';
 import { uploadImage } from '../src/lib/uploadImageNode.js';
 import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
@@ -77,6 +78,19 @@ async function main() {
                         where: { name: topic.name },
                         create: { name: topic.name, slug: topic.name.toLowerCase().replace(/ /g, '-') },
                     })),
+                },
+                optionGroups: {
+                    create: product.productOptions?.map((group: any) => ({
+                        name: group.name,
+                        required: group.required,
+                        options: {
+                            create: group.options?.map((option: any) => ({
+                                label: option.label,
+                                price: option.price,
+                                available: option.available,
+                            }))
+                        }
+                    }))
                 },
             },
         });
