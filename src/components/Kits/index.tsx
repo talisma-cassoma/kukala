@@ -20,8 +20,8 @@ export const Kits = ({ products }: { products: ProductsType }) => {
                 justifyContent: "center"
             }}
         >
-            <ComboBoxes cell={comboboxes[0]} />
-            <div className="flex gap-2 max-w-[54rem] justify-between">
+            <ComboBoxes cell={comboboxes[0]} />XX
+            <div className="flex gap-2 max-w-216 justify-between">
                 {discountedBundles.map((discountedBundle, index) => {
 
                     return (

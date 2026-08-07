@@ -7,6 +7,7 @@ import { RelatedProducts } from "./related-products";
 import type { ProductBodyType  } from "../use-cases/contracts/ProductContent";
 import {
     variantToCartItem,
+    type variantToCartItemType
 } from "../use-cases/utils";
 import type { Product as ProductType } from "../use-cases/contracts/Product";
 import { addItemToCart, cart } from '@/pages/shop/cartStore';
@@ -75,6 +76,9 @@ export const relatedProducts = {
 }
 
 export const ProductView = ({ product }: { product: ProductBodyType & ProductType}) => {
+    
+    //console.log("product on productView:", JSON.stringify(product));
+    
     const [selectedVariant, setSelectedVariant] = useState(product);
     //this part should be part of { product }: { product: ProductType }
     const [selectedOptions, setSelectedOptions] =
@@ -87,13 +91,14 @@ export const ProductView = ({ product }: { product: ProductBodyType & ProductTyp
         });
 
     const onVariantChange = (variant: any) => setSelectedVariant(variant);
-    const defaultPrice = selectedVariant?.price;
+    const defaultPrice = product.price;
     const $cart = useStore(cart); // Subscribe to cart store changes
     const [buttonText, setButtonText] = useState("Add to Cart");
 
     const addToCart = (product: any) => {
         setButtonText("Adding...");
-        const cartItem = variantToCartItem(product);
+        const cartItem:variantToCartItemType = variantToCartItem(product);
+        console.log("Adding to cart:", cartItem);
         addItemToCart(cartItem);
         setButtonText("Added 🎉");
         setTimeout(() => setButtonText("Add to Cart"), 1000);
@@ -102,7 +107,7 @@ export const ProductView = ({ product }: { product: ProductBodyType & ProductTyp
     return (
         <>
             <div className="flex lg:flex-row gap-2 w-full items-center flex-col">
-                <div className="flex flex-col text-text w-[400px]">
+                <div className="flex flex-col text-text w-100">
                     <h1 className="font-extrabold text-5xl mb-3">
                         {product.name}
                     </h1>

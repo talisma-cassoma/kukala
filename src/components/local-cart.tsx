@@ -1,5 +1,5 @@
 import { useStore } from '@nanostores/react';
-import { cart } from '../pages/shop/cartStore';
+import { cart, deleteItemOnCart } from '../pages/shop/cartStore';
 
 export const LocalCart = () => {
     const { items, total, itemCount } = useStore(cart);
@@ -16,9 +16,12 @@ export const LocalCart = () => {
                         className="flex justify-between items-center"
                     >
                         <div className="flex flex-col">
+                            <div className='flex gap-2 items-center'>
+                            <img src={item.imageUrl} className='size-12 rounded-2xl'></img>
                             <p className="font-semibold text-xl">
                                 {item.name} × {item.quantity}
                             </p>
+                            </div>
                             <div className="flex gap-3">
                                 {item.attributes?.map(
                                     (
@@ -26,16 +29,24 @@ export const LocalCart = () => {
                                         index: number
                                     ) => (
                                         <div
-                                           className="even:after:content-['\\00a0-'] even:before:content-['-\\00a0']"
+                                            //className="even:after:content-['\\00a0-'] even:before:content-['-\\00a0']"
                                             key={index}
                                         >
-                                            {attr.value}
+                                            <p>{attr.value}</p>
                                         </div>
                                     )
                                 )}
                             </div>
                         </div>
+                        <div className='flex gap-20'>
                         <p>${item.price * item.quantity}</p>
+                         <button
+                    className="bg-background2 px-4 rounded-xl"
+                    onClick={() => deleteItemOnCart(item)}
+                >
+                    x
+                </button>
+                        </div>
                     </div>
                 ))}
                 <div className="flex justify-between items-center border-t-2 border-text pt-4">

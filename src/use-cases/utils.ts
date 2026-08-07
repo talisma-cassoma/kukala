@@ -4,6 +4,8 @@ import type {
     ProductPriceVariant,
     ProductVariant,
 } from "@crystallize/js-api-client";
+import type { ProductBodyType } from "../use-cases/contracts/ProductContent";
+import type { Product as ProductType } from "../use-cases/contracts/Product";
 
 import fs from 'fs/promises';
 
@@ -65,16 +67,25 @@ export const getDefaultPriceVariant = (variants?: ProductPriceVariant[]) => {
     return variants?.find((variant) => variant.identifier === "default");
 };
 
-export const variantToCartItem = (variant: ProductVariant) => {
-    const defaultPrice = getDefaultPriceVariant(variant.priceVariants || []);
+export type variantToCartItemType={
+    sku: string;
+    name: string;
+    quantity: number;
+    price: number;
+    image?: string;
+    attributes?: any;
+}
+
+export const variantToCartItem = (variant: ProductBodyType & ProductType) => {
+    //const defaultPrice = getDefaultPriceVariant(variant.priceVariants || []);
     return {
-        sku: variant.sku,
+        sku: variant.name,
         name: variant.name,
         quantity: 1,
-        price: defaultPrice?.price,
-        image: variant.images?.[0].url,
-        attributes: variant.attributes,
-    };
+        price: variant.price,
+        image: variant.image.url,
+        attributes: variant.productOptions,
+    } as variantToCartItemType;
 };
 
 // export function resolveImage(cell: any) {

@@ -62,11 +62,14 @@ export function initializeCart() {
     }
 }
 
-export function addItemToCart(item: Omit<CartItem, 'quantity'> & { quantity?: number }) {
-    console.log("Adding item to cart:", item);
+export function addItemToCart(item: CartItem) {
+    
+    console.log("item on cart:", item);
+    
     const currentCart = cart.get();
     const existingItemIndex = currentCart.items.findIndex(i => i.sku === item.sku);
     let newItems = [...currentCart.items];
+    
 
     if (existingItemIndex > -1) {
         // Update quantity if item exists
@@ -108,4 +111,26 @@ export function updateItemQuantity(sku: string, quantity: number) {
 
 export function clearCart() {
     cart.set(INITIAL_STATE);
+}
+
+export function deleteItemOnCart(item: CartItem) {
+    
+    console.log("item on cart:", item);
+    
+    const currentCart = cart.get();
+    const existingItemIndex = currentCart.items.findIndex(i => i.sku === item.sku);
+    let currentitems = [...currentCart.items];
+    
+
+    if (existingItemIndex > -1) {
+        // delete quantity if item exists
+         currentitems = currentCart.items.filter(i => i.sku !== item.sku)
+        
+    } else {
+        // do nothing
+       return
+    }
+
+    const { total, itemCount } = calculateTotals(currentitems);
+    cart.set({ items: currentitems, total, itemCount });
 }
