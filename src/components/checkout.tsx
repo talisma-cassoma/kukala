@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useStore } from '@nanostores/react';
-import { cart as cartStore, clearCart } from '../pages/shop/cartStore';
+import { cart as cartStore, clearCart } from '@/pages/shop/cartStore';
 
 export const CheckoutForm = () => {
     const [state, setState] = useState({

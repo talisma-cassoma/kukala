@@ -1,5 +1,5 @@
 import { useStore } from '@nanostores/react';
-import { cart } from '../pages/shop/cartStore';
+import { cart } from '@/pages/shop/cartStore';
 
 export const BasketButton = () => {
     const { itemCount } = useStore(cart);

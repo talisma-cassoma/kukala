@@ -1,8 +1,6 @@
 import type { APIRoute } from 'astro';
 import { PrismaClient, ProductType, type ProductOptionGroup, type ProductOption } from '@prisma/client';
 import { getSupabaseClient } from '@/lib/supabase';
-import { loadMockFrontPage } from '../../lib/mock-data';
-
 
 const prisma = new PrismaClient();
 

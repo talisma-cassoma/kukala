@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import type { ProductType } from '@prisma/client';
-import { uploadImage } from '../src/lib/uploadImageNode.js';
+import { uploadImage } from '@/lib/uploadImageNode.js';
 import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';

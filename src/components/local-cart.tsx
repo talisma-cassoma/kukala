@@ -1,5 +1,5 @@
 import { useStore } from '@nanostores/react';
-import { cart, deleteItemOnCart } from '../pages/shop/cartStore';
+import { cart, deleteItemOnCart } from '@/pages/shop/cartStore';
 
 export const LocalCart = () => {
     const { items, total, itemCount } = useStore(cart);
