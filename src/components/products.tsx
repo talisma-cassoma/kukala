@@ -1,4 +1,4 @@
-import type { ProductType } from "../use-cases/contracts/ProductCard";
+import type { ProductType } from "@/use-cases/contracts/ProductCard";
 import { ProductCard } from "./product-card";
 
 export const Products = ({

@@ -1,4 +1,4 @@
-import { apiClient } from "../shared";
+import { apiClient } from "@/use-cases/shared";
 
 export async function createOrder(orderInput: any) {
     return await apiClient.orderApi(

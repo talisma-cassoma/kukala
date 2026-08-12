@@ -4,8 +4,8 @@ import type {
     ProductPriceVariant,
     ProductVariant,
 } from "@crystallize/js-api-client";
-import type { ProductBodyType } from "../use-cases/contracts/ProductContent";
-import type { Product as ProductType } from "../use-cases/contracts/Product";
+import type { ProductBodyType } from "@/use-cases/contracts/ProductContent";
+import type { Product as ProductType } from "@/use-cases/contracts/Product";
 
 import fs from 'fs/promises';
 

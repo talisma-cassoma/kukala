@@ -1,6 +1,6 @@
 import { ContentTransformer, Image } from "@crystallize/reactjs-components";
 import ReactPlayer from "react-player";
-import { type ProductBodyType } from "../use-cases/contracts/ProductContent";
+import { type ProductBodyType } from "@/use-cases/contracts/ProductContent";
 
 export const ProductBody = ({ body, table }: ProductBodyType) => {
     return (

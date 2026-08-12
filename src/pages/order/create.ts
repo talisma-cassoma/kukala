@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { createOrder } from "../../use-cases/mutations/create-order";
+import { createOrder } from "@/use-cases/mutations/create-order";
 
 export const POST: APIRoute = async ({ request }) => {
     let data = await request.json();

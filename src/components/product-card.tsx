@@ -1,4 +1,4 @@
-import type { ProductType } from "../use-cases/contracts/ProductCard";
+import type { ProductType } from "@/use-cases/contracts/ProductCard";
 import { TopicsDisplayer } from "./topics-displayer";
 import { Image } from "@crystallize/reactjs-components";
 

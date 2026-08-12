@@ -1,6 +1,6 @@
 import { BasketButton } from "./basket-button";
-import AstroLogo from "../assets/astro-logo.svg";
-import kukala_logo from "../assets/black_logo.png";
+import AstroLogo from "@/assets/astro-logo.svg";
+import kukala_logo from "@/assets/black_logo.png";
 
 export const Header = () => {
     return (

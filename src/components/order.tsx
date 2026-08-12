@@ -1,4 +1,4 @@
-import type { OrderProps } from "../use-cases/contracts/Order";
+import type { OrderProps } from "@/use-cases/contracts/Order";
 
 export const Order = ({ order }: OrderProps) => {
     const { total, cart } = order;

@@ -4,12 +4,12 @@ import { useStore } from '@nanostores/react';
 import { ProductBody } from "./product-body";
 import { productOptions, VariantSelector, type SelectedOptions } from "./variant-selector";
 import { RelatedProducts } from "./related-products";
-import type { ProductBodyType  } from "../use-cases/contracts/ProductContent";
+import type { ProductBodyType  } from "@/use-cases/contracts/ProductContent";
 import {
     variantToCartItem,
     type variantToCartItemType
-} from "../use-cases/utils";
-import type { Product as ProductType } from "../use-cases/contracts/Product";
+} from "@/use-cases/utils";
+import type { Product as ProductType } from "@/use-cases/contracts/Product";
 import { addItemToCart, cart, type CartItem } from '@/pages/shop/cartStore';
 
 export const relatedProducts = {

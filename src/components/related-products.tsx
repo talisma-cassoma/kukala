@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Image } from "@crystallize/reactjs-components";
-import { fetchFrontPage } from "../use-cases/queries/frontpage.ts";
+import { fetchFrontPage } from "@/use-cases/queries/frontpage.ts";
 import type { ProductType } from "@/use-cases/contracts/ProductCard.js";
 
 export const RelatedProducts = () => {

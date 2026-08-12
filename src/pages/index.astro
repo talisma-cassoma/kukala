@@ -1,9 +1,9 @@
 ---
-import { Kits } from "../components/kits/index.tsx";
+import { Kits } from "@/components/kits/index.tsx";
 import type { ProductsType } from "@/use-cases/contracts/Cell";
-import { Products } from "../components/products";
-import Layout from "../layouts/Layout.astro";
-import { fetchFrontPage } from "../use-cases/queries/frontpage.ts";
+import { Products } from "@/components/products";
+import Layout from "@/layouts/Layout.astro";
+import { fetchFrontPage } from "@/use-cases/queries/frontpage.ts";
 
 const catalog = await fetchFrontPage(Astro.url.origin);
 //console.log("catalog", JSON.stringify(catalog));
