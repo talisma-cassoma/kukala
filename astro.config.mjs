@@ -10,4 +10,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  resolve: {
+    tsconfigPaths: true // Forces Vite & Rolldown to read your tsconfig.json paths
+  }
 });
