@@ -1,7 +1,7 @@
 import { r as __exportAll } from "./rolldown-runtime_BMI-E3GI.mjs";
 import { i as renderComponent, m as maybeRenderHead, u as renderTemplate, w as createAstro } from "./server_Rimude6d.mjs";
 import { t as createComponent } from "./compiler_BMqcdPqr.mjs";
-import { t as $$Layout } from "./Layout_lmUAwAOc.mjs";
+import { t as $$Layout } from "./Layout_DyREIpbh.mjs";
 import { jsx, jsxs } from "react/jsx-runtime";
 //#region src/components/order.tsx
 var Order = ({ order }) => {

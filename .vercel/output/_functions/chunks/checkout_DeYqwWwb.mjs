@@ -1,7 +1,7 @@
 import { r as __exportAll } from "./rolldown-runtime_BMI-E3GI.mjs";
 import { i as renderComponent, m as maybeRenderHead, u as renderTemplate } from "./server_Rimude6d.mjs";
 import { t as createComponent } from "./compiler_BMqcdPqr.mjs";
-import { t as $$Layout } from "./Layout_lmUAwAOc.mjs";
+import { t as $$Layout } from "./Layout_DyREIpbh.mjs";
 import { i as clearCart, n as cart } from "./cartStore_jGT4BXup.mjs";
 import { useState } from "react";
 import { useStore } from "@nanostores/react";
