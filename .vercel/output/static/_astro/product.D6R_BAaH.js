@@ -1,1 +1,0 @@
-import{n as e,t}from"./product.CcxLRMqv.js";export{t as ProductView,e as relatedProducts};
