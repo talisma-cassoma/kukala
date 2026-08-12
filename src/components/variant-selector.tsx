@@ -17,52 +17,20 @@ export interface ProductOptionsProps {
 }
 export const productOptions: ProductOptionGroup[] = [
   {
-    id: "fragrance",
-    name: "Fragrance",
+    id: "Volume",
+    name: "Volume",
     required: true,
     options: [
       {
-        id: "lavender",
-        label: "Lavender",
+        id: "100ml",
+        label: "100ml",
         price: 0,
         available: true,
       },
       {
-        id: "vanilla",
-        label: "Vanilla",
+        id: "50ml",
+        label: "50ml",
         price: 2,
-        available: true,
-      },
-      {
-        id: "rose",
-        label: "Rose",
-        price: 4,
-        available: false,
-      },
-    ],
-  },
-
-  {
-    id: "bag-size",
-    name: "Package Size",
-    required: true,
-    options: [
-      {
-        id: "small",
-        label: "Small",
-        price: 0,
-        available: true,
-      },
-      {
-        id: "medium",
-        label: "Medium",
-        price: 5,
-        available: true,
-      },
-      {
-        id: "large",
-        label: "Large",
-        price: 10,
         available: false,
       },
     ],
@@ -70,61 +38,23 @@ export const productOptions: ProductOptionGroup[] = [
 
   {
     id: "delivery",
-    name: "Delivery",
+    name: "delivery",
     required: true,
     options: [
       {
-        id: "normal",
-        label: "2-3 days",
+        id: "in-store",
+        label: "in-store",
         price: 0,
         available: true,
       },
       {
-        id: "express",
-        label: "Same day",
-        price: 15,
+        id: "home-delivery",
+        label: "home",
+        price: 5,
         available: true,
       },
     ],
-  },
-
-  {
-    id: "gift",
-    name: "Gift Wrap",
-    options: [
-      {
-        id: "none",
-        label: "No",
-        price: 0,
-        available: true,
-      },
-      {
-        id: "premium",
-        label: "Premium",
-        price: 8,
-        available: true,
-      },
-    ],
-  },
-
-  {
-    id: "eco",
-    name: "Eco Package",
-    options: [
-      {
-        id: "no",
-        label: "Standard",
-        price: 0,
-        available: true,
-      },
-      {
-        id: "yes",
-        label: "Eco",
-        price: 3,
-        available: true,
-    },
-],
-},
+  }
 ];
 
 export function VariantSelector({
@@ -133,7 +63,7 @@ export function VariantSelector({
   onChange,
 }: ProductOptionsProps) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-100 min-w-60">
       {groups.map((group) => (
         <div key={group.id}>
           <p className="mb-3 font-semibold text-text">

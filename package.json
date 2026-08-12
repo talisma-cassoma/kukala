@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "prisma": "prisma",
-    "prisma seed": "npx tsx prisma/seed.ts"
+    "seed": "npx tsx prisma/seed.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",

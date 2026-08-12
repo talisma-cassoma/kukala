@@ -1,33 +1,10 @@
 import type { APIRoute } from 'astro';
 import { PrismaClient } from '@prisma/client';
+import { Decimal } from '@prisma/client/runtime/library';
 
 const prisma = new PrismaClient();
 
 export const GET: APIRoute = async ({ params }) => {
-
-    if (true)  {
-  const id = params.id;
-
-  return new Response(
-    JSON.stringify({
-      id,
-      orders: {
-        get: {
-          id,
-          cart: [],
-          total: { net: 0, gross: 0 },
-        },
-      },
-    }),
-    {
-      status: 200,
-      headers: {
-        'content-type': 'application/json',
-      },
-    }
-  );
-};
-
 
     const { id } = params;
 
@@ -67,7 +44,7 @@ export const GET: APIRoute = async ({ params }) => {
         const response = {
             id: order?.id,
             status: order?.status,
-            customerEmail: order?.customerEmail,
+            email: order?.email,
             total: {
                 net: order?.totalNet,
                 gross: order?.totalGross,

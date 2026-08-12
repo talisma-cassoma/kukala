@@ -12,7 +12,7 @@ export function ProductPreview({productData}: {productData:  {
 
 }) {
     return (
-      <div className="lg:container mx-auto w-full lg:px-0 px-5">
+      <div className="lg:container mx-auto w-full h-full lg:px-0 px-5">
     {
       productData ? (
         <ProductView product={productData.product}/>

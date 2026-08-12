@@ -61,17 +61,15 @@ function mapProductToContract(product: FullProduct) {
 
         // Map related products
         related: {
-            content: {
-                items: product.relatedTo.map(r => ({
-                    id: r.to.id,
-                    name: r.to.name,
-                    path: r.to.path,
-                    __typename: 'Product',
-                    image: r.to.mainImage ? { url: r.to.mainImage.url, altText: r.to.mainImage.altText ?? '' } : null,
-                    topics: r.to.topics.map(t => ({ name: t.name })),
-                    price: 0, // Price for related items can be simplified or fetched if needed
-                })),
-            },
+            items: product.relatedTo.map(r => ({
+                id: r.to.id,
+                name: r.to.name,
+                path: r.to.path,
+                __typename: 'Product',
+                image: r.to.mainImage ? { url: r.to.mainImage.url, altText: r.to.mainImage.altText ?? '' } : null,
+                topics: r.to.topics.map(t => ({ name: t.name })),
+                price: 0, // Price for related items can be simplified or fetched if needed
+            })),
         },
     };
 }

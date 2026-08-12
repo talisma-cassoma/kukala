@@ -17,7 +17,7 @@ export const LocalCart = () => {
                     >
                         <div className="flex flex-col">
                             <div className='flex gap-2 items-center'>
-                            <img src={item.imageUrl} className='size-12 rounded-2xl'></img>
+                            <img src={item.imageUrl || ''} alt={item.name} className='size-12 rounded-xl object-contain bg-gray-200'></img>
                             <p className="font-semibold text-xl">
                                 {item.name} × {item.quantity}
                             </p>
@@ -55,7 +55,7 @@ export const LocalCart = () => {
                 </div>
                 <a
                     href="/checkout"
-                    className="bg-text text-primary p-3 mt-10 rounded font-semibold text-center"
+                    className="bg-red text-black p-3 mt-10 rounded font-semibold text-center"
                 >
                     Checkout
                 </a>

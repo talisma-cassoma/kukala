@@ -32,17 +32,6 @@ function mapProductToCard(product: any) {
 }
 
 export const GET: APIRoute = async () => {
-    if (true) { // fecth no mock
-        const data = await loadMockFrontPage();
-        const products = data?.donuts?.children ?? [];
-
-        return new Response(JSON.stringify(products), {
-            status: 200,
-            headers: {
-                'content-type': 'application/json',
-            },
-        });
-    }
     try {
         const products = await prisma.product.findMany({
             where: {

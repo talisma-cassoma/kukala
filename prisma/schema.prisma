@@ -180,15 +180,28 @@ model ProductOption {
 
 // Represents a customer's order. No user accounts are needed.
 model Order {
-    id            String      @id @default(cuid())
-    customerEmail String      // Only for contact, not for accounts
-    totalNet      Decimal
-    totalGross    Decimal
-    status        OrderStatus @default(PENDING)
-    createdAt     DateTime    @default(now())
-    updatedAt     DateTime    @updatedAt
+  id          String      @id @default(cuid())
 
-    items         OrderItem[]
+  firstName   String
+  lastName    String
+  email       String
+  phone       String?
+
+  street      String
+  city        String
+  postalCode  String
+
+  totalNet    Decimal
+  totalGross  Decimal
+  status      OrderStatus @default(PENDING)
+
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  items       OrderItem[]
+
+  @@index([email])
+  @@index([createdAt])
 }
 
 // Represents a line item in an order.

@@ -25,6 +25,7 @@ export const POST: APIRoute = async ({ request }) => {
         // The 'product' field is expected to be a JSON string containing all product info.
         // Example: { name: "My Product", slug: "my-product", path: "/shop/my-product", price: 10.99, ... }
         const productPayload = JSON.parse((formData.get('product') as string) || '{}');
+        const relatedProductSlugs: string[] = productPayload.relatedProducts || [];
 
         if (!productPayload.slug) {
             return new Response(JSON.stringify({ error: 'Product slug is required' }), { status: 400 });
@@ -38,7 +39,7 @@ export const POST: APIRoute = async ({ request }) => {
                 const { error } = await supabaseAdmin.storage.from('products').upload(safeName, file, { upsert: true, contentType: file.type });
                 if (error) throw error;
                 const { data } = supabaseAdmin.storage.from('products').getPublicUrl(safeName);
-                return { url: data.publicUrl, altText: productPayload.name }; // Return object for prisma create
+                return { id: safeName, url: data.publicUrl, altText: productPayload.name }; // Return object for prisma create
             })
         );
 
@@ -51,29 +52,62 @@ export const POST: APIRoute = async ({ request }) => {
             path: productPayload.path || `/shop/${productPayload.slug}`,
             published: productPayload.published ?? true,
             type: productPayload.type || 'product',
-            summary: productPayload.summary ? JSON.stringify(productPayload.summary) : undefined,
-            body: productPayload.body ? JSON.stringify(productPayload.body) : undefined,
+            summary: productPayload.summary || undefined,
+            body: productPayload.body || undefined,
             // ... add other product fields here
         };
 
-        // 5. Upsert Product and Images to Database
-        const savedProduct = await prisma.product.upsert({
-            where: { slug: productPayload.slug },
-            update: {
-                ...productData,
-                images: {
-                    // For updates, you might want to delete old images first
-                    // or decide on a different strategy. Here we just add new ones.
-                    create: imageUrls,
-                },
+        // Find related products by their slugs to get their IDs
+        const relatedProducts = await prisma.product.findMany({
+            where: {
+                slug: { in: relatedProductSlugs },
             },
-            create: {
-                ...productData,
-                images: {
-                    create: imageUrls,
+            select: { id: true },
+        });
+        const relatedProductIds = relatedProducts.map(p => p.id);
+
+        // 5. Use a transaction to ensure data integrity
+        const savedProduct = await prisma.$transaction(async (tx) => {
+            // First, upsert the product itself
+            const product = await tx.product.upsert({
+                where: { slug: productPayload.slug },
+                update: {
+                    ...productData,
+                    images: {
+                        deleteMany: {}, // Clear old images
+                        create: imageUrls,
+                    },
+                    mainImage: imageUrls.length > 0 ? {
+                        connect: { id: imageUrls[0].id }
+                    }: undefined,
                 },
-                // You would also create variants, topics, etc. here
-            },
+                create: {
+                    ...productData,
+                    images: {
+                        create: imageUrls,
+                    },
+                    mainImage: imageUrls.length > 0 ? {
+                        connect: { id: imageUrls[0].id }
+                    } : undefined,
+                },
+            });
+
+            // Then, clear old relationships for this product
+            await tx.productRelationship.deleteMany({
+                where: { fromId: product.id },
+            });
+
+            // And create the new ones, now with the correct `fromId`
+            if (relatedProductIds.length > 0) {
+                await tx.productRelationship.createMany({
+                    data: relatedProductIds.map(relatedId => ({
+                        fromId: product.id,
+                        toId: relatedId,
+                    })),
+                });
+            }
+
+            return product;
         });
 
         return new Response(JSON.stringify({

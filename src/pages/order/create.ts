@@ -36,9 +36,9 @@ export const POST: APIRoute = async ({ request }) => {
         payment: data.payment,
     };
 
-    const createCrystallizeOrder = await createOrder(body);
+    const createNewOrder = await createOrder(body);
 
-    return new Response(JSON.stringify(createCrystallizeOrder), {
+    return new Response(JSON.stringify(createNewOrder), {
         headers: {
             "content-type": "application/json;charset=UTF-8",
         },

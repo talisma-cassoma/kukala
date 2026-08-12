@@ -68,6 +68,7 @@ export const getDefaultPriceVariant = (variants?: ProductPriceVariant[]) => {
 };
 
 export type variantToCartItemType={
+    productId: string;
     sku: string;
     name: string;
     quantity: number;
@@ -79,6 +80,7 @@ export type variantToCartItemType={
 export const variantToCartItem = (variant: ProductBodyType & ProductType) => {
     //const defaultPrice = getDefaultPriceVariant(variant.priceVariants || []);
     return {
+        productId: variant.id,
         sku: variant.name,
         name: variant.name,
         quantity: 1,

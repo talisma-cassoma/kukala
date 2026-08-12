@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useStore } from '@nanostores/react';
-import { ContentTransformer, Image } from "@crystallize/reactjs-components";
+//import { ContentTransformer, Image } from "@crystallize/reactjs-components";
 import { ProductBody } from "./product-body";
 import { productOptions, VariantSelector, type SelectedOptions } from "./variant-selector";
 import { RelatedProducts } from "./related-products";
@@ -10,22 +10,22 @@ import {
     type variantToCartItemType
 } from "../use-cases/utils";
 import type { Product as ProductType } from "../use-cases/contracts/Product";
-import { addItemToCart, cart } from '@/pages/shop/cartStore';
+import { addItemToCart, cart, type CartItem } from '@/pages/shop/cartStore';
 
 export const relatedProducts = {
     "content": {
         "items": [
             {
-                "id": "crystallize-spec-ref-61f004b959b0e119fc8c27d6",
+                "id": "61f004b959b0e119fc8c27d6",
                 "__typename": "Product",
-                "name": "Strawberry blast",
-                "path": "/shop/strawberry-blast",
+                "name": "Écran solaire spf 50 kukala",
+                "path": "/shop/ecran_solaire_spf_50",
                 "topics": [
                     {
-                        "name": "limited-edition"
+                        "name": "promo"
                     },
                     {
-                        "name": "glazed"
+                        "name": "new"
                     }
                 ],
                 "bundle": {
@@ -95,10 +95,21 @@ export const ProductView = ({ product }: { product: ProductBodyType & ProductTyp
     const $cart = useStore(cart); // Subscribe to cart store changes
     const [buttonText, setButtonText] = useState("Add to Cart");
 
-    const addToCart = (product: any) => {
+    const handleAddToCart = () => {
         setButtonText("Adding...");
-        const cartItem:variantToCartItemType = variantToCartItem(product);
-        console.log("Adding to cart:", cartItem);
+        // Always use the base `product` for consistent data like name and image,
+        // then override with variant-specific details if necessary.
+
+        //console.log("Adding product to cart:", product.id);
+        const cartItem: CartItem = {
+            productId: product.id,
+            sku: product.name,
+            name: product.name,
+            price: selectedVariant.price, // Use the price from the selected variant
+            quantity: 1,
+            imageUrl: product.image?.url
+        };
+        //console.log("Adding to cart:", cartItem);
         addItemToCart(cartItem);
         setButtonText("Added 🎉");
         setTimeout(() => setButtonText("Add to Cart"), 1000);
@@ -121,14 +132,14 @@ export const ProductView = ({ product }: { product: ProductBodyType & ProductTyp
                     sizes="500px"
                     className="rounded-sm mx-auto"
                 /> */}
-                <figure className="rounded-sm mx-auto overflow-hidden">
+                <figure className="rounded-sm overflow-hidden mx-auto">
                     <img
                         src={product.image?.url}
                         alt={product.image?.altText}
-                        srcSet={`${product.image?.url}?w=200 200w, ${product.image?.url}?w=300 300w`}
-                        sizes="(max-width: 700px) 200px, 300px"
+                        //srcSet={`${product.image?.url}?w=200 200w, ${product.image?.url}?w=300 300w`}
+                        //sizes="(max-width: 700px) 200px, 300px"
                         loading="lazy"
-                        className="max-h-full max-w-full aspect-[500/434] object-contain"
+                        className="w-88 aspect-448/404 object-contain"
                     />
                 </figure>
                 <div className="lg:mb-0 mb-5">
@@ -141,10 +152,10 @@ export const ProductView = ({ product }: { product: ProductBodyType & ProductTyp
                                 [groupId]: option.id,
                             }));
                         }}
-                    />;
+                    />
                 </div>
             </div>
-            <div className="flex z-10 justify-between lg:w-5/12 w-8/12 mx-auto bg-white p-5 text-text rounded-xl">
+            <div className="flex z-10 justify-between lg:w-5/12 w-8/12 mx-auto bg-white p-5 text-text rounded-xl border border-gray-100">
                 <div>
                     <p className="font-semibold text-sm">Total price</p>
                     <p className="font-bold text-lg">
@@ -152,15 +163,15 @@ export const ProductView = ({ product }: { product: ProductBodyType & ProductTyp
                     </p>
                 </div>
                 <button
-                    className="bg-background2 px-4 rounded-xl"
-                    onClick={() => addToCart(selectedVariant)}
+                    className="bg-[#c5dedd] px-4 rounded-xl"
+                    onClick={handleAddToCart}
                 >
                     {buttonText}
                 </button>
             </div>
             <ProductBody body={product.body} table={product.table} />
-            <p className="text-text mb-4 font-semibold">Related do(u)nuts</p>
-            <RelatedProducts related={relatedProducts as any} />
+            <p className="text-text mb-4 font-semibold">Related Products</p>
+            <RelatedProducts/>
         </>
     );
 };

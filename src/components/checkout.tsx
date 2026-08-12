@@ -20,16 +20,10 @@ export const CheckoutForm = () => {
         customer: {
             firstName,
             lastName,
-            identifier: email,
-            addresses: [
-                { type: "billing", email },
-                {
-                    type: "delivery",
-                    street,
-                    city,
-                    postalCode,
-                },
-            ],
+            email,
+            street,
+            city,
+            postalCode,
         },
         total: {
             currency: "USD",
@@ -40,34 +34,58 @@ export const CheckoutForm = () => {
                 percent: 0,
             },
         },
-        payment: {
-            provider: "custom",
-            custom: {
-                properties: {
-                    property: "payment_method",
-                    value: "Crystal Coin",
-                },
-            },
-        },
     };
 
     const handleClick = async () => {
-        let response = await fetch("/order/create", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(checkoutModel),
-        }).then((res) => res.json());
+        const { customer, basketModel, total: orderTotal } = checkoutModel;
 
-        if (response?.orders?.create?.id) {
-            clearCart();
-            window.location.href = `/order/${response.orders.create.id}`;
+        // 1. Save the order to the database
+        try {
+            const res = await fetch("/api/orders", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(checkoutModel),
+            });
+
+            if (!res.ok) {
+                // If the server response is not OK, throw an error with the status
+                throw new Error(`Failed to create order: ${res.status} ${res.statusText}`);
+            }
+
+            const response = await res.json();
+
+            // 5. If successful, clear the cart and redirect to the order page
+            if (response?.id) {
+                clearCart();
+                window.location.href = `/order/${response.id}`;
+            }
+        } catch (error) {
+            console.error("Checkout error:", error);
+            // Here you could update the UI to show an error message to the user
         }
+        // 2. Format the message for WhatsApp
+        const itemsSummary = basketModel.items
+            .map((item: any) => `- ${item.name} (x${item.quantity})`)
+            .join("\n");
+
+        const message = `New Order Details:\n\nCustomer: ${customer.firstName} ${customer.lastName} (${customer.email})\nAddress: ${customer.street}, ${customer.city
+            }, ${customer.postalCode}\n\nItems:\n${itemsSummary}\n\nTotal: $${orderTotal.gross
+            }`;
+
+        // 3. Encode the message and create the WhatsApp URL
+        const whatsappNumber = "212613363308"; // The number without '+'
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+        // 3. Open the WhatsApp link in a new tab
+        window.open(whatsappUrl, "_blank");
+
     };
 
     return (
-        <div className="p-10 mx-auto bg-background1 w-128 mt-20">
+        <div className="p-10 mx-auto bg-background1 w-lg mt-20">
             <h1 className="text-text text-3xl font-bold mb-10 text-center">
                 Checkout
             </h1>
@@ -132,7 +150,7 @@ export const CheckoutForm = () => {
                     />
                 </form>
                 <button
-                    className="w-full bg-text text-primary p-3 mt-10 rounded font-semibold text-center"
+                    className="w-full bg-green text-black p-3 mt-10 rounded font-semibold text-center"
                     onClick={handleClick}
                 >
                     Pay Now

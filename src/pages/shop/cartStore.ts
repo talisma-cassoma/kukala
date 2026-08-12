@@ -79,10 +79,12 @@ export function addItemToCart(item: CartItem) {
         // Add new item
         const newItem: CartItem = {
             ...item,
+            productId: item.productId ?? "", // Ensure productId is set, default to empty string if not provided
             sku: item.sku,
             name: item.name,
             price: item.price ?? 75,
             quantity: item.quantity ?? 1,
+            imageUrl: item.imageUrl
         };
         newItems.push(newItem);
     }

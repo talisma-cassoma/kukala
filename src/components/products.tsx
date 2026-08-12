@@ -2,16 +2,23 @@ import type { ProductType } from "../use-cases/contracts/ProductCard";
 import { ProductCard } from "./product-card";
 
 export const Products = ({
-    donuts,
+    elements,
 }: {
-    donuts: { children: ProductType[] };
+    elements: { children: ProductType[] };
 }) => {
     return (
-        <div className="mt-20">
-            <p className="text-lg font-semibold mb-10">Our donuts</p>
-            <div className="flex flex-wrap gap-5">
-                {donuts?.children?.map((donut: any, index: number) => (
-                    <ProductCard product={donut} key={index} />
+       <div
+            style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(2, 1, 1fr)",
+                gap: "1rem",
+                justifyContent: "center"
+            }}
+        >
+            <p className="text-lg font-semibold my-10">outras ofertas</p>
+            <div className="flex flex-wrap justify-between self-center gap-8 w-full">
+                {elements?.children?.map((element: any, index: number) => (
+                    <ProductCard product={element} key={index} />
                 ))}
             </div>
         </div>

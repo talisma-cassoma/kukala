@@ -1,23 +1,25 @@
 ---
-import { getOrderById } from "../../use-cases/queries/get-order";
-import { Order } from "../../components/order";
-import Layout from "../../layouts/Layout.astro";
-import '../styles/global.css';
-
-export const prerender = false;
+import { Order } from "@/components/order";
+import Layout from "@/layouts/Layout.astro";
+import type { OrderProps } from "@/use-cases/contracts/Order";
 
 const { id } = Astro.params;
-const data = id ? await getOrderById(id) : null;
+
+async function getOrderById(orderId: string, baseUrl: string): Promise<OrderProps['order'] | null> {
+    // Construct an absolute URL for server-side fetching
+    const url = new URL(`/api/orders/${orderId}`, baseUrl);
+    const res = await fetch(url.toString());
+    if (!res.ok) {
+        console.error(`Failed to fetch order: ${res.status} ${res.statusText}`);
+        return null;
+    }
+    return res.json();
+}
+
+const order = await getOrderById(id!, Astro.url.origin);
+//console.log("Fetched order:", JSON.stringify(order));
 ---
 
-<Layout title="Order" description="Details of your dounut order.">
-  <div class="lg:container mx-auto w-full lg:px-0 px-4">
-    {
-      data ? (
-        <Order order={data?.orders?.get} />
-      ) : (
-        <h1>Oops! Order not found.</h1>
-      )
-    }
-  </div>
+<Layout title="Order Confirmation" description="Order confirmation page">
+    {order ? <Order order={order} /> : <p>Order not found.</p>}
 </Layout>

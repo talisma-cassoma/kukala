@@ -25,7 +25,7 @@ export const ProductBody = ({ body, table }: ProductBodyType) => {
                                     alt={image.altText}
                                     //srcSet={`${image.url}?w=200 200w, ${image.url}?w=300 300w`}
                                     sizes="200px"
-                                    className="rounded-xl overflow-hidden aspect-[768/409]"
+                                    className="rounded-xl overflow-hidden aspect-448/404 m-10 w-180"
                                     loading="lazy"
                                     // width="500px"
                                     // height="400px"

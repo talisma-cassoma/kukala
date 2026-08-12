@@ -124,7 +124,7 @@ export function CreateProductForm({ formMethods }: CreateProductFormProps) {
                     {mainImagePreview && (
                         <div className="mt-2">
                             <p className="text-xs text-gray-500 mb-1">Preview interno do Form:</p>
-                            <img src={mainImagePreview} alt="Preview" className="h-20 w-20 object-cover rounded border" />
+                            <img src={mainImagePreview} alt="Preview" className="h-20 w-20 object-contain rounded border" />
                         </div>
                     )}
                 </div>

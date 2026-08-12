@@ -20,16 +20,22 @@
         "related": {
             "items": [
                 {
-                    "name": "Related Mock Product 1",
-                    "path": "/shop/related-mock-product-1",
-                    "topics": [{ "name": "related-category-X" }],
-                    "defaultVariant": { "price": 10.0, "currency": "USD" }
+                    "name": "Écran solaire spf 50 kukala",
+                    "path": "/shop/ecran_solaire_spf_50",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 75.0, "currency": "USD" }
                 },
                 {
-                    "name": "Related Mock Product 2",
-                    "path": "/shop/related-mock-product-2",
-                    "topics": [{ "name": "related-category-Y" }],
-                    "defaultVariant": { "price": 15.0, "currency": "EUR" }
+                    "name": "Hydratation profonde",
+                    "path": "/shop/hydratation_profonde",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 65.0, "currency": "EUR" }
+                },
+                {
+                    "name": "huile hydratante Glamour Doré",
+                    "path": "/shop/huile_hydratante_glamour_dore",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 65.0, "currency": "USD" }
                 }
             ]
         },
@@ -108,19 +114,25 @@
             "variants": []
         },
         "price": 65,
-        "related": {
+       "related": {
             "items": [
                 {
-                    "name": "Related Mock Product 1",
-                    "path": "/shop/related-mock-product-1",
-                    "topics": [{ "name": "related-category-X" }],
-                    "defaultVariant": { "price": 10.0, "currency": "USD" }
+                    "name": "Écran solaire spf 50 kukala",
+                    "path": "/shop/ecran_solaire_spf_50",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 75.0, "currency": "USD" }
                 },
                 {
-                    "name": "Related Mock Product 2",
-                    "path": "/shop/related-mock-product-2",
-                    "topics": [{ "name": "related-category-Y" }],
-                    "defaultVariant": { "price": 15.0, "currency": "EUR" }
+                    "name": "Hydratation profonde",
+                    "path": "/shop/hydratation_profonde",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 65.0, "currency": "EUR" }
+                },
+                {
+                    "name": "huile hydratante Glamour Doré",
+                    "path": "/shop/huile_hydratante_glamour_dore",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 65.0, "currency": "USD" }
                 }
             ]
         },
@@ -199,19 +211,25 @@
             "variants": []
         },
         "price": 65,
-        "related": {
+       "related": {
             "items": [
                 {
-                    "name": "Related Mock Product 1",
-                    "path": "/shop/related-mock-product-1",
-                    "topics": [{ "name": "related-category-X" }],
-                    "defaultVariant": { "price": 10.0, "currency": "USD" }
+                    "name": "Écran solaire spf 50 kukala",
+                    "path": "/shop/ecran_solaire_spf_50",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 75.0, "currency": "USD" }
                 },
                 {
-                    "name": "Related Mock Product 2",
-                    "path": "/shop/related-mock-product-2",
-                    "topics": [{ "name": "related-category-Y" }],
-                    "defaultVariant": { "price": 15.0, "currency": "EUR" }
+                    "name": "Hydratation profonde",
+                    "path": "/shop/hydratation_profonde",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 65.0, "currency": "EUR" }
+                },
+                {
+                    "name": "huile hydratante Glamour Doré",
+                    "path": "/shop/huile_hydratante_glamour_dore",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 65.0, "currency": "USD" }
                 }
             ]
         },
@@ -274,8 +292,8 @@
     },
     {      
         "type": "COMBOBOX",
-        "name": "combo kukla",
-        "path": "/shop/combo_3xkukla",
+        "name": "combo kukala",
+        "path": "/shop/combo_3xkukala",
          "topics": [
             { "name": "new" },
             { "name": "promo" }
@@ -284,25 +302,128 @@
             "content": { "value": false}
         },
         "image": {
-            "dir_path": "/combo_3xkukla",
+            "dir_path": "/combo_3xkukala",
             "url": "this sould come from supabase",
             "altText": "combo des 3 produits kukla image",
             "variants": []
         },
         "price": 150,
-        "related": {
+       "related": {
             "items": [
                 {
-                    "name": "Related Mock Product 1",
-                    "path": "/shop/related-mock-product-1",
-                    "topics": [{ "name": "related-category-X" }],
-                    "defaultVariant": { "price": 10.0, "currency": "USD" }
+                    "name": "Écran solaire spf 50 kukala",
+                    "path": "/shop/ecran_solaire_spf_50",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 75.0, "currency": "USD" }
                 },
                 {
-                    "name": "Related Mock Product 2",
-                    "path": "/shop/related-mock-product-2",
-                    "topics": [{ "name": "related-category-Y" }],
-                    "defaultVariant": { "price": 15.0, "currency": "EUR" }
+                    "name": "Hydratation profonde",
+                    "path": "/shop/hydratation_profonde",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 65.0, "currency": "EUR" }
+                },
+                {
+                    "name": "huile hydratante Glamour Doré",
+                    "path": "/shop/huile_hydratante_glamour_dore",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 65.0, "currency": "USD" }
+                }
+            ]
+        },
+        "summary": "O cuidado nutritivo aue transforma a sua dele. proporcionando um brilho dourado e saudave",
+        
+        "body": {
+            "paragraphs": [
+                {
+                    "title": { "text": "Introduction to the Mock Product" },
+                    "text": "Il existe des rituels qui traversent le temps. Au Maroc, l'huile n'est pas un produit — c'est un geste. Transmis, raffiné, quotidien. Kukala est née à Marrakech, au cœur d'une ville où le soin de la peau est une culture millénaire. Une ville où les souks respirent l'argan, le savon beldi et les épices — où prendre soin de soi n'a jamais été un luxe, mais une évidence. De cette terre, nous avons gardé l'essentiel : des huiles naturelles rigoureusement sélectionnées, formulées au sein d'un laboratoire national marocain. Chaque produit est pensé pour s'intégrer dans votre quotidien — homme ou femme — sans e ort, sans superflu. Une hydratation profonde. Des ingrédients qui ont fait leurs preuves. Une approche épurée du soin, portée par l'héritage d'une ville d'exception. Kukala. L'essentiel, à l'état pur.",
+                    "images": [
+                        { "url": "this sould come from supabase", "altText": "imagem do produto" },
+                        { "url": "this sould come from supabase", "altText": "imagem do produto" }
+                    ],
+                    "videos": [
+                        { "playlist": "mock-video-playlist-1", "autoplay": false }
+                    ]
+                }
+            ]
+        },
+        "table": {
+            "sections": [
+                {
+                    "title": "General Specifications",
+                    "properties": [
+                        { "key": "Weight", "value": "500g" },
+                        { "key": "Dimensions", "value": "10x10x5 cm" },
+                        { "key": "Material", "value": "High-quality plastic" }
+                    ]
+                },
+                {
+                    "title": "Technical Details",
+                    "properties": [
+                        { "key": "Power Source", "value": "USB-C" },
+                        { "key": "Battery Life", "value": "Up to 8 hours" }
+                    ]
+                }
+            ]
+        },
+        "productOptions": [
+            {
+                "id": "color",
+                "name": "Color",
+                "required": false,
+                "options": [
+                    { "id": "red", "label": "Red", "price": 150, "available": true },
+                    { "id": "blue", "label": "Blue", "price": 150, "available": true },
+                    { "id": "green", "label": "Green", "price": 150, "available": false }
+                ] 
+            },
+            {
+                "id": "storage",
+                "name": "Storage",
+                "options": [
+                    { "id": "32gb", "label": "32 GB", "price": 150, "available": true },
+                    { "id": "64gb", "label": "64 GB", "price": 150, "available": true }
+                ]
+            }
+        ]
+    },
+     {      
+        "type": "COMBOBOX",
+        "name": "combo body lotion & lhuile glamour",
+        "path": "/shop/combo_body_lotion_lhuile_glamour",
+         "topics": [
+            { "name": "new" },
+            { "name": "promo" }
+        ],
+        "bundle": {
+            "content": { "value": false}
+        },
+        "image": {
+            "dir_path": "/combo_body_lotion_lhuile_glamour",
+            "url": "this sould come from supabase",
+            "altText": "combo body lotion & lhuile glamour kukla image",
+            "variants": []
+        },
+        "price": 150,
+       "related": {
+            "items": [
+                {
+                    "name": "Écran solaire spf 50 kukala",
+                    "path": "/shop/ecran_solaire_spf_50",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 75.0, "currency": "USD" }
+                },
+                {
+                    "name": "Hydratation profonde",
+                    "path": "/shop/hydratation_profonde",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 65.0, "currency": "EUR" }
+                },
+                {
+                    "name": "huile hydratante Glamour Doré",
+                    "path": "/shop/huile_hydratante_glamour_dore",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 65.0, "currency": "USD" }
                 }
             ]
         },
@@ -381,19 +502,25 @@
             "variants": []
         },
         "price": 65,
-        "related": {
+       "related": {
             "items": [
                 {
-                    "name": "Related Mock Product 1",
-                    "path": "/shop/related-mock-product-1",
-                    "topics": [{ "name": "related-category-X" }],
-                    "defaultVariant": { "price": 10.0, "currency": "USD" }
+                    "name": "Écran solaire spf 50 kukala",
+                    "path": "/shop/ecran_solaire_spf_50",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 75.0, "currency": "USD" }
                 },
                 {
-                    "name": "Related Mock Product 2",
-                    "path": "/shop/related-mock-product-2",
-                    "topics": [{ "name": "related-category-Y" }],
-                    "defaultVariant": { "price": 15.0, "currency": "EUR" }
+                    "name": "Hydratation profonde",
+                    "path": "/shop/hydratation_profonde",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 65.0, "currency": "EUR" }
+                },
+                {
+                    "name": "huile hydratante Glamour Doré",
+                    "path": "/shop/huile_hydratante_glamour_dore",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 65.0, "currency": "USD" }
                 }
             ]
         },
@@ -472,19 +599,25 @@
             "variants": []
         },
         "price": 150,
-        "related": {
+       "related": {
             "items": [
                 {
-                    "name": "Related Mock Product 1",
-                    "path": "/shop/related-mock-product-1",
-                    "topics": [{ "name": "related-category-X" }],
-                    "defaultVariant": { "price": 10.0, "currency": "USD" }
+                    "name": "Écran solaire spf 50 kukala",
+                    "path": "/shop/ecran_solaire_spf_50",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 75.0, "currency": "USD" }
                 },
                 {
-                    "name": "Related Mock Product 2",
-                    "path": "/shop/related-mock-product-2",
-                    "topics": [{ "name": "related-category-Y" }],
-                    "defaultVariant": { "price": 15.0, "currency": "EUR" }
+                    "name": "Hydratation profonde",
+                    "path": "/shop/hydratation_profonde",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 65.0, "currency": "EUR" }
+                },
+                {
+                    "name": "huile hydratante Glamour Doré",
+                    "path": "/shop/huile_hydratante_glamour_dore",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 65.0, "currency": "USD" }
                 }
             ]
         },
@@ -563,19 +696,25 @@
             "variants": []
         },
         "price": 150,
-        "related": {
+       "related": {
             "items": [
                 {
-                    "name": "Related Mock Product 1",
-                    "path": "/shop/related-mock-product-1",
-                    "topics": [{ "name": "related-category-X" }],
-                    "defaultVariant": { "price": 10.0, "currency": "USD" }
+                    "name": "Écran solaire spf 50 kukala",
+                    "path": "/shop/ecran_solaire_spf_50",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 75.0, "currency": "USD" }
                 },
                 {
-                    "name": "Related Mock Product 2",
-                    "path": "/shop/related-mock-product-2",
-                    "topics": [{ "name": "related-category-Y" }],
-                    "defaultVariant": { "price": 15.0, "currency": "EUR" }
+                    "name": "Hydratation profonde",
+                    "path": "/shop/hydratation_profonde",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 65.0, "currency": "EUR" }
+                },
+                {
+                    "name": "huile hydratante Glamour Doré",
+                    "path": "/shop/huile_hydratante_glamour_dore",
+                    "topics": [{ "name": "new" }, { "name": "promo" }],
+                    "defaultVariant": { "price": 65.0, "currency": "USD" }
                 }
             ]
         },
