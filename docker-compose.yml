@@ -6,10 +6,10 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        PUBLIC_SUPABASE_URL: https://rqbegbvangiegbnrgxrv.supabase.co
+        PUBLIC_SUPABASE_URL: ${PUBLIC_SUPABASE_URL}
     ports:
       - "4321:4321"
     environment:
       - NODE_ENV=production
-      - PUBLIC_SUPABASE_URL=https://rqbegbvangiegbnrgxrv.supabase.co
+      - PUBLIC_SUPABASE_URL=${PUBLIC_SUPABASE_URL}
       # Adicione outras variáveis de ambiente necessárias aqui
