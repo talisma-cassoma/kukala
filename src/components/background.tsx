@@ -14,8 +14,5 @@ export const Background = () => {
                 fill="#FEE8F0"
             />
         </svg>
-        // <div className="w-full h-full">
-        //     <img src="https://rqbegbvangiegbnrgxrv.supabase.co/storage/v1/object/public/kukala/Thumb.png" alt="kukala thumbnail" />
-        // </div>
     );
 };
