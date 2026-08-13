@@ -37,7 +37,7 @@ export const CheckoutForm = () => {
     };
 
     const handleClick = async () => {
-        const { customer, basketModel, total: orderTotal } = checkoutModel;
+        
 
         // 1. Save the order to the database
         try {
@@ -65,22 +65,7 @@ export const CheckoutForm = () => {
             console.error("Checkout error:", error);
             // Here you could update the UI to show an error message to the user
         }
-        // 2. Format the message for WhatsApp
-        const itemsSummary = basketModel.items
-            .map((item: any) => `- ${item.name} (x${item.quantity})`)
-            .join("\n");
-
-        const message = `New Order Details:\n\nCustomer: ${customer.firstName} ${customer.lastName} (${customer.email})\nAddress: ${customer.street}, ${customer.city
-            }, ${customer.postalCode}\n\nItems:\n${itemsSummary}\n\nTotal: $${orderTotal.gross
-            }`;
-
-        // 3. Encode the message and create the WhatsApp URL
-        const whatsappNumber = "212613363308"; // The number without '+'
-        const encodedMessage = encodeURIComponent(message);
-        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-
-        // 3. Open the WhatsApp link in a new tab
-        window.open(whatsappUrl, "_blank");
+     
 
     };
 

@@ -3,8 +3,11 @@ import ReactPlayer from "react-player";
 import { type ProductBodyType } from "@/use-cases/contracts/ProductContent";
 
 export const ProductBody = ({ body, table }: ProductBodyType) => {
+
+    console.log("ProductBody received body:", JSON.stringify(body));
+    //console.log("ProductBody received table:", JSON.stringify(table));
     return (
-        <div className="flex flex-col gap-3 my-10 lg:w-9/12 w-full mx-auto z-10">
+        <div className="flex mx-auto flex-col gap-3 my-10 lg:w-9/12 w-full max-w-160 z-10">
             {body?.paragraphs.map((paragraph, index) => (
                 <div key={index} className="flex flex-col justify-between">
                     <div className="my-3 text-text md:px-20">
@@ -13,24 +16,18 @@ export const ProductBody = ({ body, table }: ProductBodyType) => {
                                 {paragraph.title?.text}
                             </h2>
                         )}
-                        <p>
-                            {paragraph.text}
+                        <p className="text-text text-sm">
+                            {paragraph?.text}
                         </p>
                     </div>
-                    {paragraph.images && (
+                    {paragraph.images[index] && (
                         <div className="my-5 mx-auto">
-                            {paragraph?.images?.map((image, index: number) => (
-                                <img
-                                    src={image.url}
-                                    alt={image.altText}
-                                    //srcSet={`${image.url}?w=200 200w, ${image.url}?w=300 300w`}
-                                    sizes="200px"
-                                    className="rounded-xl overflow-hidden aspect-448/404 m-10 w-180"
-                                    loading="lazy"
-                                    // width="500px"
-                                    // height="400px"
-                                />
-                            ))}
+                            <img
+                                src={paragraph?.images[index].url}
+                                alt={paragraph?.images[index].altText}
+                                className="rounded-xl overflow-hidden max-w-120 m-10 w-180"
+                                loading="lazy"
+                            />
                         </div>
                     )}
                     {paragraph.videos && paragraph.videos?.length > 0 && (
@@ -45,7 +42,7 @@ export const ProductBody = ({ body, table }: ProductBodyType) => {
                                     paragraph?.videos.length > 0 &&
                                     paragraph?.videos[0].thumbnails &&
                                     paragraph?.videos[0].thumbnails.length >
-                                        0 &&
+                                    0 &&
                                     paragraph?.videos[0].thumbnails[0].url
                                 }
                                 playing={true}
@@ -57,25 +54,41 @@ export const ProductBody = ({ body, table }: ProductBodyType) => {
             {table?.sections.map((section, index) => (
                 <div
                     key={index}
-                    className="flex lg:flex-row flex-col justify-between text-text my-20"
+                    className="flex flex-col justify-center text-center my-20"
                 >
-                    <div>
+                    <div className="flex flex-col w-full gap-3">
                         <h3 className="font-bold text-2xl py-2">
                             {section?.title}
                         </h3>
-                        <p className="italic">per 50 g</p>
+                        <p className="italic text-sm">per 50 g</p>
                     </div>
-                    <div className="lg:w-7/12 w-full">
-                        {section.properties.map((property, index) => (
-                            <div
-                                key={index}
-                                className="flex justify-between my-3 even:bg-grey px-5 py-2"
-                            >
-                                <p>{property.key}</p>
-                                <p>{property.value}</p>
-                            </div>
-                        ))}
+                    {/* 1. Le conteneur parent Flexbox */}
+                    <div className="flex w-full gap-3">
+
+                        {/* Colonne 1 : Votre tableau existant (7/12 de ) */}
+                        <div className="w-full">
+                            <table className="w-full text-left border-collapse">
+                                <thead >
+                                    <tr className="w-full border-b border-black text-sm font-semibold text-gray-700">
+                                        <th className="w-1/2 px-5 py-3">Prop</th>
+                                        <th className="w-1/2 px-5 py-3">Qté</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="bg-transparent text-gray-700 text-sm">
+                                    {section.properties.map((property, index) => (
+                                        <tr
+                                            key={index}
+                                            className="border-b border-black even:bg-gray-50 hover:bg-gray-100 transition-colors"
+                                        >
+                                            <td className="px-5 py-2 font-medium">{property.key}</td>
+                                            <td className="px-5 py-2 text-gray-600">{property.value}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+
                 </div>
             ))}
         </div>

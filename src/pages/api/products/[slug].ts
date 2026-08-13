@@ -35,7 +35,7 @@ function mapProductToContract(product: FullProduct) {
         body: {
                 paragraphs: product.bodyParagraphs.map(p => ({
                     title: { text: p.title ?? '' },
-                    body: { json: p.body },
+                    text: p.body ?? '' ,
                     images: p.images.map(img => ({ url: img.url, altText: img.altText ?? '' })),
                 })),
         },

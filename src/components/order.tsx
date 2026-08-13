@@ -1,7 +1,8 @@
 import type { OrderProps } from "@/use-cases/contracts/Order";
 
 export const Order = ({ order }: OrderProps) => {
-    const { total, cart } = order;
+    const { total, cart, customer } = order;
+
     return (
         <div className="lg:w-auth lg:p-20 bg-background3 mx-auto mt-20 text-text w-full p-10">
             <div>
@@ -38,11 +39,43 @@ export const Order = ({ order }: OrderProps) => {
                         </div>
                     </div>
                 </div>
-                  <a href="/" title="AstroJS" className="flex w-full my-10 justify-center">
-                                <button className="bg-[#f0efeb] py-2 px-4 rounded hover:bg-primary-dark">
-                                    retourner a la page d'accueil
-                                </button>
-                            </a>
+                <a href="/" title="AstroJS" className="flex w-full my-10 justify-center">
+                    <button className="bg-[#f0efeb] py-2 px-4 rounded hover:bg-primary-dark">
+                        retourner a la page d'accueil
+                    </button>
+                </a>
+                <div className="flex flex-col items-center mt-10">
+                    <p> send a messagewith you order details to keep in touch us</p>
+                    <button
+                        onClick={() => {
+                            console.log("Preparing to send order details via WhatsApp:", {
+                                customer,
+                                cart,
+                                total,
+                            });
+                            // 2. Format the message for WhatsApp
+                            const itemsSummary = cart.map((item) => `- ${item.name} (x${item.quantity})`)
+                                .join("\n");
+
+                            const message = `New Order Details:\n\nCustomer: ${customer?.firstName} ${customer?.lastName} (${customer?.email})\nAddress: ${customer?.street}, ${customer?.city
+                                }, ${customer?.postalCode}\n\nItems:\n${itemsSummary}\n\nTotal: $${total.gross
+                                }`;
+
+                            // 3. Encode the message and create the WhatsApp URL
+                            const whatsappNumber = "212613363308"; // The number without '+'
+                            const encodedMessage = encodeURIComponent(message);
+                            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+                            // 3. Open the WhatsApp link in a new tab
+                            if (typeof window !== 'undefined') {
+                                window.open(whatsappUrl, "_blank");
+                            }
+                        }}
+                        className="bg-[#25D366] text-white py-2 px-4 rounded hover:bg-green-700 mt-3"
+                    >
+                        Send Order Details via WhatsApp
+                    </button>
+                </div>
             </div>
         </div>
     );

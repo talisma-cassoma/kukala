@@ -15,7 +15,7 @@ export const Products = ({
                 justifyContent: "center"
             }}
         >
-            <p className="text-lg font-semibold my-10">outras ofertas</p>
+            <p className="text-lg font-semibold my-10">autres produits</p>
             <div className="flex flex-wrap justify-between self-center gap-8 w-full">
                 {elements?.children?.map((element: any, index: number) => (
                     <ProductCard product={element} key={index} />

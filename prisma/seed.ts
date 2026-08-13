@@ -55,7 +55,7 @@ async function main() {
                         images: {
                             create: (images.body as string[]).map((url: string) => ({
                                 url,
-                                altText: p.images[0]?.altText || 'Product image'
+                                altText: `${product.name} image`
                             }))
                         }
                     }))

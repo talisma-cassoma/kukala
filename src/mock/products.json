@@ -20,32 +20,26 @@
         "related": {
             "items": [
                 {
-                    "name": "Écran solaire spf 50 kukala",
-                    "path": "/shop/ecran_solaire_spf_50",
-                    "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 75.0, "currency": "USD" }
-                },
-                {
                     "name": "Hydratation profonde",
                     "path": "/shop/hydratation_profonde",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 65.0, "currency": "EUR" }
+                    "defaultVariant": { "price": 65.0, "currency": " DHM" }
                 },
                 {
                     "name": "huile hydratante Glamour Doré",
                     "path": "/shop/huile_hydratante_glamour_dore",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 65.0, "currency": "USD" }
+                    "defaultVariant": { "price": 65.0, "currency": " DHM" }
                 }
             ]
         },
-        "summary": "O cuidado nutritivo aue transforma a sua dele. proporcionando um brilho dourado e saudave",
+        "summary": "texture fluide, invisible et hydratante pour un confort total sous le soleil☀️, votre bouclier contre les UVA/UVB sans résidus.",
         
         "body": {
             "paragraphs": [
                 {
-                    "title": { "text": "Introduction to the Mock Product" },
-                    "text": "Il existe des rituels qui traversent le temps. Au Maroc, l'huile n'est pas un produit — c'est un geste. Transmis, raffiné, quotidien. Kukala est née à Marrakech, au cœur d'une ville où le soin de la peau est une culture millénaire. Une ville où les souks respirent l'argan, le savon beldi et les épices — où prendre soin de soi n'a jamais été un luxe, mais une évidence. De cette terre, nous avons gardé l'essentiel : des huiles naturelles rigoureusement sélectionnées, formulées au sein d'un laboratoire national marocain. Chaque produit est pensé pour s'intégrer dans votre quotidien — homme ou femme — sans e ort, sans superflu. Une hydratation profonde. Des ingrédients qui ont fait leurs preuves. Une approche épurée du soin, portée par l'héritage d'une ville d'exception. Kukala. L'essentiel, à l'état pur.",
+                    "title": { "text": "Soinez votre peau avec SPF50" },
+                    "text": "Lait solaire SPF 50, très haute protection contre les UVA et UVB, avec texture légère, fluide et non grasse, Il est nourrissant et hydratant. Convient à tous les types de peau, peut être utilisé sur le visage et corps",
                     "images": [
                         { "url": "this sould come from supabase", "altText": "imagem do produto" },
                         { "url": "this sould come from supabase", "altText": "imagem do produto" }
@@ -59,39 +53,46 @@
         "table": {
             "sections": [
                 {
-                    "title": "General Specifications",
+                    "title": "Details sur l'emballage",
                     "properties": [
-                        { "key": "Weight", "value": "500g" },
+                        { "key": "poids", "value": "250g" },
+                        { "key": "Volume", "value": "200ml/6.76 fl oz" },
                         { "key": "Dimensions", "value": "10x10x5 cm" },
-                        { "key": "Material", "value": "High-quality plastic" }
+                        { "key": "Material", "value": "plastic" }
                     ]
                 },
                 {
-                    "title": "Technical Details",
+                    "title": "Details sur le contenu",
                     "properties": [
-                        { "key": "Power Source", "value": "USB-C" },
-                        { "key": "Battery Life", "value": "Up to 8 hours" }
+                        { "key": "noix de Damas et coco", "value": "86 mg" },
+                        { "key": "pépins de raisin", "value": "86 mg" },
+                        { "key": "huile d'argan", "value": "86 mg" },
+                        { "key": "Protein", "value": "86 mg" },
+                        { "key": "huile de sésame", "value": "86 mg" },
+                        { "key": "carbohydrates", "value": "86 mg" },
+                        { "key": "sodium", "value": "86 mg" }
+
                     ]
                 }
             ]
         },
         "productOptions": [
             {
-                "id": "color",
-                "name": "Color",
+                "id": "delivery",
+                "name": "Delivery",
                 "required": false,
                 "options": [
-                    { "id": "red", "label": "Red", "price": 75, "available": true },
-                    { "id": "blue", "label": "Blue", "price": 75, "available": true },
-                    { "id": "green", "label": "Green", "price": 75, "available": false }
+                    { "id": "in-store", "label": "In-Store", "price": 0, "available": true },
+                    { "id": "home-delivery", "label": "Home Delivery", "price": 5, "available": true }
                 ] 
             },
             {
-                "id": "storage",
-                "name": "Storage",
+                "id": "Volume",
+                "name": "Volume",
+                "required": false,
                 "options": [
-                    { "id": "32gb", "label": "32 GB", "price": 75, "available": true },
-                    { "id": "64gb", "label": "64 GB", "price": 75, "available": true }
+                    { "id": "100ml", "label": "100 ml", "price": 75, "available": true },
+                    { "id": "50ml", "label": "50 ml", "price": 75, "available": false }
                 ]
             }
         ]
@@ -120,29 +121,40 @@
                     "name": "Écran solaire spf 50 kukala",
                     "path": "/shop/ecran_solaire_spf_50",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 75.0, "currency": "USD" }
+                    "defaultVariant": { "price":  65.0, "currency": "dhm" }
                 },
                 {
                     "name": "Hydratation profonde",
                     "path": "/shop/hydratation_profonde",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 65.0, "currency": "EUR" }
+                    "defaultVariant": { "price": 65.0, "currency": " DHM" }
                 },
                 {
                     "name": "huile hydratante Glamour Doré",
                     "path": "/shop/huile_hydratante_glamour_dore",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 65.0, "currency": "USD" }
+                    "defaultVariant": { "price": 65.0, "currency": " DHM" }
                 }
             ]
         },
-        "summary": "O cuidado nutritivo aue transforma a sua dele. proporcionando um brilho dourado e saudave",
+       "summary": "Hydratation profonde, texture légère, parfum frais… pour une peau douce, lumineuse et parfaitement nourrie.",
         
         "body": {
             "paragraphs": [
                 {
-                    "title": { "text": "Introduction to the Mock Product" },
-                    "text": "Il existe des rituels qui traversent le temps. Au Maroc, l'huile n'est pas un produit — c'est un geste. Transmis, raffiné, quotidien. Kukala est née à Marrakech, au cœur d'une ville où le soin de la peau est une culture millénaire. Une ville où les souks respirent l'argan, le savon beldi et les épices — où prendre soin de soi n'a jamais été un luxe, mais une évidence. De cette terre, nous avons gardé l'essentiel : des huiles naturelles rigoureusement sélectionnées, formulées au sein d'un laboratoire national marocain. Chaque produit est pensé pour s'intégrer dans votre quotidien — homme ou femme — sans e ort, sans superflu. Une hydratation profonde. Des ingrédients qui ont fait leurs preuves. Une approche épurée du soin, portée par l'héritage d'une ville d'exception. Kukala. L'essentiel, à l'état pur.",
+                    "title": { "text": "Hydratation de luxe" },
+                    "text": "💧 200 ml de soin délicat, pour une peau irrésistiblement soyeuse.",
+                    "images": [
+                        { "url": "this sould come from supabase", "altText": "imagem do produto" },
+                        { "url": "this sould come from supabase", "altText": "imagem do produto" }
+                    ],
+                    "videos": [
+                        { "playlist": "mock-video-playlist-1", "autoplay": false }
+                    ]
+                },
+                  {
+                    "title": { "text": "Lait Corps Fondant" },
+                    "text": "Toucher sec et mat qui dure. une absorption quasi immédiate sans aucun résidu gras de la cire d'abeille naturelle — qui forme sur la peau un voile protecteur ultrafin et respirant — la peau reste sèche, nette et confortable des heures après l'application. Fini la sensation de moiteur ou de peau collante, même par fortes chaleurs ou lors des journées actives. Un vrai allié pour celles et ceux qui souffrent d'une transpiration cutanée excessive en été.",
                     "images": [
                         { "url": "this sould come from supabase", "altText": "imagem do produto" },
                         { "url": "this sould come from supabase", "altText": "imagem do produto" }
@@ -156,39 +168,46 @@
         "table": {
             "sections": [
                 {
-                    "title": "General Specifications",
+                    "title": "Details sur l'emballage",
                     "properties": [
-                        { "key": "Weight", "value": "500g" },
+                        { "key": "poids", "value": "250g" },
+                        { "key": "Volume", "value": "200ml/6.76 fl oz" },
                         { "key": "Dimensions", "value": "10x10x5 cm" },
-                        { "key": "Material", "value": "High-quality plastic" }
+                        { "key": "Material", "value": "plastic" }
                     ]
                 },
                 {
-                    "title": "Technical Details",
+                    "title": "Details sur le contenu",
                     "properties": [
-                        { "key": "Power Source", "value": "USB-C" },
-                        { "key": "Battery Life", "value": "Up to 8 hours" }
+                        { "key": "noix de Damas et coco", "value": "86 mg" },
+                        { "key": "pépins de raisin", "value": "86 mg" },
+                        { "key": "huile d'argan", "value": "86 mg" },
+                        { "key": "Protein", "value": "86 mg" },
+                        { "key": "huile de sésame", "value": "86 mg" },
+                        { "key": "carbohydrates", "value": "86 mg" },
+                        { "key": "sodium", "value": "86 mg" }
+
                     ]
                 }
             ]
         },
-        "productOptions": [
+       "productOptions": [
             {
-                "id": "color",
-                "name": "Color",
+                "id": "delivery",
+                "name": "Delivery",
                 "required": false,
                 "options": [
-                    { "id": "red", "label": "Red", "price": 65, "available": true },
-                    { "id": "blue", "label": "Blue", "price": 65, "available": true },
-                    { "id": "green", "label": "Green", "price": 65, "available": false }
+                    { "id": "in-store", "label": "In-Store", "price": 65.0, "available": true },
+                    { "id": "home-delivery", "label": "Home Delivery", "price": 65.0, "available": true }
                 ] 
             },
             {
-                "id": "storage",
-                "name": "Storage",
+                "id": "Volume",
+                "name": "Volume",
+                "required": false,
                 "options": [
-                    { "id": "32gb", "label": "32 GB", "price": 0, "available": true },
-                    { "id": "64gb", "label": "64 GB", "price": 10, "available": true }
+                    { "id": "100ml", "label": "100 ml", "price": 65.0, "available": true },
+                    { "id": "50ml", "label": "50 ml", "price": 65.0, "available": false }
                 ]
             }
         ]
@@ -217,29 +236,29 @@
                     "name": "Écran solaire spf 50 kukala",
                     "path": "/shop/ecran_solaire_spf_50",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 75.0, "currency": "USD" }
+                    "defaultVariant": { "price": 75.0, "currency": " DHM" }
                 },
                 {
                     "name": "Hydratation profonde",
                     "path": "/shop/hydratation_profonde",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 65.0, "currency": "EUR" }
+                    "defaultVariant": { "price": 65.0, "currency": " DHM" }
                 },
                 {
                     "name": "huile hydratante Glamour Doré",
                     "path": "/shop/huile_hydratante_glamour_dore",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 65.0, "currency": "USD" }
+                    "defaultVariant": { "price": 65.0, "currency": " DHM" }
                 }
             ]
         },
-        "summary": "O cuidado nutritivo aue transforma a sua dele. proporcionando um brilho dourado e saudave",
+        "summary": "Un huile 100% d’origine végétale, formulée à partir d’un mélange luxueux d’huiles naturelles:jojoba, pépins de raisin, noix de Damas et coco ✨ Elle nourrit, adoucit et laisse la peau sublimée avec une touche d’éclat naturel ! Aucun parabène, aucune huile minérale juste la nature au service de ta peau. 💛",
         
         "body": {
             "paragraphs": [
                 {
-                    "title": { "text": "Introduction to the Mock Product" },
-                    "text": "Il existe des rituels qui traversent le temps. Au Maroc, l'huile n'est pas un produit — c'est un geste. Transmis, raffiné, quotidien. Kukala est née à Marrakech, au cœur d'une ville où le soin de la peau est une culture millénaire. Une ville où les souks respirent l'argan, le savon beldi et les épices — où prendre soin de soi n'a jamais été un luxe, mais une évidence. De cette terre, nous avons gardé l'essentiel : des huiles naturelles rigoureusement sélectionnées, formulées au sein d'un laboratoire national marocain. Chaque produit est pensé pour s'intégrer dans votre quotidien — homme ou femme — sans e ort, sans superflu. Une hydratation profonde. Des ingrédients qui ont fait leurs preuves. Une approche épurée du soin, portée par l'héritage d'une ville d'exception. Kukala. L'essentiel, à l'état pur.",
+                    "title": { "text": "Vous voulez un glow subtil et naturel?" },
+                    "text": "L’huile hydratante Glamour Doré est la réponse à deux demandes très précises de nos clientes :« Je veux une peau bien hydratée, mais je n’aime pas avoir un film gras, Et maintenant, nous vous présentons une solution sur mesure, créée spécialement pour répondre à ces besoins. La texture ultra-fine, fluide, sèche au toucher, s’absorbe en quelques secondes. Pas de brillance excessive, pas d’aspect gras… Juste un glow naturel. Le parfum délicat de thé vert l’enveloppe une fraîcheur subtile et raffiné.",
                     "images": [
                         { "url": "this sould come from supabase", "altText": "imagem do produto" },
                         { "url": "this sould come from supabase", "altText": "imagem do produto" }
@@ -250,42 +269,49 @@
                 }
             ]
         },
-        "table": {
+         "table": {
             "sections": [
                 {
-                    "title": "General Specifications",
+                    "title": "Details sur l'emballage",
                     "properties": [
-                        { "key": "Weight", "value": "500g" },
+                        { "key": "poids", "value": "250g" },
+                        { "key": "Volume", "value": "200ml/6.76 fl oz" },
                         { "key": "Dimensions", "value": "10x10x5 cm" },
-                        { "key": "Material", "value": "High-quality plastic" }
+                        { "key": "Material", "value": "plastic" }
                     ]
                 },
                 {
-                    "title": "Technical Details",
+                    "title": "Details sur le contenu",
                     "properties": [
-                        { "key": "Power Source", "value": "USB-C" },
-                        { "key": "Battery Life", "value": "Up to 8 hours" }
+                        { "key": "noix de Damas et coco", "value": "86 mg" },
+                        { "key": "pépins de raisin", "value": "86 mg" },
+                        { "key": "huile d'argan", "value": "86 mg" },
+                        { "key": "Protein", "value": "86 mg" },
+                        { "key": "huile de sésame", "value": "86 mg" },
+                        { "key": "carbohydrates", "value": "86 mg" },
+                        { "key": "sodium", "value": "86 mg" }
+
                     ]
                 }
             ]
         },
         "productOptions": [
             {
-                "id": "color",
-                "name": "Color",
+                "id": "delivery",
+                "name": "Delivery",
                 "required": false,
                 "options": [
-                    { "id": "red", "label": "Red", "price": 65, "available": true },
-                    { "id": "blue", "label": "Blue", "price": 65, "available": true },
-                    { "id": "green", "label": "Green", "price": 65, "available": false }
+                    { "id": "in-store", "label": "In-Store", "price": 65.0, "available": true },
+                    { "id": "home-delivery", "label": "Home Delivery", "price": 65.0, "available": true }
                 ] 
             },
             {
-                "id": "storage",
-                "name": "Storage",
+                "id": "Volume",
+                "name": "Volume",
+                "required": false,
                 "options": [
-                    { "id": "32gb", "label": "32 GB", "price": 65, "available": true },
-                    { "id": "64gb", "label": "64 GB", "price": 65, "available": true }
+                    { "id": "100ml", "label": "100 ml", "price": 65.0, "available": true },
+                    { "id": "50ml", "label": "50 ml", "price": 65.0, "available": false }
                 ]
             }
         ]
@@ -314,75 +340,78 @@
                     "name": "Écran solaire spf 50 kukala",
                     "path": "/shop/ecran_solaire_spf_50",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 75.0, "currency": "USD" }
+                    "defaultVariant": { "price": 75.0, "currency": " DHM" }
                 },
                 {
                     "name": "Hydratation profonde",
                     "path": "/shop/hydratation_profonde",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 65.0, "currency": "EUR" }
+                    "defaultVariant": { "price": 65.0, "currency": " DHM" }
                 },
                 {
                     "name": "huile hydratante Glamour Doré",
                     "path": "/shop/huile_hydratante_glamour_dore",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 65.0, "currency": "USD" }
+                    "defaultVariant": { "price": 65.0, "currency": " DHM" }
                 }
             ]
         },
-        "summary": "O cuidado nutritivo aue transforma a sua dele. proporcionando um brilho dourado e saudave",
+        "summary": "Le Trio parfait pour une peau douce et hydratée ✨formulées à base d’ingrédients naturels, nourrissent la peau en profondeur tout en laissant un fini soyeux 🌿 Adopte ce combo dans ta routine quotidienne",
         
         "body": {
             "paragraphs": [
                 {
-                    "title": { "text": "Introduction to the Mock Product" },
-                    "text": "Il existe des rituels qui traversent le temps. Au Maroc, l'huile n'est pas un produit — c'est un geste. Transmis, raffiné, quotidien. Kukala est née à Marrakech, au cœur d'une ville où le soin de la peau est une culture millénaire. Une ville où les souks respirent l'argan, le savon beldi et les épices — où prendre soin de soi n'a jamais été un luxe, mais une évidence. De cette terre, nous avons gardé l'essentiel : des huiles naturelles rigoureusement sélectionnées, formulées au sein d'un laboratoire national marocain. Chaque produit est pensé pour s'intégrer dans votre quotidien — homme ou femme — sans e ort, sans superflu. Une hydratation profonde. Des ingrédients qui ont fait leurs preuves. Une approche épurée du soin, portée par l'héritage d'une ville d'exception. Kukala. L'essentiel, à l'état pur.",
-                    "images": [
-                        { "url": "this sould come from supabase", "altText": "imagem do produto" },
-                        { "url": "this sould come from supabase", "altText": "imagem do produto" }
-                    ],
+                    "title": { "text": "Le meilluer combo que soit" },
+                    "text": "Le Trio parfait pour une peau douce et hydratée ✨formulées à base d’ingrédients naturels, nourrissent la peau en profondeur tout en laissant un fini soyeux 🌿 Adopte ce combo dans ta routine quotidienne.",
                     "videos": [
                         { "playlist": "mock-video-playlist-1", "autoplay": false }
                     ]
                 }
             ]
         },
-        "table": {
+          "table": {
             "sections": [
                 {
-                    "title": "General Specifications",
+                    "title": "Details sur l'emballage",
                     "properties": [
-                        { "key": "Weight", "value": "500g" },
+                        { "key": "poids", "value": "250g" },
+                        { "key": "Volume", "value": "200ml/6.76 fl oz" },
                         { "key": "Dimensions", "value": "10x10x5 cm" },
-                        { "key": "Material", "value": "High-quality plastic" }
+                        { "key": "Material", "value": "plastic" }
                     ]
                 },
                 {
-                    "title": "Technical Details",
+                    "title": "Details sur le contenu",
                     "properties": [
-                        { "key": "Power Source", "value": "USB-C" },
-                        { "key": "Battery Life", "value": "Up to 8 hours" }
+                        { "key": "noix de Damas et coco", "value": "86 mg" },
+                        { "key": "pépins de raisin", "value": "86 mg" },
+                        { "key": "huile d'argan", "value": "86 mg" },
+                        { "key": "Protein", "value": "86 mg" },
+                        { "key": "huile de sésame", "value": "86 mg" },
+                        { "key": "carbohydrates", "value": "86 mg" },
+                        { "key": "sodium", "value": "86 mg" }
+
                     ]
                 }
             ]
         },
-        "productOptions": [
+         "productOptions": [
             {
-                "id": "color",
-                "name": "Color",
+                "id": "delivery",
+                "name": "Delivery",
                 "required": false,
                 "options": [
-                    { "id": "red", "label": "Red", "price": 150, "available": true },
-                    { "id": "blue", "label": "Blue", "price": 150, "available": true },
-                    { "id": "green", "label": "Green", "price": 150, "available": false }
+                    { "id": "in-store", "label": "In-Store", "price": 150.0, "available": true },
+                    { "id": "home-delivery", "label": "Home Delivery", "price": 150.0, "available": true }
                 ] 
             },
             {
-                "id": "storage",
-                "name": "Storage",
+                "id": "Volume",
+                "name": "Volume",
+                "required": false,
                 "options": [
-                    { "id": "32gb", "label": "32 GB", "price": 150, "available": true },
-                    { "id": "64gb", "label": "64 GB", "price": 150, "available": true }
+                    { "id": "100ml", "label": "100 ml", "price": 150.0, "available": true },
+                    { "id": "50ml", "label": "50 ml", "price": 150.0, "available": false }
                 ]
             }
         ]
@@ -411,75 +440,78 @@
                     "name": "Écran solaire spf 50 kukala",
                     "path": "/shop/ecran_solaire_spf_50",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 75.0, "currency": "USD" }
+                    "defaultVariant": { "price": 75.0, "currency": " DHM" }
                 },
                 {
                     "name": "Hydratation profonde",
                     "path": "/shop/hydratation_profonde",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 65.0, "currency": "EUR" }
+                    "defaultVariant": { "price": 65.0, "currency": " DHM" }
                 },
                 {
                     "name": "huile hydratante Glamour Doré",
                     "path": "/shop/huile_hydratante_glamour_dore",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 65.0, "currency": "USD" }
+                    "defaultVariant": { "price": 65.0, "currency": " DHM" }
                 }
             ]
         },
-        "summary": "O cuidado nutritivo aue transforma a sua dele. proporcionando um brilho dourado e saudave",
+        "summary": "Le Trio parfait pour une peau douce et hydratée ✨formulées à base d’ingrédients naturels, nourrissent la peau en profondeur tout en laissant un fini soyeux 🌿 Adopte ce combo dans ta routine quotidienne",
         
         "body": {
             "paragraphs": [
                 {
-                    "title": { "text": "Introduction to the Mock Product" },
-                    "text": "Il existe des rituels qui traversent le temps. Au Maroc, l'huile n'est pas un produit — c'est un geste. Transmis, raffiné, quotidien. Kukala est née à Marrakech, au cœur d'une ville où le soin de la peau est une culture millénaire. Une ville où les souks respirent l'argan, le savon beldi et les épices — où prendre soin de soi n'a jamais été un luxe, mais une évidence. De cette terre, nous avons gardé l'essentiel : des huiles naturelles rigoureusement sélectionnées, formulées au sein d'un laboratoire national marocain. Chaque produit est pensé pour s'intégrer dans votre quotidien — homme ou femme — sans e ort, sans superflu. Une hydratation profonde. Des ingrédients qui ont fait leurs preuves. Une approche épurée du soin, portée par l'héritage d'une ville d'exception. Kukala. L'essentiel, à l'état pur.",
-                    "images": [
-                        { "url": "this sould come from supabase", "altText": "imagem do produto" },
-                        { "url": "this sould come from supabase", "altText": "imagem do produto" }
-                    ],
+                    "title": { "text": "Le meilluer combo que soit" },
+                    "text": "Le Trio parfait pour une peau douce et hydratée ✨formulées à base d’ingrédients naturels, nourrissent la peau en profondeur tout en laissant un fini soyeux 🌿 Adopte ce combo dans ta routine quotidienne.",
                     "videos": [
                         { "playlist": "mock-video-playlist-1", "autoplay": false }
                     ]
                 }
             ]
         },
-        "table": {
+          "table": {
             "sections": [
                 {
-                    "title": "General Specifications",
+                    "title": "Details sur l'emballage",
                     "properties": [
-                        { "key": "Weight", "value": "500g" },
+                        { "key": "poids", "value": "250g" },
+                        { "key": "Volume", "value": "200ml/6.76 fl oz" },
                         { "key": "Dimensions", "value": "10x10x5 cm" },
-                        { "key": "Material", "value": "High-quality plastic" }
+                        { "key": "Material", "value": "plastic" }
                     ]
                 },
                 {
-                    "title": "Technical Details",
+                    "title": "Details sur le contenu",
                     "properties": [
-                        { "key": "Power Source", "value": "USB-C" },
-                        { "key": "Battery Life", "value": "Up to 8 hours" }
+                        { "key": "noix de Damas et coco", "value": "86 mg" },
+                        { "key": "pépins de raisin", "value": "86 mg" },
+                        { "key": "huile d'argan", "value": "86 mg" },
+                        { "key": "Protein", "value": "86 mg" },
+                        { "key": "huile de sésame", "value": "86 mg" },
+                        { "key": "carbohydrates", "value": "86 mg" },
+                        { "key": "sodium", "value": "86 mg" }
+
                     ]
                 }
             ]
         },
-        "productOptions": [
+         "productOptions": [
             {
-                "id": "color",
-                "name": "Color",
+                "id": "delivery",
+                "name": "Delivery",
                 "required": false,
                 "options": [
-                    { "id": "red", "label": "Red", "price": 150, "available": true },
-                    { "id": "blue", "label": "Blue", "price": 150, "available": true },
-                    { "id": "green", "label": "Green", "price": 150, "available": false }
+                    { "id": "in-store", "label": "In-Store", "price": 150.0, "available": true },
+                    { "id": "home-delivery", "label": "Home Delivery", "price": 150.0, "available": true }
                 ] 
             },
             {
-                "id": "storage",
-                "name": "Storage",
+                "id": "Volume",
+                "name": "Volume",
+                "required": false,
                 "options": [
-                    { "id": "32gb", "label": "32 GB", "price": 150, "available": true },
-                    { "id": "64gb", "label": "64 GB", "price": 150, "available": true }
+                    { "id": "100ml", "label": "100 ml", "price": 150.0, "available": true },
+                    { "id": "50ml", "label": "50 ml", "price": 150.0, "available": false }
                 ]
             }
         ]
@@ -508,29 +540,29 @@
                     "name": "Écran solaire spf 50 kukala",
                     "path": "/shop/ecran_solaire_spf_50",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 75.0, "currency": "USD" }
+                    "defaultVariant": { "price": 75.0, "currency": " DHM" }
                 },
                 {
                     "name": "Hydratation profonde",
                     "path": "/shop/hydratation_profonde",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 65.0, "currency": "EUR" }
+                    "defaultVariant": { "price": 65.0, "currency": " DHM" }
                 },
                 {
                     "name": "huile hydratante Glamour Doré",
                     "path": "/shop/huile_hydratante_glamour_dore",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 65.0, "currency": "USD" }
+                    "defaultVariant": { "price": 65.0, "currency": " DHM" }
                 }
             ]
         },
-        "summary": "O cuidado nutritivo aue transforma a sua dele. proporcionando um brilho dourado e saudave",
+        "summary": "payez moins pour plus de produits, profitez de notre offre spéciale sur le combo 3 Écran solaire spf 50 kukala. Obtenez trois produits à un prix réduit et assurez une protection solaire optimale pour toute la famille.",
         
         "body": {
             "paragraphs": [
                 {
-                    "title": { "text": "Introduction to the Mock Product" },
-                    "text": "Il existe des rituels qui traversent le temps. Au Maroc, l'huile n'est pas un produit — c'est un geste. Transmis, raffiné, quotidien. Kukala est née à Marrakech, au cœur d'une ville où le soin de la peau est une culture millénaire. Une ville où les souks respirent l'argan, le savon beldi et les épices — où prendre soin de soi n'a jamais été un luxe, mais une évidence. De cette terre, nous avons gardé l'essentiel : des huiles naturelles rigoureusement sélectionnées, formulées au sein d'un laboratoire national marocain. Chaque produit est pensé pour s'intégrer dans votre quotidien — homme ou femme — sans e ort, sans superflu. Une hydratation profonde. Des ingrédients qui ont fait leurs preuves. Une approche épurée du soin, portée par l'héritage d'une ville d'exception. Kukala. L'essentiel, à l'état pur.",
+                    "title": { "text": "profitez de ce solde" },
+                    "text": "Profitez de notre offre spéciale sur le combo 3 Écran solaire spf 50 kukala. Obtenez trois produits à un prix réduit et assurez une protection solaire optimale pour toute la famille.",
                     "images": [
                         { "url": "this sould come from supabase", "altText": "imagem do produto" },
                         { "url": "this sould come from supabase", "altText": "imagem do produto" }
@@ -541,42 +573,50 @@
                 }
             ]
         },
-        "table": {
+       
+          "table": {
             "sections": [
                 {
-                    "title": "General Specifications",
+                    "title": "Details sur l'emballage",
                     "properties": [
-                        { "key": "Weight", "value": "500g" },
+                        { "key": "poids", "value": "250g" },
+                        { "key": "Volume", "value": "200ml/6.76 fl oz" },
                         { "key": "Dimensions", "value": "10x10x5 cm" },
-                        { "key": "Material", "value": "High-quality plastic" }
+                        { "key": "Material", "value": "plastic" }
                     ]
                 },
                 {
-                    "title": "Technical Details",
+                    "title": "Details sur le contenu",
                     "properties": [
-                        { "key": "Power Source", "value": "USB-C" },
-                        { "key": "Battery Life", "value": "Up to 8 hours" }
+                        { "key": "noix de Damas et coco", "value": "86 mg" },
+                        { "key": "pépins de raisin", "value": "86 mg" },
+                        { "key": "huile d'argan", "value": "86 mg" },
+                        { "key": "Protein", "value": "86 mg" },
+                        { "key": "huile de sésame", "value": "86 mg" },
+                        { "key": "carbohydrates", "value": "86 mg" },
+                        { "key": "sodium", "value": "86 mg" }
+
                     ]
                 }
             ]
         },
-        "productOptions": [
+         "productOptions": [
             {
-                "id": "color",
-                "name": "Color",
+                "id": "delivery",
+                "name": "Delivery",
                 "required": false,
                 "options": [
-                    { "id": "red", "label": "Red", "price": 65, "available": true },
-                    { "id": "blue", "label": "Blue", "price": 65, "available": true },
-                    { "id": "green", "label": "Green", "price": 65, "available": false }
+                    { "id": "in-store", "label": "In-Store", "price": 150.0, "available": true },
+                    { "id": "home-delivery", "label": "Home Delivery", "price": 150.0, "available": true }
                 ] 
             },
             {
-                "id": "storage",
-                "name": "Storage",
+                "id": "Volume",
+                "name": "Volume",
+                "required": false,
                 "options": [
-                    { "id": "32gb", "label": "32 GB", "price": 65, "available": true },
-                    { "id": "64gb", "label": "64 GB", "price": 65, "available": true }
+                    { "id": "100ml", "label": "100 ml", "price": 150.0, "available": true },
+                    { "id": "50ml", "label": "50 ml", "price": 150.0, "available": false }
                 ]
             }
         ]
@@ -605,23 +645,23 @@
                     "name": "Écran solaire spf 50 kukala",
                     "path": "/shop/ecran_solaire_spf_50",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 75.0, "currency": "USD" }
+                    "defaultVariant": { "price": 75.0, "currency": " DHM" }
                 },
                 {
                     "name": "Hydratation profonde",
                     "path": "/shop/hydratation_profonde",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 65.0, "currency": "EUR" }
+                    "defaultVariant": { "price": 65.0, "currency": " DHM" }
                 },
                 {
                     "name": "huile hydratante Glamour Doré",
                     "path": "/shop/huile_hydratante_glamour_dore",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 65.0, "currency": "USD" }
+                    "defaultVariant": { "price": 65.0, "currency": " DHM" }
                 }
             ]
         },
-        "summary": "O cuidado nutritivo aue transforma a sua dele. proporcionando um brilho dourado e saudave",
+        "summary": "Profitez de notre offre spéciale sur le combo 3 Hydratation profonde. Obtenez trois produits à un prix réduit et assurez une hydratation optimale pour toute la famille.",
         
         "body": {
             "paragraphs": [
@@ -702,29 +742,28 @@
                     "name": "Écran solaire spf 50 kukala",
                     "path": "/shop/ecran_solaire_spf_50",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 75.0, "currency": "USD" }
+                    "defaultVariant": { "price": 75.0, "currency": " DHM" }
                 },
                 {
                     "name": "Hydratation profonde",
                     "path": "/shop/hydratation_profonde",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 65.0, "currency": "EUR" }
+                    "defaultVariant": { "price": 65.0, "currency": " DHM" }
                 },
                 {
                     "name": "huile hydratante Glamour Doré",
                     "path": "/shop/huile_hydratante_glamour_dore",
                     "topics": [{ "name": "new" }, { "name": "promo" }],
-                    "defaultVariant": { "price": 65.0, "currency": "USD" }
+                    "defaultVariant": { "price": 65.0, "currency": " DHM" }
                 }
             ]
         },
-        "summary": "O cuidado nutritivo aue transforma a sua dele. proporcionando um brilho dourado e saudave",
-        
+        "summary": "Profitez de notre offre spéciale sur le combo 3 Hydratation profonde. Obtenez trois produits à un prix réduit et assurez une hydratation optimale pour toute la famille.",
         "body": {
             "paragraphs": [
                 {
-                    "title": { "text": "Introduction to the Mock Product" },
-                    "text": "Il existe des rituels qui traversent le temps. Au Maroc, l'huile n'est pas un produit — c'est un geste. Transmis, raffiné, quotidien. Kukala est née à Marrakech, au cœur d'une ville où le soin de la peau est une culture millénaire. Une ville où les souks respirent l'argan, le savon beldi et les épices — où prendre soin de soi n'a jamais été un luxe, mais une évidence. De cette terre, nous avons gardé l'essentiel : des huiles naturelles rigoureusement sélectionnées, formulées au sein d'un laboratoire national marocain. Chaque produit est pensé pour s'intégrer dans votre quotidien — homme ou femme — sans e ort, sans superflu. Une hydratation profonde. Des ingrédients qui ont fait leurs preuves. Une approche épurée du soin, portée par l'héritage d'une ville d'exception. Kukala. L'essentiel, à l'état pur.",
+                    "title": { "text": "profitez de ce solde" },
+                    "text": "Profitez de notre offre spéciale sur le combo 3 Hydratation profonde. Obtenez trois produits à un prix réduit et assurez une hydratation optimale pour toute la famille.",
                     "images": [
                         { "url": "this sould come from supabase", "altText": "imagem do produto" },
                         { "url": "this sould come from supabase", "altText": "imagem do produto" }
@@ -735,42 +774,50 @@
                 }
             ]
         },
-        "table": {
+       
+          "table": {
             "sections": [
                 {
-                    "title": "General Specifications",
+                    "title": "Details sur l'emballage",
                     "properties": [
-                        { "key": "Weight", "value": "500g" },
+                        { "key": "poids", "value": "250g" },
+                        { "key": "Volume", "value": "200ml/6.76 fl oz" },
                         { "key": "Dimensions", "value": "10x10x5 cm" },
-                        { "key": "Material", "value": "High-quality plastic" }
+                        { "key": "Material", "value": "plastic" }
                     ]
                 },
                 {
-                    "title": "Technical Details",
+                    "title": "Details sur le contenu",
                     "properties": [
-                        { "key": "Power Source", "value": "USB-C" },
-                        { "key": "Battery Life", "value": "Up to 8 hours" }
+                        { "key": "noix de Damas et coco", "value": "86 mg" },
+                        { "key": "pépins de raisin", "value": "86 mg" },
+                        { "key": "huile d'argan", "value": "86 mg" },
+                        { "key": "Protein", "value": "86 mg" },
+                        { "key": "huile de sésame", "value": "86 mg" },
+                        { "key": "carbohydrates", "value": "86 mg" },
+                        { "key": "sodium", "value": "86 mg" }
+
                     ]
                 }
             ]
         },
-        "productOptions": [
+         "productOptions": [
             {
-                "id": "color",
-                "name": "Color",
+                "id": "delivery",
+                "name": "Delivery",
                 "required": false,
                 "options": [
-                    { "id": "red", "label": "Red", "price": 150, "available": true },
-                    { "id": "blue", "label": "Blue", "price": 150, "available": true },
-                    { "id": "green", "label": "Green", "price": 150, "available": false }
+                    { "id": "in-store", "label": "In-Store", "price": 150.0, "available": true },
+                    { "id": "home-delivery", "label": "Home Delivery", "price": 150.0, "available": true }
                 ] 
             },
             {
-                "id": "storage",
-                "name": "Storage",
+                "id": "Volume",
+                "name": "Volume",
+                "required": false,
                 "options": [
-                    { "id": "32gb", "label": "32 GB", "price": 150, "available": true },
-                    { "id": "64gb", "label": "64 GB", "price": 150, "available": true }
+                    { "id": "100ml", "label": "100 ml", "price": 150.0, "available": true },
+                    { "id": "50ml", "label": "50 ml", "price": 150.0, "available": false }
                 ]
             }
         ]

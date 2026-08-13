@@ -84,7 +84,7 @@ export function VariantSelector({
                     onChange(group.id, option)
                   }
                   className={clsx(
-                    "rounded-md border px-4 py-2 transition",
+                    "flex rounded-xs border-2 px-4 py-2 transition",
                     active
                       ? "border-[#373567] bg-white"
                       : "border-transparent bg-white",
@@ -97,8 +97,8 @@ export function VariantSelector({
                   </div>
 
                   {option.price > 0 && (
-                    <div className="text-xs text-gray-500">
-                      +${option.price}
+                    <div className=" text-xs text-gray-500">
+                      +{option.price}
                     </div>
                   )}
                 </button>

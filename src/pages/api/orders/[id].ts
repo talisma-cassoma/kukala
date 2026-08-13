@@ -33,6 +33,8 @@ export const GET: APIRoute = async ({ params }) => {
             },
         });
 
+        //console.log("Fetched order from DB:", JSON.stringify(order));
+        
         if (!order) {
             return new Response(JSON.stringify({ message: 'Order not found' }), {
                 status: 404,
@@ -44,7 +46,16 @@ export const GET: APIRoute = async ({ params }) => {
         const response = {
             id: order?.id,
             status: order?.status,
-            email: order?.email,
+            customer: {
+                firstName: order?.firstName,
+                lastName: order?.lastName,
+                email: order?.email,
+                phone: order?.phone,
+                street: order?.street,
+                city: order?.city,
+                postalCode: order?.postalCode,
+            },
+
             total: {
                 net: order?.totalNet,
                 gross: order?.totalGross,
@@ -53,16 +64,17 @@ export const GET: APIRoute = async ({ params }) => {
             createdAt: order?.createdAt,
             cart: order?.items.map(item => ({
                 quantity: item.quantity,
+                name: item.name, // Add the name directly to the cart item
                 price: {
                     net: item.unitPrice,
                     gross: item.unitPrice, // Assuming net ~ gross for now
                 },
-                product: {
-                    id: item.productId,
-                    name: item.name,
-                    path: item.product?.path,
-                    image: item.product?.images?.[0] ?? null,
-                },
+                // product: {
+                //     id: item.productId,
+                //     name: item.name,
+                //     path: item.product?.path,
+                //     image: item.product?.images?.[0] ?? null,
+                // },
             })),
         };
 
