@@ -1,16 +1,16 @@
 import { defineConfig } from 'astro/config';
 import react from "@astrojs/react";
-import vercel from "@astrojs/vercel";
+import netlify from "@astrojs/netlify";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   output: "server",
-  adapter: vercel(),
+  adapter: netlify(),
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()],
   },
   resolve: {
-    tsconfigPaths: true // Forces Vite & Rolldown to read your tsconfig.json paths
+    tsconfigPaths: true
   }
 });
