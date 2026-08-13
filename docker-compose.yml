@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  astro-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PUBLIC_SUPABASE_URL: https://rqbegbvangiegbnrgxrv.supabase.co
+    ports:
+      - "4321:4321"
+    environment:
+      - NODE_ENV=production
+      - PUBLIC_SUPABASE_URL=https://rqbegbvangiegbnrgxrv.supabase.co
+      # Adicione outras variáveis de ambiente necessárias aqui

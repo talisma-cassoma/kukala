@@ -1,12 +1,8 @@
 import type { APIRoute } from 'astro';
 import { PrismaClient } from '@prisma/client';
-import { createClient } from '@supabase/supabase-js';
+import { getSupabaseAdmin } from '@/lib/supabase';
 
 const prisma = new PrismaClient();
-const supabaseAdmin = createClient(
-  import.meta.env.PUBLIC_SUPABASE_URL,
-  import.meta.env.SUPABASE_SERVICE_ROLE_KEY
-);
 
 // IMPORTANT: Secure your webhook with a secret token.
 const WEBHOOK_SECRET = import.meta.env.WEBHOOK_SECRET || 'YOUR_SECRET_TOKEN';
@@ -33,6 +29,7 @@ export const POST: APIRoute = async ({ request }) => {
 
         // 3. Handle Image Uploads (if any)
         const files = formData.getAll('images') as File[];
+        const supabaseAdmin = getSupabaseAdmin();
         const imageUrls = await Promise.all(
             files.map(async (file, index) => {
                 const safeName = `${productPayload.slug}-${Date.now()}-${index}-${file.name.replace(/\s+/g, '-')}`;

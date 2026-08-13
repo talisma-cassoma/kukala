@@ -232,8 +232,8 @@ const catalogx: ProductsType = {
     title="Kulala shop"
     description="One stop shop for buying cosmetxic & personal care online."
 >
-    <div class="py-10 lg:container mx-auto w-full md:px-0 px-3">
-        <Kits products={catalog} />
-        <Products elements={{ children: catalog.retailProducts }} />
-    </div>
+	<div class="py-10 lg:container mx-auto w-full md:px-0 px-3">
+		<Kits products={catalog ?? { comboboxes: [], discountedBundles: [], retailProducts: [] }} />
+		<Products elements={{ children: catalog?.retailProducts ?? [] }} />
+	</div>
 </Layout>
