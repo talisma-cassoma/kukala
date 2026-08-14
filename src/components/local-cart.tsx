@@ -42,7 +42,7 @@ export const LocalCart = () => {
                             </div>
                         </div>
                         <div className='flex gap-20'>
-                        <p>${item.price * item.quantity}</p>
+                        <p>{item.price * item.quantity} DH</p>
                          <button
                     className="bg-background2 px-4 rounded-xl"
                     onClick={() => deleteItemOnCart(item)}
@@ -54,7 +54,7 @@ export const LocalCart = () => {
                 ))}
                 <div className="flex justify-between items-center border-t-2 border-text pt-4">
                     <p className="font-semibold text-xl">Total</p>
-                    <p>${total}</p>
+                    <p>{total} DH</p>
                 </div>
                 <a
                     href="/checkout"

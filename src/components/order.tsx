@@ -20,22 +20,22 @@ export const Order = ({ order }: OrderProps) => {
                                         {item.name} x {item.quantity}
                                     </p>
                                 </div>
-                                <p>${item.price.gross * item.quantity}</p>
+                                <p>{item.price.gross * item.quantity} DH</p>
                             </div>
                         );
                     })}
                     <div className="flex flex-col gap-3 border-t-2 pt-5">
                         <div className="flex justify-between">
                             <p>Subtotal</p>
-                            <p>${total.gross}</p>
+                            <p>{total.gross} DH</p>
                         </div>
                         <div className="flex justify-between">
                             <p>Tax</p>
-                            <p>${(total.net - total.gross).toFixed(2)}</p>
+                            <p>{(total.net - total.gross).toFixed(2)} DH</p>
                         </div>
                         <div className="flex justify-between">
                             <p className="font-bold">Total</p>
-                            <p>${total.net}</p>
+                            <p>{total.net} DH</p>
                         </div>
                     </div>
                 </div>
@@ -58,8 +58,8 @@ export const Order = ({ order }: OrderProps) => {
                                 .join("\n");
 
                             const message = `New Order Details:\n\nCustomer: ${customer?.firstName} ${customer?.lastName} (${customer?.email})\nAddress: ${customer?.street}, ${customer?.city
-                                }, ${customer?.postalCode}\n\nItems:\n${itemsSummary}\n\nTotal: $${total.gross
-                                }`;
+                                }, ${customer?.postalCode}\n\nItems:\n${itemsSummary}\n\nTotal: ${total.gross
+                                } DH`;
 
                             // 3. Encode the message and create the WhatsApp URL
                             const whatsappNumber = "212613363308"; // The number without '+'

@@ -16,7 +16,7 @@ export const ProductCard = ({ product }: { product?: ProductType | null }) => {
                 <div className="flex justify-between items-start">
                     <TopicsDisplayer topics={product.topics} />
                     <p className="self-end font-semibold text-text">
-                        ${price}
+                        {price} DH
                     </p>
                 </div>
                 <div className="flex justify-center items-center box-border overflow-hidden w-full h-56 rounded-xl">

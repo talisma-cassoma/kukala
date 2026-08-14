@@ -14,7 +14,7 @@ export function DiscountedBundles({ cell }: any) {
       <div className="flex flex-col justify-between h-full gap-4">
         <div className="flex justify-between items-start">
           <TopicsDisplayer topics={product?.topics} />
-          <p className="font-bold text-text">${price}</p>
+          <p className="font-bold text-text">{price} DH</p>
         </div>
 
         <div className="flex items-center justify-center min-h-40 w-full">

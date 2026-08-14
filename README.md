@@ -1,14 +1,11 @@
-# AstroJS Boilerplate
+# AstroJS eCommerce Project
 
----
+This project is a minimal eCommerce boilerplate built using AstroJS, with a custom backend powered by Prisma and Supabase.
 
-This repository is what we call a "subtree split": a read-only copy of one directory of the main repository. If you want to report or contribute, you should do it on the main repository: https://github.com/CrystallizeAPI/boilerplates.
-
----
-
-The product storytelling boilerplate is a minimal eCommerce boilerplate built using AstroJS and Crystallize. You can also check out the [live demo](https://dounot.milliseconds.live/) (deploy it) of this boilerplate.
+> **Note:** This project was originally based on the Crystallize product storytelling boilerplate, but has since been migrated to use a custom backend.
 
 ![dounut-astro-local](https://github.com/CrystallizeAPI/boilerplates/assets/26195876/dfe351b9-69dc-4e9e-947b-e89ff07151a7)
+
 
 
 
@@ -52,19 +49,19 @@ This section provides you with a better understanding of the folder structure.
 
 **src/components**
 
-Contains all the components used throughout the application
+Contains all the Astro/React components used throughout the application.
 
-**src/use-cases**
+**src/lib**
 
-Includes the GraphQL queries and mutations used to communicate with Crystallize.
+Includes server-side and client-side helpers, such as the Supabase client initializers.
 
 **src/pages**
 
-Has all the individual pages the website contains.
+Has all the individual pages and API routes the website contains.
 
 ## Editing the theme
 
-All the theme related information can be edited in the **tailwind.config.js** file. This includes the colors, spacing, typography used throughout the application.
+All the theme-related information can be edited in the **tailwind.config.mjs** file. This includes the colors, spacing, and typography used throughout the application.
 
 ## Editing the components
 
@@ -72,9 +69,7 @@ Components can be edited by heading over to the **components** folder in **src.*
 
 ### Frontpage
 
-The frontpage contains a grid and it is fetching all the grid related information (including the layout) from Crystallize. You can directly edit the grid in Crystallize for changes to take effect. Editing the styling such as the background and typography can be done in the **grid-item** component.
-
-![frontpage-dounut-astro-grid](https://github.com/CrystallizeAPI/boilerplates/assets/26195876/80bebeb5-c2eb-4a96-9721-392bac109e17)
+The frontpage contains a grid of products fetched from the `/pages/api/products.ts` endpoint. The data is managed via a Prisma schema.
 
 ### Product
 
@@ -83,7 +78,3 @@ Individual product pages are using two components - one is the **product** compo
 ### Cart, Checkout, and Confirmation
 
 The basket, checkout, and the confirmation pages can be edited in their respective files located in the pages folder.
-
-
-> Please note that this boilerplate does not contain payment integrations such as Stripe. It is using a dummy payment method.
->

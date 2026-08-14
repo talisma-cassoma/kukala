@@ -45,7 +45,7 @@ export const RelatedProducts = () => {
                                 </div>
                             ))}
                         </div>
-                        <div className="font-bold text-text">${item.price}</div>
+                        <div className="font-bold text-text">{item.price} DH</div>
                     </div>
                     <div className="flex justify-center items-center h-48 w-full rounded-xl overflow-hidden my-2"> 
                         {item.image?.url && (

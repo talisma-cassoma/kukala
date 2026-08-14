@@ -17,12 +17,6 @@ importers:
       '@astrojs/react':
         specifier: ^6.0.2
         version: 6.0.2(@types/node@26.1.2)(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(esbuild@0.28.1)(jiti@2.7.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(yaml@2.9.0)
-      '@crystallize/js-api-client':
-        specifier: ^1.12.2
-        version: 1.13.1
-      '@crystallize/reactjs-components':
-        specifier: ^2.0.0
-        version: 2.1.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@fontsource-variable/inter':
         specifier: ^5.3.0
         version: 5.3.0
@@ -443,15 +437,6 @@ packages:
   '@colors/colors@1.6.0':
     resolution: {integrity: sha512-Ir+AOibqzrIsL6ajt3Rz3LskB7OiMVHqltZmspbW/TJuTVuyOMirVqAkjfY6JISiLHgyNqicAC8AyHHGzNd/dA==}
     engines: {node: '>=0.1.90'}
-
-  '@crystallize/js-api-client@1.13.1':
-    resolution: {integrity: sha512-vg0iywIL9rGXZtkXSGvjGGkpTGYy5npa57e7ZANiH5POGnrPdSrS/KY0YPXEpgVn+jjVm0pe8vxEOj4FemQKvw==}
-
-  '@crystallize/reactjs-components@2.1.0':
-    resolution: {integrity: sha512-OKLYiHhhsxf8OO1Tv/5JGIXTcrb7jj+ljsO60/XiZE38KUJ14qnhI30yFuv8G6Z9s6KFtnhLpTDweeTdswtR2Q==}
-    peerDependencies:
-      react: '*'
-      react-dom: '*'
 
   '@dabh/diagnostics@2.0.8':
     resolution: {integrity: sha512-R4MSXTVnuMzGD7bzHdW2ZhhdPC/igELENcq5IjEverBvq5hn1SXCWcsi6eSsdWP0/Ur+SItRRjAktmdoX/8R/Q==}
@@ -4301,9 +4286,6 @@ packages:
   json-schema-typed@8.0.2:
     resolution: {integrity: sha512-fQhoXdcvc3V28x7C7BMs4P5+kNlgUURe2jmUT1T//oBRMDrqy1QPelJimwZGo7Hg9VPV3EQV5Bnq4hbFy2vetA==}
 
-  json-to-graphql-query@2.3.0:
-    resolution: {integrity: sha512-khZtaLLQ0HllFec+t89ZWduUZ0rmne/OpRm/39hyZUWDHNx9Yk4DgQzDtMeqd8zj2g5opBD4GHrdtH0JzKnN2g==}
-
   json5@2.2.3:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
@@ -4657,9 +4639,6 @@ packages:
   mime-db@1.54.0:
     resolution: {integrity: sha512-aU5EJuIN2WDemCcAp2vFBfp/m4EAhWJnUNSSw0ixs7/kXbd6Pg64EmwJkNdFhB8aWt1sH2CTXrLxo/iAGV3oPQ==}
     engines: {node: '>= 0.6'}
-
-  mime-lite@1.0.3:
-    resolution: {integrity: sha512-V85l97zJSTG8FEvmdTlmNYb0UMrVBwvRjw7bWTf/aT6KjFwtz3iTz8D2tuFIp7lwiaO2C5ecnrEmSkkMRCrqVw==}
 
   mime-types@3.0.2:
     resolution: {integrity: sha512-Lbgzdk0h4juoQ9fCKXW4by0UJqj+nOOrI9MJ1sSj4nI8aI2eo1qmvQEie4VD1glsS250n15LsWsYtCugiStS5A==}
@@ -6804,26 +6783,6 @@ snapshots:
       sisteransi: 1.0.5
 
   '@colors/colors@1.6.0': {}
-
-  '@crystallize/js-api-client@1.13.1':
-    dependencies:
-      dotenv: 16.6.1
-      json-to-graphql-query: 2.3.0
-      mime-lite: 1.0.3
-      node-fetch: 2.7.0
-      tiny-invariant: 1.3.3
-      typescript: 5.9.3
-      zod: 3.25.76
-    transitivePeerDependencies:
-      - encoding
-
-  '@crystallize/reactjs-components@2.1.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
-    dependencies:
-      '@crystallize/js-api-client': 1.13.1
-      react: 19.2.8
-      react-dom: 19.2.8(react@19.2.8)
-    transitivePeerDependencies:
-      - encoding
 
   '@dabh/diagnostics@2.0.8':
     dependencies:
@@ -10872,8 +10831,6 @@ snapshots:
 
   json-schema-typed@8.0.2: {}
 
-  json-to-graphql-query@2.3.0: {}
-
   json5@2.2.3: {}
 
   jsonc-parser@2.3.1: {}
@@ -11183,8 +11140,6 @@ snapshots:
       picomatch: 2.3.2
 
   mime-db@1.54.0: {}
-
-  mime-lite@1.0.3: {}
 
   mime-types@3.0.2:
     dependencies:

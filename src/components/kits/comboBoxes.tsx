@@ -15,7 +15,7 @@ export function ComboBoxes({ cell }: any) {
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 wrap-break-words break-words max-w-full ">
               {product.name}
             </h2>
-            <p className="text-base sm:text-lg font-semibold mt-2">${price}</p>
+            <p className="text-base sm:text-lg font-semibold mt-2">{price} DH</p>
           </div>
           <div >
            <TopicsDisplayer topics={product?.topics}  />
