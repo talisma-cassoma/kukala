@@ -10,16 +10,16 @@ export const ProductCard = ({ product }: { product?: ProductType | null }) => {
     return (
         <a
             href={product.path}
-            className="flex flex-col overflow-hidden bg-[#d6e2e9] rounded-xl p-5 w-full hover:shadow-md transition-shadow"
+            className="flex flex-col overflow-hidden bg-[#d6e2e9] rounded-xl p-5 w-full min-w-40  hover:shadow-md transition-shadow"
         >
             <div className="flex flex-col gap-4 h-full">
-                <div className="flex justify-between items-start">
+                <div className="flex justify-between items-start flex-wrap gap-4">
                     <TopicsDisplayer topics={product.topics} />
                     <p className="self-end font-semibold text-text">
                         {price} DH
                     </p>
                 </div>
-                <div className="flex justify-center items-center box-border overflow-hidden w-full h-56 rounded-xl">
+                <div className="flex justify-center items-center box-border overflow-hidden w-full h-48 lg:h-56 rounded-xl">
                     {image?.url && (
                         <img
                             src={image.url}
@@ -29,7 +29,7 @@ export const ProductCard = ({ product }: { product?: ProductType | null }) => {
                         />
                     )}
                 </div>
-                <h2 className="text-xl font-bold text-center mx-auto max-w-54 truncate text-text">
+                <h2 className="text-lg font-bold text-center mx-auto max-w-full truncate text-text">
                     {product.name}
                 </h2>
             </div>

@@ -29,7 +29,7 @@ export const Kits = ({ products }: { products?: ProductsType | null }) => {
             {discountedBundles && discountedBundles.length > 0 && (
                 <div className="flex flex-col w-full gap-6 justify-between">
                     <p className="text-xl font-bold text-text">Payez moins et obtenez plus</p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 w-full">
                         {discountedBundles.map((discountedBundle, index) => (
                             <div
                                 className="flex flex-col"

@@ -81,7 +81,7 @@ export const ProductView = ({ product }: { product: ProductBodyType & ProductTyp
                 <div>
                     <p className="font-semibold text-sm text-gray-500">Total price</p>
                     <p className="font-bold text-2xl text-text">
-                        ${defaultPrice}
+                        {defaultPrice} DH
                     </p>
                 </div>
                 <button

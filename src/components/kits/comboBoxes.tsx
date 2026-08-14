@@ -10,7 +10,7 @@ export function ComboBoxes({ cell }: any) {
     <a href={product.path} className="block w-full py-4 lg:py-8 box-border overflow-hidden">
       <div className="flex flex-col justify-between lg:flex-row items-center lg:items-stretch w-full h-90 gap-8 relative">
         {/* Conteúdo de Texto */}
-        <div className="w-lg flex-1 flex flex-col justify-center rounded-xl bg-[#f0efeb] p-6 lg:p-8 border-4 border-gray-200 z-0 box-content mt-20 lg:mx-auto">
+        <div className="min-w-76 lg:w-lg flex-1 flex flex-col justify-center rounded-xl bg-[#f0efeb] p-6 lg:p-8 border-4 border-gray-200 z-0 box-content mt-20 lg:mx-auto">
           <div>
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 wrap-break-words break-words max-w-full ">
               {product.name}
