@@ -73,31 +73,6 @@ interface ProductForCartConversion {
     attributes?: any;
 }
 
-export type variantToCartItemType = {
-    productId: string;
-    sku: string;
-    name: string;
-    quantity: number;
-    price: number;
-    image?: string;
-    attributes?: any;
-}
-
-export const variantToCartItem = (product: ProductForCartConversion) => {
-    return {
-        productId: product.id,
-        sku: product.name, // Using product name as SKU for now, adjust if you have a specific SKU field
-        name: product.name,
-        quantity: 1,
-        price: product.price,
-        image: product.image,
-        attributes: product.attributes,
-    } as variantToCartItemType;
-};
-
-// export function resolveImage(cell: any) {
-//   const key = cell?.item?.path?.split("/").pop();
-
 //   const mapped = imageMap[key];
 
 //   if (!mapped) return cell;

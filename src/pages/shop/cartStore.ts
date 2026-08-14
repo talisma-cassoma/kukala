@@ -15,10 +15,40 @@ export interface Cart {
     itemCount: number;
 }
 
+interface ProductForCartConversion {
+    id: string;
+    name: string;
+    price: number; // Assuming a single price or a default variant price
+    productId: string;
+    sku: string;
+    quantity: number;
+    image?: string;
+    attributes?: any;
+}
+
+export interface Cart {
+    items: CartItem[];
+    total: number;
+    itemCount: number;
+}
+
 const INITIAL_STATE: Cart = {
     items: [],
     total: 0,
     itemCount: 0,
+};
+
+
+export const variantToCartItem = (product: ProductForCartConversion) => {
+    return {
+        productId: product.id,
+        sku: product.name, // Using product name as SKU for now, adjust if you have a specific SKU field
+        name: product.name,
+        quantity: 1,
+        price: product.price,
+        image: product.image,
+        attributes: product.attributes,
+    } as variantToCartItemType;
 };
 
 const isBrowser = typeof window !== 'undefined';
