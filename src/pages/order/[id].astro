@@ -1,25 +1,22 @@
 ---
 import { Order } from "@/components/order";
 import Layout from "@/layouts/Layout.astro";
-import type { OrderProps } from "@/use-cases/contracts/Order";
+import { getOrderById } from "@/use-cases/queries/get-order";
 
 const { id } = Astro.params;
-
-async function getOrderById(orderId: string, baseUrl: string): Promise<OrderProps['order'] | null> {
-    // Construct an absolute URL for server-side fetching
-    const url = new URL(`/api/orders/${orderId}`, baseUrl);
-    const res = await fetch(url.toString());
-    if (!res.ok) {
-        console.error(`Failed to fetch order: ${res.status} ${res.statusText}`);
-        return null;
-    }
-    return res.json();
-}
-
-const order = await getOrderById(id!, Astro.url.origin);
-//console.log("Fetched order:", JSON.stringify(order));
+const order = id ? await getOrderById(id, Astro.url.origin) : null;
 ---
 
 <Layout title="Order Confirmation" description="Order confirmation page">
-    {order ? <Order order={order} client:load/> : <p>Order not found.</p>}
+    <div class="py-12 w-full max-w-4xl mx-auto">
+        {order ? (
+            <Order order={order} client:load />
+        ) : (
+            <div class="text-center py-20">
+                <h1 class="text-2xl font-bold mb-4">Order not found</h1>
+                <p class="text-gray-600 mb-6">We could not find the order details for this ID.</p>
+                <a href="/" class="underline font-semibold">Back to store</a>
+            </div>
+        )}
+    </div>
 </Layout>

@@ -1,4 +1,4 @@
-import { getSupabaseClient, supabaseAdmin  } from "./supabase";
+import { getSupabaseAdmin } from "./supabase.server";
 import { readdir, readFile } from "fs/promises";
 import { join, extname } from "path";
 
@@ -31,16 +31,7 @@ function getContentType(fileName: string) {
 }
 
 export async function uploadImage(dirPath: string) {
-  const supabase = supabaseAdmin ;
-
-// const { data, error } = await supabase.storage.listBuckets();
-
-// const { data, error } = await supabase.storage
-//   .from("kukala")
-//   .list();
-
-// console.log(data);
-// console.log(error);
+  const supabase = getSupabaseAdmin();
 
   const productSlug = dirPath.split("/").pop() as string;
   const uploads: { [key: string]: string | string[] } = {
@@ -93,7 +84,6 @@ export async function uploadImage(dirPath: string) {
         uploads.body = bodyUploads;
       } else if (entry.name === "variants") {
         // The logic for variants can be added here if needed.
-        // For now, it is an empty array.
       }
     }
   }

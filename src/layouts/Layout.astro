@@ -1,10 +1,7 @@
 ---
-//import { ViewTransitions } from "astro:transitions";
 import { Header } from "@/components/header";
 import { Background } from "@/components/background";
-import CrystallizeLogo from "@/assets/crystallize-logo.svg?url";
 import '@/styles/global.css';
-import { initializeCart } from '@/pages/shop/cartStore';
 import kukala_logo from "@/assets/black_logo.png";
 
 interface Props {
@@ -25,12 +22,12 @@ const { pathname } = Astro.url;
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-     <script type="module">
-        import { initializeCart } from '/src/pages/shop/cartStore.ts';
-        initializeCart();
+    <script>
+      import { initializeCart } from '@/pages/shop/cartStore';
+      initializeCart();
     </script>
   </head>
-<body class="relative min-h-screen w-full bg-primary text-text flex flex-col items-center">
+  <body class="relative min-h-screen w-full bg-primary text-text flex flex-col items-center">
 
     {
         pathname === "/cart" ||
@@ -44,15 +41,14 @@ const { pathname } = Astro.url;
 
     <Header client:load />
 
-    <main class="w-full px-4 flex-1 flex flex-col items-center">
+    <main class="w-full px-4 flex-1 flex flex-col items-center max-w-7xl">
         <slot />
     </main>
-
 
     <footer class="container max-w-7xl mt-20 mx-auto pb-10 px-4">
       <div class="flex mt-10 w-full text-center justify-end">
         <div class="flex items-center gap-1 mt-10">
-          Powered by <a href="#" class="underline">
+          Powered by <a href="/" class="underline">
             <img src={kukala_logo.src} alt="Kukala" class="w-20" />
           </a>
         </div>

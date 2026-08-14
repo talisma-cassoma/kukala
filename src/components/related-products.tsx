@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { Image } from "@crystallize/reactjs-components";
-import { fetchFrontPage } from "@/use-cases/queries/frontpage.ts";
-import type { ProductType } from "@/use-cases/contracts/ProductCard.js";
+import { fetchFrontPage } from "@/use-cases/queries/frontpage";
+import type { ProductType } from "@/use-cases/contracts/ProductCard";
 
 export const RelatedProducts = () => {
     const [catalog, setCatalog] = useState<{
@@ -12,52 +11,53 @@ export const RelatedProducts = () => {
 
     useEffect(() => {
         const loadData = async () => {
-            // Astro.url.origin is not available in client-side React components.
-            // We can use window.location.origin instead.
-            const data = await fetchFrontPage(window.location.origin);
+            const origin = typeof window !== 'undefined' ? window.location.origin : '';
+            const data = await fetchFrontPage(origin);
             setCatalog(data);
         };
 
         loadData();
     }, []);
 
-    if (!catalog) {
-        return <div>Loading related products...</div>;
+    if (!catalog || !catalog.retailProducts || catalog.retailProducts.length === 0) {
+        return null;
     }
 
     const allProducts = catalog.retailProducts;
 
     return (
-        <div className="flex flex-row justify-around w-full max-w-100 h-fit items-start gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full my-6">
             {allProducts.map((item, index: number) => (
                 <a
                     href={item.path}
-                    key={index}
-                    className="bg-primary px-4 py-3 rounded-xl border-2 border-grey  flex flex-col"
+                    key={item.id || index}
+                    className="bg-[#d6e2e9] p-4 rounded-xl flex flex-col justify-between hover:shadow-md transition-shadow"
                 >
-                    <div className="flex justify-between">
-                        <div className="flex gap-1">
+                    <div className="flex justify-between items-center mb-2">
+                        <div className="flex flex-wrap gap-1">
                             {item.topics?.map((topic: { name: string }) => (
                                 <div
-                                    className="text-sm bg-grey px-2 py-1 rounded-2xl"
+                                    className="text-xs bg-white/70 px-2 py-1 rounded-full text-text"
                                     key={topic.name}
                                 >
                                     {topic.name}
                                 </div>
                             ))}
                         </div>
-                        <div>${item.price}</div>
+                        <div className="font-bold text-text">${item.price}</div>
                     </div>
-                    <div className="flex justify-center items-center h-64 w-56 rounded-xl overflow-hidden box-border"> 
-                    <img
-                        src={item.image?.url}
-                        alt={item.image?.altText}
-                        className="w-full h-full object-contain"
-                        loading="lazy"
-                    />
+                    <div className="flex justify-center items-center h-48 w-full rounded-xl overflow-hidden my-2"> 
+                        {item.image?.url && (
+                            <img
+                                src={item.image.url}
+                                alt={item.image.altText || item.name}
+                                className="max-h-full max-w-full object-contain"
+                                loading="lazy"
+                            />
+                        )}
                     </div>
                         
-                    <h2 className="text-l text-center m-auto self-end truncate">
+                    <h2 className="text-sm font-semibold text-center mt-2 truncate text-text">
                         {item.name}
                     </h2>
                 </a>
