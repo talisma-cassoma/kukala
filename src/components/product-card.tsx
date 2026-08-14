@@ -10,7 +10,7 @@ export const ProductCard = ({ product }: { product?: ProductType | null }) => {
     return (
         <a
             href={product.path}
-            className="flex flex-col overflow-hidden bg-[#d6e2e9] rounded-xl p-5 w-full min-w-40  hover:shadow-md transition-shadow"
+            className="flex flex-col overflow-hidden bg-[#d6e2e9] rounded-xl p-5 w-full min-w-42  hover:shadow-md transition-shadow"
         >
             <div className="flex flex-col gap-4 h-full">
                 <div className="flex justify-between items-start flex-wrap gap-4">
