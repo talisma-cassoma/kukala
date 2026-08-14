@@ -1,36 +1,37 @@
-
 import { TopicsDisplayer } from "@/components/topics-displayer";
 
 export function DiscountedBundles({ cell }: any) {
+  if (!cell) return null;
   const product = cell;
+  const image = product.image || {};
+  const price = product.price ?? 0;
 
-  const image = product.image;
-  const price = product.price;
   return (
-    <a href={product.path}
-      className="flex flex-col p-8 bg-[#d6e2e9] rounded-xl lg:h-96 lg:w-[300px w-full box-border">
-      <div className="grid grid-rows-[auto_1fr_auto] h-full gap-4">
-      
+    <a
+      href={product.path}
+      className="flex flex-col p-6 bg-[#d6e2e9] rounded-xl h-full w-full box-border hover:shadow-md transition-shadow"
+    >
+      <div className="flex flex-col justify-between h-full gap-4">
         <div className="flex justify-between items-start">
           <TopicsDisplayer topics={product?.topics} />
-          <p className="font-bold">${price}</p>
+          <p className="font-bold text-text">${price}</p>
         </div>
 
-        <div className="flex items-center justify-center min-h-0 w-full">
-          <img
-            src={image.url}
-            alt={image.altText}
-            // srcSet={`${image.url}?w=200 200w, ${image.url}?w=300 300w`}
-            // sizes="(max-width: 700px) 200px, 300px"
-            loading="lazy"
-            className="w-full h-full aspect-448/404 object-contain"
-          />
+        <div className="flex items-center justify-center min-h-40 w-full">
+          {image.url && (
+            <img
+              src={image.url}
+              alt={image.altText || product.name}
+              loading="lazy"
+              className="max-h-48 w-full object-contain"
+            />
+          )}
         </div>
-        <h2 className="text-xl font-bold text-center mx-auto max-w-54 truncate">
+
+        <h2 className="text-lg font-bold text-center mx-auto max-w-full truncate text-text">
           {product?.name}
         </h2>
       </div>
-
     </a>
   );
 }

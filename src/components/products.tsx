@@ -4,21 +4,20 @@ import { ProductCard } from "./product-card";
 export const Products = ({
     elements,
 }: {
-    elements: { children: ProductType[] };
+    elements?: { children: ProductType[] } | null;
 }) => {
+    const products = elements?.children ?? [];
+
+    if (!products || products.length === 0) {
+        return null;
+    }
+
     return (
-       <div
-            style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(2, 1, 1fr)",
-                gap: "1rem",
-                justifyContent: "center"
-            }}
-        >
-            <p className="text-lg font-semibold my-10">autres produits</p>
-            <div className="flex flex-wrap justify-between self-center gap-8 w-full">
-                {elements?.children?.map((element: any, index: number) => (
-                    <ProductCard product={element} key={index} />
+       <div className="w-full my-8">
+            <p className="text-2xl font-bold text-text my-6">Autres produits</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                {products.map((element: any, index: number) => (
+                    <ProductCard product={element} key={element?.id || index} />
                 ))}
             </div>
         </div>

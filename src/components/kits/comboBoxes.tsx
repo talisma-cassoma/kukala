@@ -1,33 +1,33 @@
 export function ComboBoxes({ cell }: any) {
+  if (!cell) return null;
   const product = cell;
-  const image = product.image;
-  const price = product.price;
+  const image = product.image || {};
+  const price = product.price ?? 0;
 
   return (
-    
-  <a href={product.path} className="block w-full min-w-200 py-6 lg:py-10 relative">
-  <div className="flex flex-row items-center lg:items-stretch w-full">
-    
-    {/* Conteúdo de Texto */}
-    <div className="w-full lg:w-full flex flex-col justify-center rounded-xl bg-[#f0efeb] p-6 lg:pr-10 box-border mt-0 lg:mt-24 border border-gray-200 z-0">
-      <div>
-        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 wrap-normalbreak-words max-w-full lg:max-w-[80%]">
-          {product.name}
-        </h2>
-        <p className="text-base sm:text-lg font-semibold mt-2">${price}</p>
+    <a href={product.path} className="block w-full py-4 lg:py-8 relative">
+      <div className="flex flex-col lg:flex-row items-center lg:items-stretch w-full gap-4">
+        {/* Conteúdo de Texto */}
+        <div className="w-full flex-1 flex flex-col justify-center rounded-xl bg-[#f0efeb] p-6 lg:p-8 border border-gray-200 z-0">
+          <div>
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 break-words max-w-full">
+              {product.name}
+            </h2>
+            <p className="text-base sm:text-lg font-semibold mt-2">${price}</p>
+          </div>
+        </div>
+
+        {/* Coluna da Imagem */}
+        {image.url && (
+          <div className="w-full lg:w-1/2 z-10 rounded-xl overflow-hidden flex justify-center items-center">
+            <img
+              src={image.url}
+              alt={image.altText || product.name}
+              className="w-full max-h-60 object-contain"
+            />
+          </div>
+        )}
       </div>
-    </div>
-
-    {/* Coluna da Imagem */}
-    <div className="w-full lg:w-3/4 z-10 -mt-12 lg:mt-0 lg:-ml-60 rounded-xl overflow-hidden flex justify-center pl-0 lg:pl-10">
-      <img
-        src={image.url}
-        alt={image.altText}
-        className="w-full h-auto object-contain aspect-1366/745"
-      />
-    </div>
-
-  </div>
-</a>
+    </a>
   );
 }

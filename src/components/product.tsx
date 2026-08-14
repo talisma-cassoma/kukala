@@ -1,86 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useStore } from '@nanostores/react';
-//import { ContentTransformer, Image } from "@crystallize/reactjs-components";
 import { ProductBody } from "./product-body";
 import { productOptions, VariantSelector, type SelectedOptions } from "./variant-selector";
 import { RelatedProducts } from "./related-products";
-import type { ProductBodyType  } from "@/use-cases/contracts/ProductContent";
-import {
-    variantToCartItem,
-    type variantToCartItemType
-} from "@/use-cases/utils";
+import type { ProductBodyType } from "@/use-cases/contracts/ProductContent";
 import type { Product as ProductType } from "@/use-cases/contracts/Product";
 import { addItemToCart, cart, type CartItem } from '@/pages/shop/cartStore';
 
-export const relatedProducts = {
-    "content": {
-        "items": [
-            {
-                "id": "61f004b959b0e119fc8c27d6",
-                "__typename": "Product",
-                "name": "Écran solaire spf 50 kukala",
-                "path": "/shop/ecran_solaire_spf_50",
-                "topics": [
-                    {
-                        "name": "promo"
-                    },
-                    {
-                        "name": "new"
-                    }
-                ],
-                "bundle": {
-                    "content": null
-                },
-                "defaultVariant": {
-                    "firstImage": {
-                        "url": "https://media.crystallize.com/dounot/23/10/1/2/strawberry_blast.png",
-                        "altText": "Strawberry flavoured donut",
-                        "variants": []
-                    },
-                    "priceVariant": {
-                        "price": 6,
-                        "currency": "USD"
-                    }
-                }
-            },
-            {
-                "id": "crystallize-spec-ref-61f00d4059b0e119fc8c28aa",
-                "__typename": "Product",
-                "name": "Creamy Nonsense",
-                "path": "/shop/creamy-nonsense",
-                "topics": [
-                    {
-                        "name": "new"
-                    },
-                    {
-                        "name": "glazed"
-                    }
-                ],
-                "bundle": {
-                    "content": null
-                },
-                "defaultVariant": {
-                    "firstImage": {
-                        "url": "https://media.crystallize.com/dounot/23/10/1/4/creamy_nonsense.png",
-                        "altText": "Donut with vanilla frosting and chocolate drizzle.",
-                        "variants": []
-                    },
-                    "priceVariant": {
-                        "price": 8,
-                        "currency": "USD"
-                    }
-                }
-            }
-        ]
-    }
-}
-
-export const ProductView = ({ product }: { product: ProductBodyType & ProductType}) => {
-    
-    //console.log("product on productView:", JSON.stringify(product));
-    
+export const ProductView = ({ product }: { product: ProductBodyType & ProductType }) => {
     const [selectedVariant, setSelectedVariant] = useState(product);
-    //this part should be part of { product }: { product: ProductType }
     const [selectedOptions, setSelectedOptions] =
         useState<SelectedOptions>({
             fragrance: "lavender",
@@ -90,26 +18,21 @@ export const ProductView = ({ product }: { product: ProductBodyType & ProductTyp
             eco: "no",
         });
 
-    const onVariantChange = (variant: any) => setSelectedVariant(variant);
-    const defaultPrice = product.price;
-    const $cart = useStore(cart); // Subscribe to cart store changes
+    const defaultPrice = product.price ?? 0;
+    const $cart = useStore(cart);
     const [buttonText, setButtonText] = useState("Add to Cart");
 
     const handleAddToCart = () => {
         setButtonText("Adding...");
-        // Always use the base `product` for consistent data like name and image,
-        // then override with variant-specific details if necessary.
 
-        //console.log("Adding product to cart:", product.id);
         const cartItem: CartItem = {
             productId: product.id,
             sku: product.name,
             name: product.name,
-            price: selectedVariant.price, // Use the price from the selected variant
+            price: selectedVariant?.price ?? product.price ?? 0,
             quantity: 1,
             imageUrl: product.image?.url
         };
-        //console.log("Adding to cart:", cartItem);
         addItemToCart(cartItem);
         setButtonText("Added 🎉");
         setTimeout(() => setButtonText("Add to Cart"), 1000);
@@ -117,32 +40,30 @@ export const ProductView = ({ product }: { product: ProductBodyType & ProductTyp
 
     return (
         <>
-            <div className="flex lg:flex-row gap-2 w-full items-center flex-col">
-                <div className="flex flex-col text-text w-100">
-                    <h1 className="font-extrabold text-5xl mb-3">
+            <div className="flex lg:flex-row gap-6 w-full items-center flex-col my-8">
+                <div className="flex flex-col text-text w-full lg:w-1/3">
+                    <h1 className="font-extrabold text-4xl lg:text-5xl mb-3">
                         {product.name}
                     </h1>
-                    <p>
-                        {product?.summary}
-                    </p>
-
+                    {product?.summary && (
+                        <p className="text-gray-700 leading-relaxed">
+                            {product.summary}
+                        </p>
+                    )}
                 </div>
-                {/* <Image
-                    {...product.defaultVariant?.firstImage}
-                    sizes="500px"
-                    className="rounded-sm mx-auto"
-                /> */}
-                <figure className="rounded-sm overflow-hidden mx-auto">
-                    <img
-                        src={product.image?.url}
-                        alt={product.image?.altText}
-                        //srcSet={`${product.image?.url}?w=200 200w, ${product.image?.url}?w=300 300w`}
-                        //sizes="(max-width: 700px) 200px, 300px"
-                        loading="lazy"
-                        className="w-88 aspect-448/404 object-contain"
-                    />
+                
+                <figure className="rounded-xl overflow-hidden mx-auto max-w-sm flex justify-center items-center">
+                    {product.image?.url && (
+                        <img
+                            src={product.image.url}
+                            alt={product.image?.altText || product.name}
+                            loading="lazy"
+                            className="w-80 h-auto max-h-80 object-contain"
+                        />
+                    )}
                 </figure>
-                <div className="lg:mb-0 mb-5">
+
+                <div className="lg:mb-0 mb-5 w-full lg:w-auto">
                     <VariantSelector
                         groups={productOptions}
                         selected={selectedOptions}
@@ -155,23 +76,28 @@ export const ProductView = ({ product }: { product: ProductBodyType & ProductTyp
                     />
                 </div>
             </div>
-            <div className="flex z-10 justify-between lg:w-5/12 w-8/12 mx-auto bg-white p-5 text-text rounded-xl border border-gray-100">
+
+            <div className="flex z-10 justify-between items-center lg:w-5/12 w-11/12 mx-auto bg-white p-5 text-text rounded-xl border border-gray-200 shadow-sm my-6">
                 <div>
-                    <p className="font-semibold text-sm">Total price</p>
-                    <p className="font-bold text-lg">
-                        {defaultPrice?? 0.0}
+                    <p className="font-semibold text-sm text-gray-500">Total price</p>
+                    <p className="font-bold text-2xl text-text">
+                        ${defaultPrice}
                     </p>
                 </div>
                 <button
-                    className="bg-[#c5dedd] px-4 rounded-xl"
+                    className="bg-[#c5dedd] hover:bg-[#b0d2d1] px-6 py-3 rounded-xl font-bold text-text transition-colors cursor-pointer"
                     onClick={handleAddToCart}
                 >
                     {buttonText}
                 </button>
             </div>
+
             <ProductBody body={product.body} table={product.table} />
-            <p className="text-text mb-4 font-semibold">Related Products</p>
-            <RelatedProducts/>
+
+            <div className="w-full my-12">
+                <p className="text-text text-2xl font-bold mb-4">Related Products</p>
+                <RelatedProducts />
+            </div>
         </>
     );
 };

@@ -1,18 +1,9 @@
 ---
-import { fetchAllProducts } from "@/use-cases/queries/all-products";
-import { fetchProduct } from "@/use-cases/queries/product";
-
+import { getProductData } from "@/use-cases/queries/product";
 import Layout from "@/layouts/Layout.astro";
 import { ProductView } from "@/components/product";
 
 export const prerender = false;
-
-// export async function getStaticPaths({ site }:any) {
-//   const paths = await fetchAllProducts(site.origin);
-//   return paths.catalogue.children.map((child: { path: string }) => ({
-//     params: { product: child.path.replace("/shop/", "") },
-//   }));
-// }
 
 const { product } = Astro.params;
 const previewMode = Astro.url.searchParams.get('preview') === '1';
@@ -26,29 +17,24 @@ if (previewMode && previewData) {
   } catch {
     productData = null;
   }
-} else {
-  productData = await fetchProduct(
-    `/shop/${product}`,
-    Astro.url.origin
-  );
+} else if (product) {
+  productData = await getProductData(product);
 }
 
 const pageTitle = productData?.product?.name ?? 'Product';
-const pageDescription = productData?.product?.description ?? 'Product';
-
-
-// console.log('dados do produto: { pageTitle', JSON.stringify(pageTitle));
-// console.log('pageDescription', JSON.stringify(pageDescription));
- //console.log('productData', JSON.stringify(productData), '}');
+const pageDescription = productData?.product?.summary ?? productData?.product?.description ?? 'Product details';
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
-  <div class="lg:container mx-auto w-screenWidth lg:px-0 px-5">
+  <div class="lg:container mx-auto w-full lg:px-0 px-5">
     {
-      productData ? (
-        <ProductView product={productData.product} client:load/>
+      productData?.product ? (
+        <ProductView product={productData.product} client:load />
       ) : (
-        <p>Product not found</p>
+        <div class="py-20 text-center">
+          <h1 class="text-2xl font-bold mb-4">Product not found</h1>
+          <a href="/" class="underline text-text">Return to shop</a>
+        </div>
       )
     }
   </div>
