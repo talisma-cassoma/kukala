@@ -1,5 +1,4 @@
 import type { APIRoute } from "astro";
-import { createOrder } from "@/use-cases/mutations/create-order";
 
 export const POST: APIRoute = async ({ request }) => {
     let data = await request.json();
@@ -36,9 +35,8 @@ export const POST: APIRoute = async ({ request }) => {
         payment: data.payment,
     };
 
-    const createNewOrder = await createOrder(body);
 
-    return new Response(JSON.stringify(createNewOrder), {
+    return new Response(JSON.stringify(body), {
         headers: {
             "content-type": "application/json;charset=UTF-8",
         },

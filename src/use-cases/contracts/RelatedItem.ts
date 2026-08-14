@@ -1,7 +1,6 @@
-import type { ProductVariant } from "@crystallize/js-api-client";
 
 export type RelatedItem = {
-    defaultVariant?: ProductVariant;
+    defaultVariant?: any;
     name: string;
     path: string;
     topics: { name: string }[];

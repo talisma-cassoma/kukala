@@ -1,15 +1,3 @@
-//import { imageMap } from "@/mock/image-map";
-
-import type {
-    ProductPriceVariant, // This type is from Crystallize and will be removed
-    ProductVariant, // This type is from Crystallize and will be removed
-} from "@crystallize/js-api-client"; 
-
-// Assuming these contracts are also Crystallize-specific and will be replaced or are no longer needed here.
-// If they are still needed, their definitions should be updated to reflect your Prisma schema.
-import type { ProductBodyType } from "@/use-cases/contracts/ProductContent"; 
-import type { Product as ProductType } from "@/use-cases/contracts/Product"; 
-
 
 export function isEqual(a: any, b: any): boolean {
     // Handle primitive types and references to the same object

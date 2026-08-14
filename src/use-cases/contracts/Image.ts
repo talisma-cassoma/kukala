@@ -1,4 +1,3 @@
-import type { RichTextContent } from "@crystallize/js-api-client";
 
 export type Image = {
     key?: string;
