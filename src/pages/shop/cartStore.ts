@@ -38,13 +38,16 @@ const calculateTotals = (items: CartItem[]): { total: number; itemCount: number 
     return { total, itemCount };
 };
 
-// Listen for changes and persist to localStorage
-onSet(cart, ({ newValue }) => {
-    // This runs only on the client where localStorage is available
-    if (isBrowser) {
+// This function should be called once from a client-side script or component effect.
+export function setupCartListener() {
+    // Listen for changes and persist to localStorage
+    onSet(cart, ({ newValue }) => {
+        // This check is redundant if setupCartListener is called correctly, but safe to keep.
+        if (isBrowser) {
         localStorage.setItem('cart', JSON.stringify(newValue));
-    }
-});
+        }
+    });
+}
 
 // --- Store Actions ---
 
