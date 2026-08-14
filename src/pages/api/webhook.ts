@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { PrismaClient } from '@prisma/client';
-import { getSupabaseAdmin } from '@/lib/supabase';
+import { getSupabaseAdmin } from '@/lib/supabase.server';
 
 const prisma = new PrismaClient();
 
@@ -30,15 +30,28 @@ export const POST: APIRoute = async ({ request }) => {
         // 3. Handle Image Uploads (if any)
         const files = formData.getAll('images') as File[];
         const supabaseAdmin = getSupabaseAdmin();
-        const imageUrls = await Promise.all(
-            files.map(async (file, index) => {
+        const uploadResults = await Promise.allSettled(
+            files.map((file, index) => {
                 const safeName = `${productPayload.slug}-${Date.now()}-${index}-${file.name.replace(/\s+/g, '-')}`;
-                const { error } = await supabaseAdmin.storage.from('products').upload(safeName, file, { upsert: true, contentType: file.type });
-                if (error) throw error;
-                const { data } = supabaseAdmin.storage.from('products').getPublicUrl(safeName);
-                return { id: safeName, url: data.publicUrl, altText: productPayload.name }; // Return object for prisma create
+                return supabaseAdmin.storage.from('products').upload(safeName, file, { upsert: true, contentType: file.type })
+                    .then(({ error }) => {
+                        if (error) throw error; // This will be caught by allSettled
+                        // Store the path, not the full URL, for flexibility.
+                        return { id: safeName, path: safeName, altText: productPayload.name };
+                    });
             })
         );
+
+        const successfulUploads = uploadResults
+            .filter(result => result.status === 'fulfilled')
+            .map(result => (result as PromiseFulfilledResult<any>).value);
+
+        const failedUploads = uploadResults
+            .filter(result => result.status === 'rejected');
+
+        if (failedUploads.length > 0) {
+            console.warn(`Webhook: ${failedUploads.length} image(s) failed to upload.`);
+        }
 
         // 4. Prepare Data for Prisma
         // This is where you map the incoming payload to your Prisma schema.
@@ -72,19 +85,19 @@ export const POST: APIRoute = async ({ request }) => {
                     ...productData,
                     images: {
                         deleteMany: {}, // Clear old images
-                        create: imageUrls,
+                        create: successfulUploads,
                     },
-                    mainImage: imageUrls.length > 0 ? {
-                        connect: { id: imageUrls[0].id }
+                    mainImage: successfulUploads.length > 0 ? {
+                        connect: { id: successfulUploads[0].id }
                     }: undefined,
                 },
                 create: {
                     ...productData,
                     images: {
-                        create: imageUrls,
+                        create: successfulUploads,
                     },
-                    mainImage: imageUrls.length > 0 ? {
-                        connect: { id: imageUrls[0].id }
+                    mainImage: successfulUploads.length > 0 ? {
+                        connect: { id: successfulUploads[0].id }
                     } : undefined,
                 },
             });
