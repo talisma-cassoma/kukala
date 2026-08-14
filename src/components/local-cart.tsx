@@ -1,8 +1,11 @@
 import { useStore } from '@nanostores/react';
-import { cart, deleteItemOnCart } from '@/pages/shop/cartStore';
+import { cart, deleteItemOnCart, initializeCart } from '@/pages/shop/cartStore';
+import { useEffect } from 'react';
 
 export const LocalCart = () => {
     const { items, total, itemCount } = useStore(cart);
+    
+    useEffect(() => {initializeCart()}, []);
 
     return (
         <div className="py-20 text-text lg:w-auth mx-auto w-full">

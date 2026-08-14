@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { fetchFrontPage } from "@/use-cases/queries/frontpage";
 import type { ProductType } from "@/use-cases/contracts/ProductCard";
 
 export const RelatedProducts = () => {
@@ -11,8 +10,10 @@ export const RelatedProducts = () => {
 
     useEffect(() => {
         const loadData = async () => {
-            const origin = typeof window !== 'undefined' ? window.location.origin : '';
-            const data = await fetchFrontPage(origin);
+            // Fetch data from the API endpoint instead of direct import
+            const response = await fetch('/api/frontpage');
+            if (!response.ok) return;
+            const data = await response.json();
             setCatalog(data);
         };
 
@@ -26,12 +27,12 @@ export const RelatedProducts = () => {
     const allProducts = catalog.retailProducts;
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full my-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full lg:w-190 my-6">
             {allProducts.map((item, index: number) => (
                 <a
                     href={item.path}
                     key={item.id || index}
-                    className="bg-#d6e2e9 p-4 rounded-xl flex flex-col justify-between hover:shadow-md transition-shadow"
+                    className="bg-[#d6e2e9] p-4 rounded-xl flex flex-col justify-between hover:shadow-md transition-shadow"
                 >
                     <div className="flex justify-between items-center mb-2">
                         <div className="flex flex-wrap gap-1">

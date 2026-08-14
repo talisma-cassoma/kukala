@@ -62,6 +62,7 @@ export function initializeCart() {
                 localStorage.removeItem('cart');
             }
         }
+        setupCartListener();
     }
 }
 
