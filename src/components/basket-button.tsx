@@ -31,7 +31,7 @@ export const BasketButton = () => {
                 />
             </svg>
 
-            <div className="w-5 h-5 absolute bg-text rounded-full text-[#333] text-center -right-2 -top-2 text-sm">
+            <div className="w-5 h-5 absolute bg-text rounded-full text-white text-center -right-2 -top-2 text-sm">
                 {itemCount}
             </div>
         </div>

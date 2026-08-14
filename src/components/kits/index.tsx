@@ -10,9 +10,9 @@ export const Kits = ({ products }: { products?: ProductsType | null }) => {
     }
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 justify-center mb-12">
+        <div className="grid grid-cols-1 gap-8 justify-center mb-12 w-full">
             {comboboxes && comboboxes.length > 0 && (
-                <div className="flex flex-col w-full gap-8 justify-between">
+                <div className="flex flex-col w-full gap-8 justify-between ">
                     <div className="flex flex-col gap-8 w-full items-stretch">
                         {comboboxes.slice(0, 1).map((combobox, index) => (
                             <div
@@ -29,7 +29,7 @@ export const Kits = ({ products }: { products?: ProductsType | null }) => {
             {discountedBundles && discountedBundles.length > 0 && (
                 <div className="flex flex-col w-full gap-6 justify-between">
                     <p className="text-xl font-bold text-text">Payez moins et obtenez plus</p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full items-stretch">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
                         {discountedBundles.map((discountedBundle, index) => (
                             <div
                                 className="flex flex-col"
