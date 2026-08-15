@@ -62,7 +62,7 @@ export const Order = ({ order }: OrderProps) => {
                                 } DH`;
 
                             // 3. Encode the message and create the WhatsApp URL
-                            const whatsappNumber = "212613363308"; // The number without '+'
+                            const whatsappNumber = "212750970832"; // The number without '+'
                             const encodedMessage = encodeURIComponent(message);
                             const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
