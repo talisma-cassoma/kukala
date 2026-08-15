@@ -27,7 +27,7 @@ export const RelatedProducts = () => {
     const allProducts = catalog.retailProducts;
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full lg:w-190 my-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 w-full lg:w-190 my-6">
             {allProducts.map((item, index: number) => (
                 <a
                     href={item.path}
@@ -47,7 +47,7 @@ export const RelatedProducts = () => {
                         </div>
                         <div className="font-bold text-text">{item.price} DH</div>
                     </div>
-                    <div className="flex justify-center items-center h-48 w-full rounded-xl overflow-hidden my-2"> 
+                    <div className="flex justify-center items-center h-25 lg:h-48 w-full rounded-xl overflow-hidden my-2"> 
                         {item.image?.url && (
                             <img
                                 src={item.image.url}

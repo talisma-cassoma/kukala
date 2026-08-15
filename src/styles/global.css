@@ -5,6 +5,13 @@
 
 @source "../**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}";
 
+
+/* *, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} */
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
