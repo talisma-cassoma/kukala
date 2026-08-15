@@ -8,6 +8,16 @@ export interface CartItem {
     imageUrl?: string;
     [key: string]: any; // Allow other properties
 }
+ 
+export interface variantToCartItemType {   
+    productId: string;
+        sku:   string // Using product name as SKU for now, adjust if you have a specific SKU field
+        name: string
+        quantity: number,
+        price: number,
+        image: string,
+        attributes: any,
+} 
 
 export interface Cart {
     items: CartItem[];
@@ -31,6 +41,8 @@ export interface Cart {
     total: number;
     itemCount: number;
 }
+
+
 
 const INITIAL_STATE: Cart = {
     items: [],
