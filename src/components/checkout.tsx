@@ -138,7 +138,7 @@ export const CheckoutForm = () => {
                     className="w-full bg-green text-black p-3 mt-10 rounded font-semibold text-center"
                     onClick={handleClick}
                 >
-                    Pay Now
+                    Commender
                 </button>
             </div>
         </div>

@@ -12,7 +12,7 @@ export const LocalCart = () => {
             <h1 className="text-4xl font-bold  mb-10">
                 Your shopping cart ({itemCount})
             </h1>
-            <div className="flex flex-col gap-5 bg-background1 p-20">
+            <div className="flex flex-col gap-5 bg-background1 p-4 lg:p-20">
                 {items.map((item, index: number) => (
                     <div
                         key={index}
@@ -21,7 +21,7 @@ export const LocalCart = () => {
                         <div className="flex flex-col">
                             <div className='flex gap-2 items-center'>
                             <img src={item.imageUrl || ''} alt={item.name} className='size-12 rounded-xl object-contain bg-gray-200'></img>
-                            <p className="font-semibold text-xl">
+                            <p className="font-semibold text-xs lg:text-xl">
                                 {item.name} × {item.quantity}
                             </p>
                             </div>
@@ -42,7 +42,7 @@ export const LocalCart = () => {
                             </div>
                         </div>
                         <div className='flex gap-20'>
-                        <p>{item.price * item.quantity} DH</p>
+                        <p className="font-semibold text-xs lg:text-xl">{item.price * item.quantity} DH</p>
                          <button
                     className="bg-background2 px-4 rounded-xl"
                     onClick={() => deleteItemOnCart(item)}
@@ -53,8 +53,8 @@ export const LocalCart = () => {
                     </div>
                 ))}
                 <div className="flex justify-between items-center border-t-2 border-text pt-4">
-                    <p className="font-semibold text-xl">Total</p>
-                    <p>{total} DH</p>
+                    <p className="font-semibold text-xs lg:text-xl">Total</p>
+                    <p className="font-semibold text-xs lg:text-xl">{total} DH</p>
                 </div>
                 <a
                     href="/checkout"
