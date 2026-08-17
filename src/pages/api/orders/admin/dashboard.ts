@@ -44,12 +44,12 @@ export const GET: APIRoute = async (context) => {
         // 3. Map Prisma Order to the data structure expected by the dashboard
         const recentOrders = recentOrdersRaw.map(order => ({
             id: order.id,
-            header: `Order #${order.id.substring(0, 8)}...`,
-            type: `${order.items.length} item(s)`,
+            order: `Order #${order.id.substring(0, 8)}...`,
+            quantity: `${order.items.length} item(s)`,
             status: order.status,
-            target: order.totalGross.toString(), // Representing gross total as 'target'
-            limit: order.items.reduce((sum, item) => sum + item.quantity, 0).toString(), // Representing item count as 'limit'
-            reviewer: `${order.firstName} ${order.lastName}`, // Using customer name as 'reviewer'
+            price: order.totalGross.toString(), // Representing gross total as 'target'
+            //limit: order.items.reduce((sum, item) => sum + item.quantity, 0).toString(), // Representing item count as 'limit'
+            name: `${order.firstName} ${order.lastName}`, // Using customer name as 'reviewer'
         }));
 
         const response = {

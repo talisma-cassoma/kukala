@@ -1,6 +1,5 @@
 import type { APIRoute } from 'astro';
-import { PrismaClient } from '@prisma/client';
-import { Decimal } from '@prisma/client/runtime/library';
+import { PrismaClient, type OrderStatus } from '@prisma/client';
 import { requireAdmin } from '@/lib/auth';
 
 const prisma = new PrismaClient();
@@ -91,5 +90,78 @@ export const GET: APIRoute = async (context) => {
             status: 500,
             headers: { 'content-type': 'application/json' },
         });
+    }
+};
+
+export const PATCH: APIRoute = async (context) => {
+    const adminUserOrResponse = await requireAdmin(context);
+    if (adminUserOrResponse instanceof Response) {
+        return adminUserOrResponse;
+    }
+    const { params, request } = context;
+    const { id } = params;
+    const body = await request.json();
+
+    if (!id) {
+        return new Response(JSON.stringify({ message: 'Order ID is required' }), {
+            status: 400,
+            headers: { 'content-type': 'application/json' },
+        });
+    }
+
+    const { status, price, name, order } = body;
+
+    const dataToUpdate: {
+        status?: OrderStatus;
+        totalGross?: number;
+        firstName?: string;
+        lastName?: string;
+    } = {};
+
+    if (status) dataToUpdate.status = status;
+    if (price) dataToUpdate.totalGross = parseFloat(price);
+    if (name) {
+        const [firstName, ...lastName] = name.split(' ');
+        dataToUpdate.firstName = firstName;
+        dataToUpdate.lastName = lastName.join(' ');
+    }
+
+    try {
+        const updatedOrder = await prisma.order.update({
+            where: { id },
+            data: dataToUpdate,
+        });
+
+        return new Response(JSON.stringify(updatedOrder), {
+            status: 200,
+            headers: { 'content-type': 'application/json' },
+        });
+    } catch (error: any) {
+        console.error(error);
+        return new Response(JSON.stringify({ message: "An error occurred while updating the order.", error: error.message }), {
+            status: 500,
+            headers: { 'content-type': 'application/json' },
+        });
+    }
+};
+
+export const DELETE: APIRoute = async (context) => {
+    const adminUserOrResponse = await requireAdmin(context);
+    if (adminUserOrResponse instanceof Response) {
+        return adminUserOrResponse;
+    }
+    const { params } = context;
+    const { id } = params;
+
+    if (!id) {
+        return new Response(JSON.stringify({ message: 'Order ID is required' }), { status: 400 });
+    }
+
+    try {
+        await prisma.order.delete({ where: { id } });
+        return new Response(null, { status: 204 });
+    } catch (error: any) {
+        console.error(error);
+        return new Response(JSON.stringify({ message: "An error occurred while deleting the order.", error: error.message }), { status: 500 });
     }
 };

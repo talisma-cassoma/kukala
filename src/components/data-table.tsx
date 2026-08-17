@@ -1,4 +1,5 @@
 import * as React from "react"
+import { cn } from "@/lib/utils"
 import {
   closestCenter,
   DndContext,
@@ -113,18 +114,28 @@ const columnHelper = createColumnHelper<
   z.infer<typeof schema>
 >()
 
+/**
+ id: order.id,
+            order: `Order #${order.id.substring(0, 8)}...`,
+            quantity: `${order.items.length} item(s)`,
+            status: order.status,
+            price: order.totalGross.toString(), // Representing gross total as 'target'
+            //limit: order.items.reduce((sum, item) => sum + item.quantity, 0).toString(), // Representing item count as 'limit'
+            name: `${order.firstName} ${order.lastName}`,
+ */
+
 export const schema = z.object({
-  id: z.number(),
-  header: z.string(),
-  type: z.string(),
+  id: z.string(),
+  order: z.string(),
+  quantity: z.string(),
   status: z.string(),
-  target: z.string(),
-  limit: z.string(),
-  reviewer: z.string(),
+  price: z.string(),
+  //limit: z.string(),
+  name: z.string(),
 })
 
 // Create a separate component for the drag handle
-function DragHandle({ id }: { id: number }) {
+function DragHandle({ id }: { id: string }) {
   const { attributes, listeners } = useSortable({
     id,
   })
@@ -175,19 +186,19 @@ const columns = columnHelper.columns([
     enableSorting: false,
     enableHiding: false,
   }),
-  columnHelper.accessor("header", {
-    header: "Header",
+  columnHelper.accessor("order", {
+    header: "Order",
     cell: ({ row }) => {
       return <TableCellViewer item={row.original} />
     },
     enableHiding: false,
   }),
-  columnHelper.accessor("type", {
-    header: "Qtd",
+  columnHelper.accessor("quantity", {
+    header: "Quantity",
     cell: ({ row }) => (
       <div className="w-32">
         <Badge variant="outline" className="px-1.5 text-muted-foreground">
-          {row.original.type}
+          {row.original.quantity}
         </Badge>
       </div>
     ),
@@ -206,67 +217,22 @@ const columns = columnHelper.columns([
       </Badge>
     ),
   }),
-  columnHelper.accessor("target", {
-    header: () => <div className="w-full text-right">Prix</div>,
-    cell: ({ row }) => (
-      <form
-        onSubmit={(e) => {
-          e.preventDefault()
-          toast.promise(new Promise((resolve) => setTimeout(resolve, 1000)), {
-            loading: `Saving ${row.original.header}`,
-            success: "Done",
-            error: "Error",
-          })
-        }}
-      >
-        <Label htmlFor={`${row.original.id}-target`} className="sr-only">
-          Target
-        </Label>
-        <Input
-          className="h-8 w-16 border-transparent bg-transparent text-right shadow-none hover:bg-input/30 focus-visible:border focus-visible:bg-background dark:bg-transparent dark:hover:bg-input/30 dark:focus-visible:bg-input/30"
-          defaultValue={row.original.target}
-          id={`${row.original.id}-target`}
-        />
-      </form>
-    ),
+  columnHelper.accessor("price", {
+    header: () => <div className="w-full px-0 text-left ">Price(DH)</div>,
   }),
-  columnHelper.accessor("limit", {
-    header: () => <div className="w-full text-right">Limit</div>,
-    cell: ({ row }) => (
-      <form
-        onSubmit={(e) => {
-          e.preventDefault()
-          toast.promise(new Promise((resolve) => setTimeout(resolve, 1000)), {
-            loading: `Saving ${row.original.header}`,
-            success: "Done",
-            error: "Error",
-          })
-        }}
-      >
-        <Label htmlFor={`${row.original.id}-limit`} className="sr-only">
-          Limit
-        </Label>
-        <Input
-          className="h-8 w-16 border-transparent bg-transparent text-right shadow-none hover:bg-input/30 focus-visible:border focus-visible:bg-background dark:bg-transparent dark:hover:bg-input/30 dark:focus-visible:bg-input/30"
-          defaultValue={row.original.limit}
-          id={`${row.original.id}-limit`}
-        />
-      </form>
-    ),
-  }),
-  columnHelper.accessor("reviewer", {
-    header: "Reviewer",
+  columnHelper.accessor("name", {
+    header: "Client Name",
     cell: ({ row }) => {
-      const isAssigned = row.original.reviewer !== "Assign reviewer"
+      const isAssigned = row.original.name !== "Assign reviewer"
 
       if (isAssigned) {
-        return row.original.reviewer
+        return row.original.name
       }
 
       return (
         <>
           <Label htmlFor={`${row.original.id}-reviewer`} className="sr-only">
-            Client
+            Name
           </Label>
           <Select>
             <SelectTrigger
@@ -291,12 +257,14 @@ const columns = columnHelper.columns([
   }),
   columnHelper.display({
     id: "actions",
-    cell: () => (
+    cell: ({ row }) => (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
-            className="flex size-8 text-muted-foreground data-[state=open]:bg-muted"
+            className={cn(
+              "flex size-8 text-muted-foreground data-[state=open]:bg-muted"
+            )}
             size="icon"
           >
             <EllipsisVerticalIcon
@@ -305,7 +273,7 @@ const columns = columnHelper.columns([
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-32">
-          <DropdownMenuItem>Edit</DropdownMenuItem>
+          <TableCellViewer item={row.original} isEdit />
           <DropdownMenuItem>Mark as Done</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem variant="destructive">Cancel</DropdownMenuItem>
@@ -349,6 +317,9 @@ export function DataTable({
 }: {
   data: z.infer<typeof schema>[]
 }) {
+
+//console.log("DataTable: ", JSON.stringify(initialData))
+
   const [data, setData] = React.useState(() => initialData)
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] =
@@ -473,11 +444,11 @@ export function DataTable({
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button variant="outline" size="sm">
+          {/* <Button variant="outline" size="sm">
             <PlusIcon
             />
             <span className="hidden lg:inline">Add Section</span>
-          </Button>
+          </Button> */}
         </div>
       </div>
       <TabsContent
@@ -653,19 +624,31 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
+function TableCellViewer({
+  item,
+  isEdit = false,
+}: {
+  item: z.infer<typeof schema>
+  isEdit?: boolean
+}) {
   const isMobile = useIsMobile()
 
   return (
     <Drawer direction={isMobile ? "bottom" : "right"}>
       <DrawerTrigger asChild>
-        <Button variant="link" className="w-fit px-0 text-left text-foreground">
-          {item.header}
-        </Button>
+        {isEdit ? (
+          <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+            Edit
+          </DropdownMenuItem>
+        ) : (
+          <Button variant="link" className="w-fit px-0 text-left text-foreground">
+            {item.order}
+          </Button>
+        )}
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="gap-1">
-          <DrawerTitle>{item.header}</DrawerTitle>
+          <DrawerTitle>{item.order}</DrawerTitle>
           <DrawerDescription>
             Showing total visitors for the last 6 months
           </DrawerDescription>
@@ -730,13 +713,13 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
           )}
           <form className="flex flex-col gap-4">
             <div className="flex flex-col gap-3">
-              <Label htmlFor="header">Header</Label>
-              <Input id="header" defaultValue={item.header} />
+              <Label htmlFor="header">Order</Label>
+              <Input id="header" defaultValue={item.order} />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-3">
-                <Label htmlFor="type">Type</Label>
-                <Select defaultValue={item.type}>
+                <Label htmlFor="type">Quantity</Label>
+                <Select defaultValue={item.quantity}>
                   <SelectTrigger id="type" className="w-full">
                     <SelectValue placeholder="Select a type" />
                   </SelectTrigger>
@@ -781,16 +764,16 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-3">
                 <Label htmlFor="target">Target</Label>
-                <Input id="target" defaultValue={item.target} />
+                <Input id="target" defaultValue={item.price} />
               </div>
               <div className="flex flex-col gap-3">
                 <Label htmlFor="limit">Limit</Label>
-                <Input id="limit" defaultValue={item.limit} />
+                <Input id="limit" defaultValue={item.quantity} />
               </div>
             </div>
             <div className="flex flex-col gap-3">
-              <Label htmlFor="reviewer">Reviewer</Label>
-              <Select defaultValue={item.reviewer}>
+              <Label htmlFor="reviewer">Name</Label>
+              <Select defaultValue={item.name}>
                 <SelectTrigger id="reviewer" className="w-full">
                   <SelectValue placeholder="Select a reviewer" />
                 </SelectTrigger>
