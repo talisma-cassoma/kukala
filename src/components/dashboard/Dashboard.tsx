@@ -93,7 +93,7 @@ export function Dashboard({ onAuthFailure }: { onAuthFailure: () => void }) {
                 <div className="px-4 lg:px-6">
                   <ChartAreaInteractive />
                 </div>
-                <DataTable data={dashboardData.recentOrders} />
+                <DataTable data={dashboardData.recentOrders} onUpdate={fetchData} />
               </div>
             )}
           </div>

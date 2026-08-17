@@ -45,7 +45,7 @@ export const GET: APIRoute = async (context) => {
         const recentOrders = recentOrdersRaw.map(order => ({
             id: order.id,
             order: `Order #${order.id.substring(0, 8)}...`,
-            quantity: `${order.items.length} item(s)`,
+            quantity:order.items.length,
             status: order.status,
             price: order.totalGross.toString(), // Representing gross total as 'target'
             //limit: order.items.reduce((sum, item) => sum + item.quantity, 0).toString(), // Representing item count as 'limit'
