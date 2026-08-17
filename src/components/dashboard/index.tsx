@@ -3,6 +3,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Dashboard } from "./Dashboard";
 import { LoginDialog } from "@/components/login";
 import { getSupabaseClient } from "@/lib/supabase";
+import "@/styles/global.css";
 
 export function DashboardRoot() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

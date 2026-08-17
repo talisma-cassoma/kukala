@@ -14,6 +14,7 @@ import {
 import { Field, FieldGroup } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import "@/styles/global.css";
 
 const supabase = getSupabaseClient();
 

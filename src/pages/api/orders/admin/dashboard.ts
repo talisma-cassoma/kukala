@@ -6,8 +6,8 @@ const prisma = new PrismaClient();
 
 export const GET: APIRoute = async (context) => {
 
-    console.log("Dashboard API Called")
-    
+    //console.log("Dashboard API Called")
+
     try {
         // 1. Authenticate and authorize the administrator
         const adminUserOrResponse = await requireAdmin(context);
