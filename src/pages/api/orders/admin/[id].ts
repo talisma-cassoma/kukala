@@ -1,10 +1,17 @@
 import type { APIRoute } from 'astro';
 import { PrismaClient } from '@prisma/client';
 import { Decimal } from '@prisma/client/runtime/library';
+import { requireAdmin } from '@/lib/auth';
 
 const prisma = new PrismaClient();
 
-export const GET: APIRoute = async ({ params }) => {
+export const GET: APIRoute = async (context) => {
+    // 1. Authenticate and authorize the administrator
+    const adminUserOrResponse = await requireAdmin(context);
+    if (adminUserOrResponse instanceof Response) {
+        return adminUserOrResponse;
+    }
+    const { params } = context;
 
     const { id } = params;
 

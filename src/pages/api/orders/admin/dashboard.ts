@@ -1,10 +1,20 @@
 import type { APIRoute } from "astro";
 import { PrismaClient, type OrderStatus } from "@prisma/client";
+import { requireAdmin } from "@/lib/auth";
 
 const prisma = new PrismaClient();
 
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = async (context) => {
+
+    console.log("Dashboard API Called")
+    
     try {
+        // 1. Authenticate and authorize the administrator
+        const adminUserOrResponse = await requireAdmin(context);
+        if (adminUserOrResponse instanceof Response) {
+            return adminUserOrResponse;
+        }
+
         // 1. Fetch aggregated statistics
         const totalOrders = await prisma.order.count();
         const pendingOrders = await prisma.order.count({ where: { status: 'PENDING' } });
