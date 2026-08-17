@@ -1,50 +1,8 @@
 ---
+import DashboardLayout from "@/layouts/DashboardLayout.astro";
 import { DashboardRoot } from "@/components/dashboard";
-import "@/styles/global.css";
-import kukala_logo from "@/assets/black_logo.png";
 ---
 
-<!doctype html>
-<html lang="fr" class="w-full min-h-screen m-0 p-0">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="dashboard page" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/png" href={kukala_logo.src} />
-    <meta name="generator" content={Astro.generator} />
-    <title>dashboard</title>
-  </head>
-
-  <body>
-    <DashboardRoot client:load />
-  </body>
-
-  <style is:global>
-    @utility no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-    }
-
-    @media screen and (max-width: 768px) {
-      .crystallize-grid {
-        display: flex !important;
-        flex-direction: column !important;
-      }
-
-      .bg-fixed {
-        display: none;
-      }
-    }
-
-    .bg-fixed {
-      background-attachment: fixed;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-  </style>
-</html>
+<DashboardLayout>
+  <DashboardRoot client:load />
+</DashboardLayout>
