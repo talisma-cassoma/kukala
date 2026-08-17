@@ -50,7 +50,7 @@ export function Dashboard({ onAuthFailure }: { onAuthFailure: () => void }) {
         throw new Error(`Failed to fetch dashboard data: ${response.statusText}`);
       }
       const data = await response.json();
-       console.log("auth data: ",data)
+      //console.log("auth data: ",data)
 
 
       setDashboardData(data);
@@ -75,7 +75,7 @@ export function Dashboard({ onAuthFailure }: { onAuthFailure: () => void }) {
         } as React.CSSProperties
       }
     >
-      <AppSidebar variant="inset" />
+      {/* <AppSidebar variant="inset" /> */}
       <SidebarInset>
         <header className="flex h-[var(--header-height)] shrink-0 items-center justify-between gap-2 border-b px-4 lg:px-6">
           <SiteHeader />

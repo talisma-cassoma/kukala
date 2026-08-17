@@ -18,7 +18,7 @@ export function DashboardRoot() {
     // Check initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
 
-      console.log("session: ", session)
+      // console.log("session: ", session)
       setIsAuthenticated(!!session);
       setIsLoading(false);
     });

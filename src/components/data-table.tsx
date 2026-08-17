@@ -183,7 +183,7 @@ const columns = columnHelper.columns([
     enableHiding: false,
   }),
   columnHelper.accessor("type", {
-    header: "Section Type",
+    header: "Qtd",
     cell: ({ row }) => (
       <div className="w-32">
         <Badge variant="outline" className="px-1.5 text-muted-foreground">
@@ -207,7 +207,7 @@ const columns = columnHelper.columns([
     ),
   }),
   columnHelper.accessor("target", {
-    header: () => <div className="w-full text-right">Target</div>,
+    header: () => <div className="w-full text-right">Prix</div>,
     cell: ({ row }) => (
       <form
         onSubmit={(e) => {
@@ -266,7 +266,7 @@ const columns = columnHelper.columns([
       return (
         <>
           <Label htmlFor={`${row.original.id}-reviewer`} className="sr-only">
-            Reviewer
+            Client
           </Label>
           <Select>
             <SelectTrigger
