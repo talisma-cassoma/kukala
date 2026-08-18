@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Dashboard } from "./Dashboard";
+import {ProductDashboardRoot} from "@/components/addproduct/AddProduct"
 import { LoginDialog } from "@/components/login";
 import { getSupabaseClient } from "@/lib/supabase";
-import { DashboardProvider } from "@/components/dashboard-provider";
+import { ProductProvider } from "@/components/addproduct/AddPodructProvider";
 import "@/styles/global.css";
 
-export function DashboardRoot() {
+export function PoductDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const supabase = getSupabaseClient();
+
+console.log("productDashboard")
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
@@ -37,9 +39,10 @@ export function DashboardRoot() {
   return (
     <TooltipProvider>
       {isAuthenticated ?
-       <DashboardProvider>
-         <Dashboard onAuthFailure={() => setIsAuthenticated(isAuthenticated)} /> 
-       </DashboardProvider>:
+      <ProductProvider>
+          <ProductDashboardRoot onAuthFailure={() => setIsAuthenticated(isAuthenticated)} /> 
+      </ProductProvider>
+          :
         <div className="flex items-center justify-center h-screen"><LoginDialog /></div>}
     </TooltipProvider>
   );

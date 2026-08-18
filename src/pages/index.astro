@@ -12,7 +12,7 @@ const catalog = await getFrontPageData();
     description="One stop shop for buying cosmetic & personal care online."
 >
 	<div class="py-10 lg:container mx-auto w-full md:px-0 px-3">
-		<Kits products={catalog} />
 		<Products elements={{ children: catalog?.retailProducts ?? [] }} />
+		<Kits products={catalog} />
 	</div>
 </Layout>

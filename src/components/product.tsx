@@ -85,7 +85,7 @@ export const ProductView = ({ product }: { product: ProductBodyType & ProductTyp
                     </p>
                 </div>
                 <button
-                    className="bg-[#c5dedd] hover:bg-[#b0d2d1] px-6 py-3 rounded-xl font-bold text-text transition-colors cursor-pointer"
+                    className="bg-[#F9C307] hover:opacity-75 px-6 py-3 rounded-xl font-bold text-text transition-colors cursor-pointer"
                     onClick={handleAddToCart}
                 >
                     {buttonText}

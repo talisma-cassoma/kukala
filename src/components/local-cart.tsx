@@ -12,7 +12,7 @@ export const LocalCart = () => {
             <h1 className="text-4xl font-bold  mb-10">
                 Your shopping cart ({itemCount})
             </h1>
-            <div className="flex flex-col gap-5 bg-background1 p-4 lg:p-20">
+            <div className="flex flex-col gap-5 bg-white p-4 lg:p-20">
                 {items.map((item, index: number) => (
                     <div
                         key={index}
@@ -44,7 +44,7 @@ export const LocalCart = () => {
                         <div className='flex gap-20'>
                         <p className="font-semibold text-xs lg:text-xl">{item.price * item.quantity} DH</p>
                          <button
-                    className="bg-background2 px-4 rounded-xl"
+                    className="bg-[#F9C307] px-4 rounded-xl"
                     onClick={() => deleteItemOnCart(item)}
                 >
                     x

@@ -32,7 +32,7 @@ export const RelatedProducts = () => {
                 <a
                     href={item.path}
                     key={item.id || index}
-                    className="bg-[#d6e2e9] p-4 rounded-xl flex flex-col justify-between hover:shadow-md transition-shadow"
+                    className="bg-white p-4 rounded-sm flex flex-col justify-between hover:shadow-md transition-shadow"
                 >
                     <div className="flex justify-between items-center mb-2">
                         <div className="flex flex-wrap gap-1">

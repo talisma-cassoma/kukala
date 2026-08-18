@@ -1,0 +1,151 @@
+{
+  "id": "cmsrxf6f8000qkyi37onqd2ft",
+  "name": "Hydratation profonde",
+  "path": "/shop/hydratation_profonde",
+  "__typename": "Product",
+  "topics": [
+    {
+      "name": "new"
+    },
+    {
+      "name": "promo"
+    }
+  ],
+  "image": {
+    "url": "https://rqbegbvangiegbnrgxrv.supabase.co/storage/v1/object/public/kukala//hydratation_profonde/thumbnail.png",
+    "altText": "Hydratation profonde image"
+  },
+  "price": 65,
+  "summary": "Hydratation profonde, texture légère, parfum frais… pour une peau douce, lumineuse et parfaitement nourrie.",
+  "body": {
+    "paragraphs": [
+      {
+        "title": {
+          "text": "Hydratation de luxe"
+        },
+        "text": "💧 200 ml de soin délicat, pour une peau irrésistiblement soyeuse.",
+        "images": [
+          {
+            "url": "https://rqbegbvangiegbnrgxrv.supabase.co/storage/v1/object/public/kukala//hydratation_profonde/body/0.webp",
+            "altText": "Hydratation profonde image"
+          }
+        ],
+        "videos": []
+      },
+      {
+        "title": {
+          "text": "Lait Corps Fondant"
+        },
+        "text": "Toucher sec et mat qui dure. une absorption quasi immédiate sans aucun résidu gras de la cire d'abeille naturelle — qui forme sur la peau un voile protecteur ultrafin et respirant — la peau reste sèche, nette et confortable des heures après l'application. Fini la sensation de moiteur ou de peau collante, même par fortes chaleurs ou lors des journées actives. Un vrai allié pour celles et ceux qui souffrent d'une transpiration cutanée excessive en été.",
+        "images": [
+          {
+            "url": "https://rqbegbvangiegbnrgxrv.supabase.co/storage/v1/object/public/kukala//hydratation_profonde/body/0.webp",
+            "altText": "Hydratation profonde image"
+          }
+        ],
+        "videos": []
+      }
+    ]
+  },
+  "table": {
+    "sections": [
+      {
+        "title": "Details sur l'emballage",
+        "properties": [
+          {
+            "key": "poids",
+            "value": "250g"
+          },
+          {
+            "key": "Volume",
+            "value": "200ml/6.76 fl oz"
+          },
+          {
+            "key": "Dimensions",
+            "value": "10x10x5 cm"
+          },
+          {
+            "key": "Material",
+            "value": "plastic"
+          }
+        ]
+      },
+      {
+        "title": "Details sur le contenu",
+        "properties": [
+          {
+            "key": "noix de Damas et coco",
+            "value": "86 mg"
+          },
+          {
+            "key": "pépins de raisin",
+            "value": "86 mg"
+          },
+          {
+            "key": "huile d'argan",
+            "value": "86 mg"
+          },
+          {
+            "key": "Protein",
+            "value": "86 mg"
+          },
+          {
+            "key": "huile de sésame",
+            "value": "86 mg"
+          },
+          {
+            "key": "carbohydrates",
+            "value": "86 mg"
+          },
+          {
+            "key": "sodium",
+            "value": "86 mg"
+          }
+        ]
+      }
+    ]
+  },
+  "productOptions": [
+    {
+      "id": "cmsrxf6fa001bkyi3zxnbw0eg",
+      "name": "Delivery",
+      "required": false,
+      "options": [
+        {
+          "id": "cmsrxf6fb001ckyi3tt3mvspf",
+          "label": "In-Store",
+          "price": 65,
+          "available": true
+        },
+        {
+          "id": "cmsrxf6fb001dkyi3jw4jazrq",
+          "label": "Home Delivery",
+          "price": 65,
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "cmsrxf6fb001ekyi3y5yjajay",
+      "name": "Volume",
+      "required": false,
+      "options": [
+        {
+          "id": "cmsrxf6fb001fkyi3tsdotbkx",
+          "label": "100 ml",
+          "price": 65,
+          "available": true
+        },
+        {
+          "id": "cmsrxf6fb001gkyi3uqde9hy4",
+          "label": "50 ml",
+          "price": 65,
+          "available": false
+        }
+      ]
+    }
+  ],
+  "related": {
+    "items": []
+  }
+}

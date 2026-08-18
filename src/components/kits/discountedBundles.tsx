@@ -9,7 +9,7 @@ export function DiscountedBundles({ cell }: any) {
   return (
     <a
       href={product.path}
-      className="flex flex-col p-6 bg-[#d6e2e9] rounded-xl h-full min-w-42 lg:w-full box-border hover:shadow-md transition-shadow"
+      className="flex flex-col p-6 bg-white rounded-xl h-full min-w-42 lg:w-full box-border hover:shadow-md transition-shadow"
     >
       <div className="flex flex-col justify-between h-full gap-4">
         <div className="flex justify-between items-start flex-wrap gap-0">
