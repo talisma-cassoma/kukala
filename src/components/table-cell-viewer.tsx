@@ -54,6 +54,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 
 import { TrendingUpIcon } from "lucide-react"
+import { useDashboard } from "./dashboard-provider"
 
 // New in v9: declare the features this table uses — anything you don't
 // register is tree-shaken out of the bundle.
@@ -104,15 +105,14 @@ const chartConfig = {
 export function TableCellViewer({
     item,
     isEdit = false,
-    onUpdate,
 }: {
     item: z.infer<typeof schema>
     isEdit?: boolean
-    onUpdate?: () => void
 }) {
     const isMobile = useIsMobile()
     const [isSubmitting, setIsSubmitting] = React.useState(false)
     const [formData, setFormData] = React.useState(item);
+    const { fetchOrders } = useDashboard();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -136,7 +136,7 @@ export function TableCellViewer({
             }
 
             toast.success("Order updated successfully.");
-            onUpdate?.();
+            fetchOrders();
 
         } catch (error) {
             toast.error("Failed to update order.");

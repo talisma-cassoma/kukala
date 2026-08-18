@@ -3,6 +3,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Dashboard } from "./Dashboard";
 import { LoginDialog } from "@/components/login";
 import { getSupabaseClient } from "@/lib/supabase";
+import { DashboardProvider } from "@/components/dashboard-provider";
 import "@/styles/global.css";
 
 export function DashboardRoot() {
@@ -36,7 +37,9 @@ export function DashboardRoot() {
   return (
     <TooltipProvider>
       {isAuthenticated ?
-        <Dashboard onAuthFailure={() => setIsAuthenticated(isAuthenticated)} /> :
+        <DashboardProvider>
+          <Dashboard onAuthFailure={() => setIsAuthenticated(isAuthenticated)} />
+        </DashboardProvider> :
         <div className="flex items-center justify-center h-screen"><LoginDialog /></div>}
     </TooltipProvider>
   );

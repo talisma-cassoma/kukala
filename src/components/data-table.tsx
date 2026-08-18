@@ -1,6 +1,6 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
-
+import { useDashboard } from "@/components/dashboard-provider"
 import {
   closestCenter,
   DndContext,
@@ -155,8 +155,7 @@ const columns = columnHelper.columns([
   columnHelper.accessor("order", {
     header: "Order",
     cell: ({ row, table }) => {
-      const { onUpdate } = table.options.meta as { onUpdate: () => void };
-      return <TableCellViewer item={row.original} onUpdate={onUpdate} />
+      return <TableCellViewer item={row.original} />
     },
     enableHiding: false,
   }),
@@ -225,34 +224,33 @@ const columns = columnHelper.columns([
   columnHelper.display({
     id: "actions",
     cell: ({ row, table }) => {
-      const { onUpdate } = table.options.meta as { onUpdate: () => void };
       return (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button
-            variant="ghost"
-            className={cn(
-              "flex size-8 text-muted-foreground data-[state=open]:bg-muted"
-            )}
-            size="icon"
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="ghost"
+              className={cn(
+                "flex size-8 text-muted-foreground data-[state=open]:bg-muted"
+              )}
+              size="icon"
+            >
+              <EllipsisVerticalIcon
+              />
+              <span className="sr-only">Open menu</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="end"
+            className="w-32"
+            onCloseAutoFocus={(e) => e.preventDefault()}
           >
-            <EllipsisVerticalIcon
-            />
-            <span className="sr-only">Open menu</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent
-          align="end"
-          className="w-32"
-          onCloseAutoFocus={(e) => e.preventDefault()}
-        >
-          <TableCellViewer item={row.original} isEdit onUpdate={onUpdate} />
-          <DropdownMenuItem>Mark as Done</DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem variant="destructive">Cancel</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    )
+            <TableCellViewer item={row.original} isEdit />
+            <DropdownMenuItem>Mark as Done</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem variant="destructive">Cancel</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )
     },
   }),
 ])
@@ -286,17 +284,9 @@ function DraggableRow({
   )
 }
 
-export function DataTable({
-  data: initialData,
-  onUpdate,
-}: {
-  data: z.infer<typeof schema>[]
-  onUpdate?: () => void
-}) {
-
-console.log("DataTable: ", JSON.stringify(initialData))
-
-  const [data, setData] = React.useState(() => initialData)
+export function DataTable() {
+  const { orders, loading, error } = useDashboard();
+  const [data, setData] = React.useState<z.infer<typeof schema>[]>([])
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] =
     React.useState<ColumnVisibilityState>({})
@@ -315,10 +305,22 @@ console.log("DataTable: ", JSON.stringify(initialData))
     useSensor(KeyboardSensor, {})
   )
 
+
+  React.useEffect(() => {
+//console.log("data: ", orders)
+
+if (Array.isArray(orders)) {
+      setData(orders)
+    } else {
+      setData([])
+    }
+  }, [orders])
+
   const dataIds = React.useMemo<UniqueIdentifier[]>(
     () => data?.map(({ id }) => id) || [],
     [data]
   )
+
 
   const table = useTable({
     features,
@@ -330,9 +332,6 @@ console.log("DataTable: ", JSON.stringify(initialData))
       rowSelection,
       columnFilters,
       pagination,
-    },
-    meta: {
-      onUpdate,
     },
     getRowId: (row) => row.id.toString(),
     enableRowSelection: true,
@@ -352,6 +351,14 @@ console.log("DataTable: ", JSON.stringify(initialData))
         return arrayMove(data, oldIndex, newIndex)
       })
     }
+  }
+
+  if (loading) {
+    return <div className="p-4 text-center">Loading orders...</div>;
+  }
+
+  if (error) {
+    return <div className="p-4 text-center text-red-500">Error: {error}</div>;
   }
 
   return (
