@@ -29,13 +29,20 @@ export interface TableOption {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { product, setProduct } = useProduct();
-  const [prodructUrl, setProductUrl] = useState<string | null>(null)
-  const [description, setDescription] = useState(product.summary)
-  const [price, setPrice] = useState<number>(product.price)
+  const [productUrl, setProductUrl] = useState<string | null>(product.image?.url ?? null)
   const [selectedTags, setSelectedTags] = useState<string[]>(topicsList)
-  const [selectedVolume, setSelectedVolume] = useState<string[]>(Volumelist)
-  const [selectedDelivery, setSelectedDelivery] = useState<string[]>(DeliveryList)
   const [table, setTable] = useState<TableOption[]>([{ props: "", value: "100mg" }])
+
+  useEffect(() => {
+    setProduct((prev) => ({
+      ...prev,
+      image: {
+        ...prev.image,
+        url: productUrl ?? "",
+        altText: prev.image?.altText || `${prev.name || "product"} image`,
+      },
+    }))
+  }, [productUrl, setProduct])
 
   useEffect(() => {
     //fill product
@@ -99,7 +106,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               placeholder="Ex: Camiseta Oversized"
             />
           </div>
-          <ImagePreview url={prodructUrl} setUrl={setProductUrl} />
+          <ImagePreview url={productUrl} setUrl={setProductUrl} />
 
           <div className="space-y-2">
             <Label htmlFor="prod-description">description do Produto</Label>
@@ -153,12 +160,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
           /> */}
 
+          <Paragraphes/>
+
           <TableField
             title="tabela"
             tableFild={table}
             setTableFild={setTable}
           />
-          <Paragraphes paragraphTitle="" />
+
 
         </form>
       </SidebarContent>

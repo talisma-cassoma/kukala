@@ -16,10 +16,12 @@ export function ImagePreview({
   onChange,
   initialImage,
   title,
+  url,
+  setUrl,
 }: ImagePreviewProps) {
   const [file, setFile] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(
-    initialImage ?? null
+    url ?? initialImage ?? null
   )
 
   useEffect(() => {
@@ -27,6 +29,7 @@ export function ImagePreview({
 
     const objectUrl = URL.createObjectURL(file)
     setPreview(objectUrl)
+    setUrl(objectUrl)
 
     return () => {
       URL.revokeObjectURL(objectUrl)
@@ -43,6 +46,7 @@ export function ImagePreview({
   const handleRemove = () => {
     setFile(null)
     setPreview(null)
+    setUrl(null)
     onChange?.(null)
   }
 
