@@ -11,27 +11,39 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { useProduct } from "../AddPodructProvider";
 import { SelectOptions } from "@/components/addproduct/side-bar/select"
-import { TableField } from "@/components/addproduct/side-bar/table"
+import { TableField, type TableOption } from "@/components/addproduct/side-bar/table"
 import { Store } from "lucide-react"
 import { ImagePreview } from "@/components/addproduct/side-bar/ImagePreview"
 import { Paragraphes } from "@/components/addproduct/side-bar/paragraph"
-
+import { getSupabaseClient } from "@/lib/supabase"
+import { toast } from "sonner"
+import { uploadImage } from "@/lib/uploadImage"
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 
 const topicsList = ["new", "promo", "solde"]
-const Volumelist = ["100ml", "50ml"]
-const DeliveryList = ["in-Store", "home-delivery"]
-
-
-export interface TableOption {
-  props: string
-  value: string
-}
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const { product, setProduct } = useProduct();
   const [productUrl, setProductUrl] = useState<string | null>(product.image?.url ?? null)
+  const [mainImageFile, setMainImageFile] = useState<File | null>(null)
+  const [paragraphImageFiles, setParagraphImageFiles] = useState<(File | null)[]>([])
   const [selectedTags, setSelectedTags] = useState<string[]>(topicsList)
-  const [table, setTable] = useState<TableOption[]>([{ props: "", value: "100mg" }])
+  const [tables, setTables] = useState<TableOption[][]>(product.table.sections.map((section) =>
+    (section.properties || []).map((property) => ({
+      title: section.title,
+      props: property.key,
+      value: property.value,
+    }))
+  ));
+
 
   useEffect(() => {
     setProduct((prev) => ({
@@ -42,7 +54,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         altText: prev.image?.altText || `${prev.name || "product"} image`,
       },
     }))
-  }, [productUrl, setProduct])
+  }, [productUrl])
 
   useEffect(() => {
     //fill product
@@ -53,31 +65,87 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   }, [selectedTags])
 
   useEffect(() => {
-    if (!table || table.length === 0) return;
+    if (!tables || tables.length === 0) return;
 
     setProduct((prev) => ({
       ...prev,
       table: {
         ...prev?.table,
-        sections: [
-          {
-            title: "Details sur l'emballage",
-            // Mapeia o estado `table` para a estrutura de `properties`
-            properties: table.map((item) => ({
-              key: item.props,
-              value: item.value,
-            })),
-          },
-          // Mantenha outras seções existentes se houver, ou adicione conforme a necessidade
-          ...(prev?.table?.sections?.slice(1) || []),
-        ],
+        sections: tables.map((table, index) => ({
+          // Preserva o título existente da seção se houver, ou usa o padrão
+          title: prev?.table?.sections?.[index]?.title || "Détails sur l'emballage",
+          properties: table.map((item) => ({
+            key: item.props,
+            value: item.value,
+          })),
+        })),
       },
     }));
-  }, [table]);
+  }, [tables]);
 
-  const handleSubmit = (formData: any) => {
-    console.log("Dados salvos a partir da Sidebar:", formData);
-    // Aqui você chama sua API ou Supabase para atualizar o produto
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      const supabase = getSupabaseClient();
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) throw new Error("Not authenticated");
+
+      const productSlug = product.name
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, "_")
+        .replace(/[^a-z0-9_]/g, "")
+        .replace(/_+/g, "_")
+        .replace(/^_|_$/g, "");
+
+      const uploadedProduct = structuredClone(product);
+
+      if (mainImageFile) {
+        uploadedProduct.image.url = await uploadImage(
+          mainImageFile,
+          productSlug,
+          "",
+          `thumbnail${mainImageFile.name.slice(mainImageFile.name.lastIndexOf("."))}`,
+        );
+
+        console.log("image URL: ",  uploadedProduct.image.url)
+      }
+
+      
+
+      for (const [index, file] of paragraphImageFiles.entries()) {
+        if (!file || !uploadedProduct.body.paragraphs[index]) continue;
+
+        uploadedProduct.body.paragraphs[index].images[0].url = await uploadImage(
+          file,
+          productSlug,
+          "body",
+          `${index}-${file.name}`,
+        );
+      }
+
+      const response = await fetch("/api/products/admin/add-product", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session.access_token}`,
+        },
+        body: JSON.stringify({ product: uploadedProduct }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to update order: ${response.statusText}`);
+      }
+
+      toast.success("Order updated successfully.");
+    } catch (error) {
+      toast.error("Failed to update order.");
+      console.error(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
 
@@ -92,6 +160,33 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       {/* Corpinho com campos (com rolagem automática se o form for longo) */}
       <SidebarContent className="p-4 space-y-4 overflow-scroll">
         <form id="sidebar-form" onSubmit={handleSubmit} className="space-y-4">
+           <div className="flex flex-col gap-3">
+                                          <Label htmlFor="status">Status</Label>
+                                          <Select
+                                              value={product.__typename}
+                                              onValueChange={(value) => {
+                                                  setProduct((prev) => ({
+                                                      ...prev,
+                                                      __typename: value,
+                                                  }));
+                                              }}
+                                          >
+                                              <SelectTrigger id="status" className="w-full">
+                                                  <SelectValue placeholder="Select a status" />
+                                              </SelectTrigger>
+                                              <SelectContent>
+                                                  <SelectGroup>
+                                                      <SelectItem value="COMBOBOX">COMBOBOX
+    
+    </SelectItem>
+                                                      <SelectItem value="RETAIL">RETAIL</SelectItem>
+                                                      <SelectItem value="FULFILLED">DISCOUNTED</SelectItem>
+                                                    
+                                                  </SelectGroup>
+                                              </SelectContent>
+                                          </Select>
+                                      </div>
+          
           <div className="space-y-2">
             <Label htmlFor="prod-name">Nome do Produto</Label>
             <Input
@@ -106,7 +201,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               placeholder="Ex: Camiseta Oversized"
             />
           </div>
-          <ImagePreview url={productUrl} setUrl={setProductUrl} />
+          <ImagePreview
+            url={productUrl}
+            setUrl={setProductUrl}
+            onChange={setMainImageFile}
+          />
 
           <div className="space-y-2">
             <Label htmlFor="prod-description">description do Produto</Label>
@@ -145,38 +244,45 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             selectedItems={selectedTags}
             setSelectedItems={setSelectedTags}
           />
-          {/* <SelectOptions
-            title="Volume"
-            itemList={selectedVolume}
-            selectedItems={selectedVolume}
-            setSelectedItems={setSelectedVolume}
+
+          <Paragraphes
+            onFileChange={(index, file) => {
+              setParagraphImageFiles((prev) => {
+                const next = [...prev]
+                next[index] = file
+                return next
+              })
+            }}
           />
 
-          <SelectOptions
-            title="delivery"
-            itemList={selectedDelivery}
-            selectedItems={selectedDelivery}
-            setSelectedItems={setSelectedDelivery}
+          {tables.map((table, index) => (
+            <TableField
+              key={index}
+              title={product.table.sections[index]?.title ?? "Détails sur l'emballage"}
+              tableFild={table}
+              setTableFild={(action) => {
+                setTables((prevTables) =>
+                  prevTables.map((prevTable, sectionIndex) => {
+                    if (sectionIndex !== index) return prevTable;
 
-          /> */}
+                    // Se 'action' for uma função, executa passando a tabela atual
+                    return typeof action === "function" ? action(prevTable) : action;
+                  })
+                );
+              }}
+            />
+          ))}
 
-          <Paragraphes/>
+          <div className="flex w-full justify-center">
 
-          <TableField
-            title="tabela"
-            tableFild={table}
-            setTableFild={setTable}
-          />
-
-
+            <Button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Registrando..." : "Registrar produto"}
+            </Button>
+          </div>
         </form>
       </SidebarContent>
-
       {/* Rodapé fixo para ações/botões de envio */}
       <SidebarFooter className="border-t p-4 flex gap-2">
-        <Button type="submit" form="sidebar-form" className="w-full">
-          Salvar Alterações
-        </Button>
       </SidebarFooter>
     </Sidebar>
   )

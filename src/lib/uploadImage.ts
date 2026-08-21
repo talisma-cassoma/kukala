@@ -1,103 +1,133 @@
 import { getSupabaseClient } from "@/lib/supabase";
 
-
 const BUCKET = "kukala";
 
-export async function uploadImage(dir: FileSystemDirectoryHandle) {
+async function uploadSingleImage(
+  file: File,
+  productSlug: string,
+  directory = "",
+  fileName = file.name,
+): Promise<string> {
   const supabase = getSupabaseClient();
+  
+  // 1. Limpa barras e espaços das partes da rota
+  const cleanSlug = productSlug.trim().replace(/^\/+|\/+$/g, "");
+  const cleanDirectory = directory.trim().replace(/^\/+|\/+$/g, "");
+  
+  // 2. Remove acentos, espaços e caracteres especiais do nome do arquivo
+  const safeFileName = fileName
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "") // Remove acentos
+    .replace(/[^a-zA-Z0-9._-]/g, "-") // Substitui espaços e especiais por hífens
+    .replace(/-+/g, "-"); // Evita hífens duplicados
 
-  const productSlug = dir.name;
+  // 3. Monta o caminho final limpo (ex: "hydratation-profonde/body/0.webp")
+  const path = [cleanSlug, cleanDirectory, safeFileName]
+    .filter(Boolean)
+    .join("/");
 
+  const mimeType = file.type || getFallbackMimeType(safeFileName);
+
+  const { error } = await supabase.storage
+    .from(BUCKET)
+    .upload(path, file, {
+      cacheControl: "3600",
+      upsert: true,
+      contentType: mimeType,
+    });
+
+  if (error) {
+    console.error("Erro detalhado no upload para a rota:", path, error);
+    throw error;
+  }
+
+  return supabase.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+}
+// Auxiliar para inferir o MIME type pela extensão do arquivo
+function getFallbackMimeType(filename: string): string {
+  const ext = filename.split(".").pop()?.toLowerCase();
+  switch (ext) {
+    case "webp": return "image/webp";
+    case "png": return "image/png";
+    case "jpg":
+    case "jpeg": return "image/jpeg";
+    case "svg": return "image/svg+xml";
+    default: return "application/octet-stream";
+  }
+}
+
+export async function uploadImage(
+  file: File,
+  productSlug: string,
+  directory?: string,
+  fileName?: string,
+): Promise<string>;
+export async function uploadImage(
+  dir: FileSystemDirectoryHandle,
+): Promise<string[]>;
+export async function uploadImage(
+  source: File | FileSystemDirectoryHandle,
+  productSlug?: string,
+  directory = "",
+  fileName?: string,
+): Promise<string | string[]> {
+  if (source instanceof File) {
+    if (!productSlug) throw new Error("productSlug é obrigatório para upload de arquivo único.");
+    return uploadSingleImage(source, productSlug, directory, fileName);
+  }
+
+  const dir = source;
+  const directoryProductSlug = dir.name;
   const uploads: string[] = [];
 
-/*A estrutura esperada seria:
-iphone-17-pro/
-├── thumbnail.webp
-├── body/
-│   ├── camera.webp
-│   └── screen.webp
-└── variants/
-    ├── BLACK-128/
-    │   ├── front.webp
-    │   └── back.webp
-    └── WHITE-256/
-        ├── front.webp
-        └── back.webp
-*/
-  for await (const [name, handle] of dir.entries()) {
-    if (handle.kind === "file") {
-      // thumbnail.webp
-      if (name.startsWith("thumbnail.")) {
-        const file = await handle.getFile();
+  const entries: [string, FileSystemHandle][] = [];
+  for await (const entry of dir.entries()) {
+    entries.push(entry);
+  }
 
-        const path = `${productSlug}/${name}`;
-
-        const { error } = await supabase.storage
-          .from(BUCKET)
-          .upload(path, file, {
-            cacheControl: "3600",
-            upsert: true,
-          });
-
-        if (error) throw error;
-
-        uploads.push(path);
-      }
+  // 1. Upload do thumbnail na raiz (ex: thumbnail.webp)
+  for (const [name, handle] of entries) {
+    if (handle.kind === "file" && name.startsWith("thumbnail.")) {
+      const fileHandle = handle as FileSystemFileHandle;
+      const file = await fileHandle.getFile();
+      const url = await uploadSingleImage(file, directoryProductSlug, "", name);
+      uploads.push(url);
     }
+  }
 
-    if (handle.kind === "directory") {
-      //
-      // body/
-      //
-      if (handle.name === "body") {
-        for await (const [, fileHandle] of handle.entries()) {
-          if (fileHandle.kind !== "file") continue;
+  // 2. Upload da pasta body (renomeando para 0, 1, 2...)
+  const bodyHandleEntry = entries.find(
+    ([name, handle]) => handle.kind === "directory" && name === "body"
+  );
 
-          const file = await fileHandle.getFile();
+  if (bodyHandleEntry) {
+    const bodyDir = bodyHandleEntry[1] as FileSystemDirectoryHandle;
+    let index = 0;
 
-          const path = `${productSlug}/body/${file.name}`;
+    for await (const [originalFileName, fileHandle] of bodyDir.entries()) {
+      // Ignora subpastas ou arquivos ocultos do sistema (como .DS_Store)
+      if (fileHandle.kind !== "file" || originalFileName.startsWith(".")) continue;
 
-          const { error } = await supabase.storage
-            .from(BUCKET)
-            .upload(path, file, {
-              cacheControl: "3600",
-              upsert: true,
-            });
+      try {
+        const file = await (fileHandle as FileSystemFileHandle).getFile();
 
-          if (error) throw error;
+        // Extrai a extensão original do arquivo (ex: "webp", "png", "jpg")
+        const ext = originalFileName.split(".").pop()?.toLowerCase() || "webp";
 
-          uploads.push(path);
-        }
-      }
+        // Cria o novo nome formatado numericamente (ex: "0.webp", "1.webp")
+        const newFileName = `${index}.${ext}`;
 
-      //
-      // variants/
-      //
-      if (handle.name === "variants") {
-        for await (const [, variantDir] of handle.entries()) {
-          if (variantDir.kind !== "directory") continue;
+        const url = await uploadSingleImage(
+          file,
+          directoryProductSlug,
+          "body",
+          newFileName
+        );
 
-          const sku = variantDir.name;
-
-          for await (const [, fileHandle] of variantDir.entries()) {
-            if (fileHandle.kind !== "file") continue;
-
-            const file = await fileHandle.getFile();
-
-            const path = `${productSlug}/variants/${sku}/${file.name}`;
-
-            const { error } = await supabase.storage
-              .from(BUCKET)
-              .upload(path, file, {
-                cacheControl: "3600",
-                upsert: true,
-              });
-
-            if (error) throw error;
-
-            uploads.push(path);
-          }
-        }
+        uploads.push(url);
+        index++; // Incrementa para a próxima imagem do body
+      } catch (err) {
+        console.error(`Erro ao subir imagem do body index ${index}:`, err);
       }
     }
   }

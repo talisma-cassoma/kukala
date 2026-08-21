@@ -11,7 +11,7 @@ export function PoductDashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const supabase = getSupabaseClient();
 
-console.log("productDashboard")
+//console.log("productDashboard")
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {

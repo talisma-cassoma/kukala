@@ -7,23 +7,25 @@ import { Button } from "@/components/ui/button"
 import { Plus, Trash2 } from "lucide-react"
 
 export interface TableOption {
+    title?: string
     props: string
     value: string
 }
 
 interface TableFieldProps {
-    title: string
-    tableFild: TableOption[]
-    setTableFild: React.Dispatch<React.SetStateAction<TableOption[]>>
+  title: string;
+  tableFild: TableOption[];
+  setTableFild: React.Dispatch<React.SetStateAction<TableOption[]>>;
 }
 
 export function TableField({
+    title:tabletitle,
     tableFild,
     setTableFild,
 }: TableFieldProps) {
     const [props, setProps] = useState("")
     const [value, setValue] = useState("")
-    const [title, setTitle] = useState("")
+    const [title, setTitle] = useState(tabletitle)
 
     const handleAdd = () => {
         if (!props.trim() || !value.trim()) return

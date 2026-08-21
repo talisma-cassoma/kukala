@@ -5,6 +5,8 @@
     "jsxImportSource": "react",
     "baseUrl": ".",
     "ignoreDeprecations": "6.0",
+    "target": "ES2022",
+    "lib": ["DOM", "ES2022"],
     "paths": {
       "@/*": ["src/*"],
       "@assets/*": ["src/assets/*"]
